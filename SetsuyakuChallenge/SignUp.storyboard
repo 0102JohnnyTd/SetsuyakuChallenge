@@ -77,7 +77,7 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6n8-Sa-oem">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6n8-Sa-oem">
                                 <rect key="frame" x="48" y="423.5" width="318" height="38"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -123,6 +123,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="rof-U3-uCc" id="LiL-v2-kjb"/>
                         <outlet property="passwordTextField" destination="L3S-6g-2Ma" id="tgD-9d-gOH"/>
+                        <outlet property="registButton" destination="6n8-Sa-oem" id="7ww-uE-GAs"/>
                         <outlet property="userNameTextField" destination="EJe-CU-2dO" id="i0J-lh-sQY"/>
                     </connections>
                 </viewController>

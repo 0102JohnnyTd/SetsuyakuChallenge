@@ -27,7 +27,7 @@ final class SignUpViewController: UIViewController {
 
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        let textsIsEmpty = textFields.map{ $0.text?.isEmpty ?? true }
+        let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }
 
         if textsIsEmpty[0] || textsIsEmpty[1] || textsIsEmpty[2] {
             registButton.isEnabled = false

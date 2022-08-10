@@ -36,6 +36,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rof-U3-uCc">
                                                 <rect key="frame" x="0.0" y="20.5" width="350" height="34"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -52,6 +53,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L3S-6g-2Ma">
                                                 <rect key="frame" x="0.0" y="20.5" width="350" height="34"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -68,6 +70,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EJe-CU-2dO">
                                                 <rect key="frame" x="0.0" y="20.5" width="350" height="34"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -76,10 +79,11 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6n8-Sa-oem">
-                                <rect key="frame" x="32" y="423.5" width="350" height="31"/>
-                                <color key="backgroundColor" red="0.94973593950000001" green="0.74756163360000005" blue="0.34890815619999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="48" y="423.5" width="318" height="31"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="登録"/>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Hj-wk-e26">
                                 <rect key="frame" x="32" y="502.5" width="350" height="31"/>
@@ -102,7 +106,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8Hj-wk-e26" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="3p5-QW-EaN"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6n8-Sa-oem" secondAttribute="trailing" constant="32" id="Fmw-bX-IJd"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6n8-Sa-oem" secondAttribute="trailing" constant="48" id="Fmw-bX-IJd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pY6-R7-wi1" secondAttribute="trailing" constant="32" id="MZS-S1-CvL"/>
                             <constraint firstItem="zH8-3d-l6N" firstAttribute="top" secondItem="pY6-R7-wi1" secondAttribute="bottom" constant="48" id="RRy-P9-akO"/>
                             <constraint firstItem="6n8-Sa-oem" firstAttribute="top" secondItem="zH8-3d-l6N" secondAttribute="bottom" constant="48" id="XB7-Zy-jtv"/>
@@ -111,7 +115,7 @@
                             <constraint firstItem="zH8-3d-l6N" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="dRz-aG-Rjw"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8Hj-wk-e26" secondAttribute="trailing" constant="32" id="n7K-MX-dgZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="zH8-3d-l6N" secondAttribute="trailing" constant="32" id="oUq-ez-XLR"/>
-                            <constraint firstItem="6n8-Sa-oem" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="q8Q-Ie-vsX"/>
+                            <constraint firstItem="6n8-Sa-oem" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="q8Q-Ie-vsX"/>
                             <constraint firstItem="pY6-R7-wi1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="xKA-Pd-ue7"/>
                         </constraints>
                     </view>
@@ -124,6 +128,12 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

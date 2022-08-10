@@ -120,6 +120,11 @@
                             <constraint firstItem="pY6-R7-wi1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="xKA-Pd-ue7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="rof-U3-uCc" id="LiL-v2-kjb"/>
+                        <outlet property="passwordTextField" destination="L3S-6g-2Ma" id="tgD-9d-gOH"/>
+                        <outlet property="userNameTextField" destination="EJe-CU-2dO" id="i0J-lh-sQY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 final class SignUpViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
@@ -29,15 +30,27 @@ final class SignUpViewController: UIViewController {
     private func registUser() {
         let email = emailTextField.text!
         let password = passwordTextField.text!
+        let userName = userNameTextField.text!
 
-        Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
+        Auth.auth().createUser(withEmail: email, password: password) { [self] (res, err) in
             if let err = err {
                 print("認証情報の保存に失敗しました: \(err)")
                 return
             }
             print("認証情報の保存に成功しました")
+            saveData(email: email, userName: userName)
+        }
+    }
 
+    private func saveData(email: String, userName: String) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let docData = ["email": email, "userName": userName, "createdAt": Timestamp()] as [String: Any]
 
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+            if let err = err {
+                print("FireStroreへの保存に失敗しました: \(err)")
+            }
+            print("FireStoreへの保存に成功しました")
         }
     }
 

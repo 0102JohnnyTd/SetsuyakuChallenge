@@ -14,3 +14,4 @@ disabled_rules:
   - identifier_name
   - cyclomatic_complexity
   - function_body_length
+  - type_name

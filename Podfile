@@ -7,5 +7,8 @@ target 'SetsuyakuChallenge' do
 
   # Pods for SetsuyakuChallenge
   pod 'IQKeyboardManagerSwift'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
 
 end

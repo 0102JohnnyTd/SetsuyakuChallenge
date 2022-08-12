@@ -38,13 +38,15 @@ final class SignUpViewController: UIViewController {
                 return
             }
             print("認証情報の保存に成功しました")
-            saveData(email: email, userName: userName)
+            saveData(email: email, name: userName)
         }
     }
 
-    private func saveData(email: String, userName: String) {
+    private func saveData(email: String, name: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let docData = ["email": email, "userName": userName, "createdAt": Timestamp()] as [String: Any]
+
+        let docData = ["email": email, "name": name, "createdAt": Timestamp()] as [String: Any]
+
         let userRef = Firestore.firestore().collection("users").document(uid)
 
         userRef.setData(docData) { (err) in
@@ -63,6 +65,8 @@ final class SignUpViewController: UIViewController {
             }
             let data = snapshot?.data()
             print("ユーザー情報の取得に成功しました: \(data)")
+            let user = User.init(dic: data!)
+            print("ユーザー情報のname: \(user.name)")
         }
     }
 

@@ -9,4 +9,9 @@ import UIKit
 
 final class UserDetailsTableViewCell: UITableViewCell {
     @IBOutlet private weak var optionLabel: UILabel!
+
+    func configure(option: String, textColor: UIColor) {
+        optionLabel.text = option
+        optionLabel.textColor = textColor
+    }
 }

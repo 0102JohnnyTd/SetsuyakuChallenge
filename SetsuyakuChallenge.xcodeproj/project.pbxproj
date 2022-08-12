@@ -17,6 +17,8 @@
 		1CB7A41A28A3A79E008E1262 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A41928A3A79E008E1262 /* SignUpViewController.swift */; };
 		1CD3807E28A4A60600B2AC80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3807D28A4A60600B2AC80 /* GoogleService-Info.plist */; };
 		1CD3808028A4F0C100B2AC80 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3807F28A4F0C100B2AC80 /* User.swift */; };
+		1CD380AC28A5FB9A00B2AC80 /* UserDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD380AB28A5FB9A00B2AC80 /* UserDetails.storyboard */; };
+		1CD380AE28A5FC5D00B2AC80 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD380AD28A5FC5D00B2AC80 /* UserDetailsViewController.swift */; };
 		9DC38D5127426FCCFA123819 /* Pods_SetsuyakuChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9559AA5CFA7CEF13DE1E1D23 /* Pods_SetsuyakuChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		1CB7A41928A3A79E008E1262 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1CD3807D28A4A60600B2AC80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../My Mac (todaryoumanoMBP)/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1CD3807F28A4F0C100B2AC80 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1CD380AB28A5FB9A00B2AC80 /* UserDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetails.storyboard; sourceTree = "<group>"; };
+		1CD380AD28A5FC5D00B2AC80 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		357490A01650221DBC3F0C39 /* Pods-SetsuyakuChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetsuyakuChallenge.debug.xcconfig"; path = "Target Support Files/Pods-SetsuyakuChallenge/Pods-SetsuyakuChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		9559AA5CFA7CEF13DE1E1D23 /* Pods_SetsuyakuChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SetsuyakuChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61DB092B882EF53AA343305 /* Pods-SetsuyakuChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetsuyakuChallenge.release.xcconfig"; path = "Target Support Files/Pods-SetsuyakuChallenge/Pods-SetsuyakuChallenge.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 				1CB7A40228A36021008E1262 /* ViewController.swift */,
 				1CB7A40428A36021008E1262 /* Main.storyboard */,
 				1CB7A41428A3643B008E1262 /* SignUp.storyboard */,
+				1CD380AB28A5FB9A00B2AC80 /* UserDetails.storyboard */,
+				1CD380AD28A5FC5D00B2AC80 /* UserDetailsViewController.swift */,
 				1CB7A41928A3A79E008E1262 /* SignUpViewController.swift */,
 				1CD3807F28A4F0C100B2AC80 /* User.swift */,
 				1CB7A40728A36026008E1262 /* Assets.xcassets */,
@@ -169,6 +175,7 @@
 				1CD3807E28A4A60600B2AC80 /* GoogleService-Info.plist in Resources */,
 				1CB7A40628A36021008E1262 /* Main.storyboard in Resources */,
 				1CB7A41528A3643B008E1262 /* SignUp.storyboard in Resources */,
+				1CD380AC28A5FB9A00B2AC80 /* UserDetails.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +249,7 @@
 				1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */,
 				1CB7A41A28A3A79E008E1262 /* SignUpViewController.swift in Sources */,
 				1CD3808028A4F0C100B2AC80 /* User.swift in Sources */,
+				1CD380AE28A5FC5D00B2AC80 /* UserDetailsViewController.swift in Sources */,
 				1CB7A40128A36021008E1262 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

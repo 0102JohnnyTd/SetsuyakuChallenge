@@ -14,5 +14,19 @@ final class UserDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpTableView()
+    }
+
+    private func setUpTableView() {
+        userDetailsTableView.delegate = self
+        userDetailsTableView.dataSource = self
+    }
+}
+
+extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     }
 }

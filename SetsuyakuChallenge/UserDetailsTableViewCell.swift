@@ -8,4 +8,5 @@
 import UIKit
 
 final class UserDetailsTableViewCell: UITableViewCell {
+    @IBOutlet private weak var optionLabel: UILabel!
 }

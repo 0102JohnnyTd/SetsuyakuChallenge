@@ -7,6 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.toolbarPreviousNextAllowedClasses.append(UIStackView.self)
         IQKeyboardManager.shared.previousNextDisplayMode = .alwaysShow
+
+        FirebaseApp.configure()
         return true
     }
 

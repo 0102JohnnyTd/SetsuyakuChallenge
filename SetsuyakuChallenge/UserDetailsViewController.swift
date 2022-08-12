@@ -20,6 +20,7 @@ final class UserDetailsViewController: UIViewController {
     private func setUpTableView() {
         userDetailsTableView.delegate = self
         userDetailsTableView.dataSource = self
+        userDetailsTableView.register(UserDetailsTableViewCell.nib, forCellReuseIdentifier: UserDetailsTableViewCell.identifier)
     }
 }
 
@@ -29,6 +30,13 @@ extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let cell = userDetailsTableView.dequeueReusableCell(withIdentifier: UserDetailsTableViewCell.identifier) as! UserDetailsTableViewCell
+
+        let option = options[indexPath.row]
+        let textColor: UIColor = option.textColorType == .warning ? .systemRed : .black
+
+        cell.configure(option: option.item, textColor: textColor)
+
+        return cell
     }
 }

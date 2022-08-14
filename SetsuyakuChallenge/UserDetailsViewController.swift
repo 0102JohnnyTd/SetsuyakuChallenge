@@ -12,6 +12,8 @@ final class UserDetailsViewController: UIViewController {
 
     private let options = [Option(item: "ログアウト", textColorType: .normal), Option(item: "アカウントを削除する", textColorType: .warning)]
 
+    private var user: User?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
@@ -21,10 +23,19 @@ final class UserDetailsViewController: UIViewController {
         userDetailsTableView.delegate = self
         userDetailsTableView.dataSource = self
         userDetailsTableView.register(UserDetailsTableViewCell.nib, forCellReuseIdentifier: UserDetailsTableViewCell.identifier)
+        userDetailsTableView.register(UserDetailsTableViewHeaderView.nib, forHeaderFooterViewReuseIdentifier: UserDetailsTableViewHeaderView.identifier)
     }
 }
 
 extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = userDetailsTableView.dequeueReusableHeaderFooterView(withIdentifier: UserDetailsTableViewHeaderView.identifier) as! UserDetailsTableViewHeaderView
+
+        header.configure(name: user?.name ?? "取得に失敗しました", email: user?.email ?? "取得に失敗しました")
+
+        return header
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         options.count
     }

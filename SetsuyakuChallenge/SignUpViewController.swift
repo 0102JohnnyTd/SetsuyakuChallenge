@@ -26,7 +26,6 @@ final class SignUpViewController: UIViewController {
         setUpTextFileds()
     }
 
-
     private func registUser() {
         let email = emailTextField.text!
         let password = passwordTextField.text!
@@ -54,22 +53,10 @@ final class SignUpViewController: UIViewController {
                 print("FireStroreへの保存に失敗しました: \(err)")
             }
             print("FireStoreへの保存に成功しました")
-            self.loadData(uid: uid, userRef: userRef)
+            let userDetailsVC = UIStoryboard(name: "UserDetails", bundle: nil).instantiateViewController(withIdentifier: "UserDetails") as! UserDetailsViewController
+            self.present(userDetailsVC, animated: true)
         }
     }
-
-    private func loadData(uid: String, userRef: DocumentReference) {
-        userRef.getDocument { (snapshot, err) in
-            if let err = err {
-                print("ユーザー情報の取得に失敗しました \(err)")
-            }
-            let data = snapshot?.data()
-            print("ユーザー情報の取得に成功しました: \(data)")
-            let user = User.init(dic: data!)
-            print("ユーザー情報のname: \(user.name)")
-        }
-    }
-
     private func setUpTextFileds() {
         textFields.forEach { $0.delegate = self }
     }

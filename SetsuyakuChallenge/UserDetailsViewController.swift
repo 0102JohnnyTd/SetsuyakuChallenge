@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 final class UserDetailsViewController: UIViewController {
     @IBOutlet private weak var userDetailsTableView: UITableView!
@@ -19,11 +21,30 @@ final class UserDetailsViewController: UIViewController {
         setUpTableView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getData()
+    }
+
     private func setUpTableView() {
         userDetailsTableView.delegate = self
         userDetailsTableView.dataSource = self
         userDetailsTableView.register(UserDetailsTableViewCell.nib, forCellReuseIdentifier: UserDetailsTableViewCell.identifier)
         userDetailsTableView.register(UserDetailsTableViewHeaderView.nib, forHeaderFooterViewReuseIdentifier: UserDetailsTableViewHeaderView.identifier)
+    }
+
+    private func getData() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+            if let err = err {
+                print("ユーザー情報の取得に失敗しました: \(err)")
+            }
+            print("ユーザー情報の取得に成功しました")
+            let data = snapshot?.data()
+            self.user  = User.init(dic: data!)
+            self.userDetailsTableView.reloadData()
+        }
     }
 }
 

@@ -31,12 +31,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9qF-EI-zhc">
-                        <barButtonItem key="rightBarButtonItem" title="プロフィール" id="aDb-hf-dUW"/>
+                        <barButtonItem key="rightBarButtonItem" title="プロフィール" id="aDb-hf-dUW">
+                            <connections>
+                                <segue destination="LJt-EZ-tVB" kind="push" id="ikV-mq-Fb1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="955.07246376811599" y="37.5"/>
+        </scene>
+        <!--UserDetails-->
+        <scene sceneID="xha-1B-ITc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserDetails" id="LJt-EZ-tVB" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="BIn-m9-rhK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uDI-f2-eaq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1531" y="-219"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="STn-Kg-6Zf">

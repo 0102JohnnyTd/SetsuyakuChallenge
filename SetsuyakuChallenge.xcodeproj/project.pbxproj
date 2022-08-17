@@ -26,6 +26,8 @@
 		1CD380B828A63C7000B2AC80 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD380B728A63C7000B2AC80 /* Option.swift */; };
 		1CD380C228A8F51B00B2AC80 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD380C128A8F51B00B2AC80 /* Home.storyboard */; };
 		1CD380C428A8F53A00B2AC80 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD380C328A8F53A00B2AC80 /* HomeViewController.swift */; };
+		1CD380EA28AC8AD200B2AC80 /* ChallengeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD380E928AC8AD200B2AC80 /* ChallengeCollectionViewCell.xib */; };
+		1CD380EC28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD380EB28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift */; };
 		9DC38D5127426FCCFA123819 /* Pods_SetsuyakuChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9559AA5CFA7CEF13DE1E1D23 /* Pods_SetsuyakuChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		1CD380B728A63C7000B2AC80 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		1CD380C128A8F51B00B2AC80 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		1CD380C328A8F53A00B2AC80 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		1CD380E928AC8AD200B2AC80 /* ChallengeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChallengeCollectionViewCell.xib; sourceTree = "<group>"; };
+		1CD380EB28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCollectionViewCell.swift; sourceTree = "<group>"; };
 		357490A01650221DBC3F0C39 /* Pods-SetsuyakuChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetsuyakuChallenge.debug.xcconfig"; path = "Target Support Files/Pods-SetsuyakuChallenge/Pods-SetsuyakuChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		9559AA5CFA7CEF13DE1E1D23 /* Pods_SetsuyakuChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SetsuyakuChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61DB092B882EF53AA343305 /* Pods-SetsuyakuChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetsuyakuChallenge.release.xcconfig"; path = "Target Support Files/Pods-SetsuyakuChallenge/Pods-SetsuyakuChallenge.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 				1CB7A41428A3643B008E1262 /* SignUp.storyboard */,
 				1CD380C328A8F53A00B2AC80 /* HomeViewController.swift */,
 				1CD380C128A8F51B00B2AC80 /* Home.storyboard */,
+				1CD380EB28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift */,
+				1CD380E928AC8AD200B2AC80 /* ChallengeCollectionViewCell.xib */,
 				1CD380AD28A5FC5D00B2AC80 /* UserDetailsViewController.swift */,
 				1CD380AB28A5FB9A00B2AC80 /* UserDetails.storyboard */,
 				1CD380B128A6033C00B2AC80 /* UserDetailsTableViewHeaderView.swift */,
@@ -191,6 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CD380EA28AC8AD200B2AC80 /* ChallengeCollectionViewCell.xib in Resources */,
 				1CB7A40B28A36026008E1262 /* LaunchScreen.storyboard in Resources */,
 				1CB7A40828A36026008E1262 /* Assets.xcassets in Resources */,
 				1CD3807E28A4A60600B2AC80 /* GoogleService-Info.plist in Resources */,
@@ -270,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CB7A40328A36021008E1262 /* ViewController.swift in Sources */,
+				1CD380EC28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift in Sources */,
 				1CD380B628A62CC700B2AC80 /* UserDetailsTableViewCell.swift in Sources */,
 				1CD380B228A6033C00B2AC80 /* UserDetailsTableViewHeaderView.swift in Sources */,
 				1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */,

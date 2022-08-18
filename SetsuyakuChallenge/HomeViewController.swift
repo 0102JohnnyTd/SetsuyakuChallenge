@@ -9,6 +9,8 @@ import UIKit
 import FirebaseAuth
 
 final class HomeViewController: UIViewController {
+    @IBOutlet private weak var challengeCollectionView: UICollectionView!
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkIsLogin()
@@ -16,6 +18,7 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpCollectionView()
     }
 
     private func checkIsLogin() {
@@ -32,5 +35,20 @@ final class HomeViewController: UIViewController {
         let nav = UINavigationController(rootViewController: signUpVC)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
+    }
+
+    private func setUpCollectionView() {
+        challengeCollectionView.delegate = self
+        challengeCollectionView.dataSource = self
+        challengeCollectionView.register(ChallengeCollectionViewCell.nib, forCellWithReuseIdentifier: ChallengeCollectionViewCell.identifier)
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        1
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        challengeCollectionView.dequeueReusableCell(withReuseIdentifier: ChallengeCollectionViewCell.identifier, for: indexPath) as! ChallengeCollectionViewCell
     }
 }

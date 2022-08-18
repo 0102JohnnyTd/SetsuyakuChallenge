@@ -11,4 +11,7 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var totalLabel: UILabel!
     @IBOutlet private weak var goalLabel: UILabel!
+
+    static let nib = UINib(nibName: String(describing: ChallengeCollectionViewCell.self), bundle: nil)
+    static let identifier = String(describing: ChallengeCollectionViewCell.self)
 }

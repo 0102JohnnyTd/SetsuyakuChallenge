@@ -7,6 +7,8 @@
 
 import UIKit
 
-class ChallengeCollectionViewCell: UICollectionViewCell {
-    
+final class ChallengeCollectionViewCell: UICollectionViewCell {
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var totalLabel: UILabel!
+    @IBOutlet private weak var goalLabel: UILabel!
 }

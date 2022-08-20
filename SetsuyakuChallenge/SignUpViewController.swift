@@ -19,6 +19,9 @@ final class SignUpViewController: UIViewController {
         registUser()
     }
 
+    static let storyboardName = "SignUp"
+    static let identifier = "SignUp"
+
     private var textFields: [UITextField] { [emailTextField, passwordTextField, userNameTextField] }
 
     override func viewDidLoad() {
@@ -53,8 +56,8 @@ final class SignUpViewController: UIViewController {
                 print("FireStroreへの保存に失敗しました: \(err)")
             }
             print("FireStoreへの保存に成功しました")
-            let userDetailsVC = UIStoryboard(name: "UserDetails", bundle: nil).instantiateViewController(withIdentifier: "UserDetails") as! UserDetailsViewController
-            self.present(userDetailsVC, animated: true)
+            let homeVC = UIStoryboard(name: "UserDetails", bundle: nil).instantiateViewController(withIdentifier: "UserDetails") as! UserDetailsViewController
+            self.navigationController?.pushViewController(homeVC, animated: true)
         }
     }
     private func setUpTextFileds() {

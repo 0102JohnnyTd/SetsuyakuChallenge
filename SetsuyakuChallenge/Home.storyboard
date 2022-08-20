@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XQB-Q2-KKR">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="HomeViewController" customModule="SetsuyakuChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G5G-qL-ZpO">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tMc-Pw-ntq">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-6R-5EV">
+                                <rect key="frame" x="258" y="716" width="124" height="114"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="RegistChallengeButton"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2Pd-6R-5EV" secondAttribute="bottom" constant="32" id="NA8-P8-wGI"/>
+                            <constraint firstItem="G5G-qL-ZpO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Q2c-BO-I04"/>
+                            <constraint firstItem="G5G-qL-ZpO" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="TJC-73-G3Z"/>
+                            <constraint firstItem="G5G-qL-ZpO" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="f9a-jK-0qn"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2Pd-6R-5EV" secondAttribute="trailing" constant="32" id="x3N-9B-Fee"/>
+                            <constraint firstItem="G5G-qL-ZpO" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="yxe-ys-PMK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9qF-EI-zhc">
+                        <barButtonItem key="rightBarButtonItem" title="プロフィール" id="aDb-hf-dUW">
+                            <connections>
+                                <segue destination="LJt-EZ-tVB" kind="push" id="ikV-mq-Fb1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="challengeCollectionView" destination="G5G-qL-ZpO" id="OXg-km-fZy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="955.07246376811599" y="37.5"/>
+        </scene>
+        <!--UserDetails-->
+        <scene sceneID="xha-1B-ITc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserDetails" id="LJt-EZ-tVB" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="BIn-m9-rhK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uDI-f2-eaq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1531" y="-219"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="STn-Kg-6Zf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XQB-Q2-KKR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Mb-f8-lCw">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="YiN-ds-P4l"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wC3-B0-6b3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="44.927536231884062" y="37.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="RegistChallengeButton" width="100" height="100"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

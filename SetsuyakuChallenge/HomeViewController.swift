@@ -41,6 +41,20 @@ final class HomeViewController: UIViewController {
         challengeCollectionView.delegate = self
         challengeCollectionView.dataSource = self
         challengeCollectionView.register(ChallengeCollectionViewCell.nib, forCellWithReuseIdentifier: ChallengeCollectionViewCell.identifier)
+        setUpCellLayout()
+    }
+
+    private func setUpCellLayout() {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 30
+        layout.itemSize = setUpCellSize()
+        challengeCollectionView.collectionViewLayout = layout
+    }
+
+    private func setUpCellSize() -> CGSize {
+        let width = UIScreen.main.bounds.width - 48
+        let height = width * 0.5
+        return CGSize(width: width, height: height)
     }
 }
 

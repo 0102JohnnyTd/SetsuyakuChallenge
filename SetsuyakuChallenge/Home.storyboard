@@ -27,13 +27,20 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-6R-5EV">
+                                <rect key="frame" x="258" y="716" width="124" height="114"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="RegistChallengeButton"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2Pd-6R-5EV" secondAttribute="bottom" constant="32" id="NA8-P8-wGI"/>
                             <constraint firstItem="G5G-qL-ZpO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Q2c-BO-I04"/>
                             <constraint firstItem="G5G-qL-ZpO" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="TJC-73-G3Z"/>
                             <constraint firstItem="G5G-qL-ZpO" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="f9a-jK-0qn"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2Pd-6R-5EV" secondAttribute="trailing" constant="32" id="x3N-9B-Fee"/>
                             <constraint firstItem="G5G-qL-ZpO" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="yxe-ys-PMK"/>
                         </constraints>
                     </view>
@@ -82,6 +89,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="RegistChallengeButton" width="100" height="100"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

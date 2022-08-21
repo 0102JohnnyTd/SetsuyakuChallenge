@@ -56,8 +56,7 @@ final class SignUpViewController: UIViewController {
                 print("FireStroreへの保存に失敗しました: \(err)")
             }
             print("FireStoreへの保存に成功しました")
-            let homeVC = UIStoryboard(name: "UserDetails", bundle: nil).instantiateViewController(withIdentifier: "UserDetails") as! UserDetailsViewController
-            self.navigationController?.pushViewController(homeVC, animated: true)
+            self.dismiss(animated: true)
         }
     }
     private func setUpTextFileds() {

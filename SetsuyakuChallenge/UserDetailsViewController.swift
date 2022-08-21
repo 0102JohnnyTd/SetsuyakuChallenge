@@ -9,6 +9,11 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
+private enum Cell: Int,CaseIterable {
+    case logoutCell
+    case deleteAccountCell
+}
+
 final class UserDetailsViewController: UIViewController {
     @IBOutlet private weak var userDetailsTableView: UITableView!
 
@@ -46,6 +51,32 @@ final class UserDetailsViewController: UIViewController {
             self.userDetailsTableView.reloadData()
         }
     }
+
+    private func showLogoutAlert() {
+        let logoutAlert = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
+        logoutAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+        logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { [self] _ in
+            logout()
+        }))
+        present(logoutAlert, animated: true)
+    }
+
+    private func logout() {
+        do {
+            try Auth.auth().signOut()
+            showDidFinishLogoutAlert()
+        } catch {
+            print(error)
+        }
+    }
+
+    private func showDidFinishLogoutAlert() {
+        let didFinishLououtAlert = UIAlertController(title: "ログアウト完了", message: "またのご利用待ってるぜ！", preferredStyle: .alert)
+
+        didFinishLououtAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self] _ in            navigationController?.popViewController(animated: true)
+        }))
+        present(didFinishLououtAlert, animated: true)
+    }
 }
 
 extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
@@ -70,5 +101,16 @@ extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
         cell.configure(option: option.item, textColor: textColor)
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let cell = Cell(rawValue: indexPath.row)
+        switch cell {
+        case .logoutCell: showLogoutAlert()
+        case .deleteAccountCell: break
+        default: break
+        }
     }
 }

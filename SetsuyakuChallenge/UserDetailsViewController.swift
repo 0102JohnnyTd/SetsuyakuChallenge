@@ -46,6 +46,23 @@ final class UserDetailsViewController: UIViewController {
             self.userDetailsTableView.reloadData()
         }
     }
+
+    private func logout() {
+        do {
+            try Auth.auth().signOut()
+            showDidFinishLogoutAlert()
+        } catch {
+            print(error)
+        }
+    }
+
+    private func showDidFinishLogoutAlert() {
+        let didFinishLououtAlert = UIAlertController(title: "ログアウト完了", message: "またのご利用待ってるぜ！", preferredStyle: .alert)
+
+        didFinishLououtAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self] _ in            navigationController?.popViewController(animated: true)
+        }))
+        present(didFinishLououtAlert, animated: true)
+    }
 }
 
 extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {

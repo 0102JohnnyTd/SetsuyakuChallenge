@@ -78,7 +78,16 @@ final class UserDetailsViewController: UIViewController {
         present(didFinishLououtAlert, animated: true)
     }
 
-    
+    private func showDeleteAuthAlert() {
+        let alert = UIAlertController(title: "アカウントを削除しますか？", message: "この操作は取り消せません", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+        alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { [weak self] _ in
+            self?.deleteAccount()
+        }))
+        present(alert, animated: true)
+    }
+
+
     private func deleteAccount() {
         Auth.auth().currentUser?.delete() { (error) in
             if error == nil {} else {

@@ -77,9 +77,29 @@ final class UserDetailsViewController: UIViewController {
         }))
         present(didFinishLououtAlert, animated: true)
     }
+
+    private func showDeleteAuthAlert() {
+        let alert = UIAlertController(title: "アカウントを削除しますか？", message: "この操作は取り消せません", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+        alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { [weak self] _ in
+            self?.deleteAccount()
+        }))
+        present(alert, animated: true)
+    }
+
+
+    private func deleteAccount() {
+        Auth.auth().currentUser?.delete() { (error) in
+            if error == nil {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                print("エラー:\(String(describing: error?.localizedDescription))")
+            }
+        }
+    }
 }
 
-extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
+extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = userDetailsTableView.dequeueReusableHeaderFooterView(withIdentifier: UserDetailsTableViewHeaderView.identifier) as! UserDetailsTableViewHeaderView
 
@@ -109,7 +129,7 @@ extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
         let cell = Cell(rawValue: indexPath.row)
         switch cell {
         case .logoutCell: showLogoutAlert()
-        case .deleteAccountCell: break
+        case .deleteAccountCell: showDeleteAuthAlert()
         default: break
         }
     }

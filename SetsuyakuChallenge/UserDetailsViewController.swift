@@ -47,6 +47,15 @@ final class UserDetailsViewController: UIViewController {
         }
     }
 
+    private func showLogoutAlert() {
+        let logoutAlert = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
+        logoutAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+        logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { [self] _ in
+            logout()
+        }))
+        present(logoutAlert, animated: true)
+    }
+
     private func logout() {
         do {
             try Auth.auth().signOut()

@@ -77,6 +77,15 @@ final class UserDetailsViewController: UIViewController {
         }))
         present(didFinishLououtAlert, animated: true)
     }
+
+    
+    private func deleteAccount() {
+        Auth.auth().currentUser?.delete() { (error) in
+            if error == nil {} else {
+                print("エラー:\(String(describing: error?.localizedDescription))")
+            }
+        }
+    }
 }
 
 extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {

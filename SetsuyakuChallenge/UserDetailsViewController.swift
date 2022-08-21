@@ -82,6 +82,7 @@ final class UserDetailsViewController: UIViewController {
         let alert = UIAlertController(title: "アカウントを削除しますか？", message: "この操作は取り消せません", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { [weak self] _ in
+            self?.deleteAccountData()
             self?.deleteAccount()
         }))
         present(alert, animated: true)
@@ -94,6 +95,15 @@ final class UserDetailsViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             } else {
                 print("エラー:\(String(describing: error?.localizedDescription))")
+            }
+        }
+    }
+
+    private func deleteAccountData() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).delete() { err in
+            if let err = err {
+                print("エラー:\(String(describing: err.localizedDescription))")
             }
         }
     }

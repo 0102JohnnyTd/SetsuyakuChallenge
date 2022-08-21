@@ -90,14 +90,16 @@ final class UserDetailsViewController: UIViewController {
 
     private func deleteAccount() {
         Auth.auth().currentUser?.delete() { (error) in
-            if error == nil {} else {
+            if error == nil {
+                self.navigationController?.popViewController(animated: true)
+            } else {
                 print("エラー:\(String(describing: error?.localizedDescription))")
             }
         }
     }
 }
 
-extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
+extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = userDetailsTableView.dequeueReusableHeaderFooterView(withIdentifier: UserDetailsTableViewHeaderView.identifier) as! UserDetailsTableViewHeaderView
 
@@ -127,7 +129,7 @@ extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
         let cell = Cell(rawValue: indexPath.row)
         switch cell {
         case .logoutCell: showLogoutAlert()
-        case .deleteAccountCell: break
+        case .deleteAccountCell: showDeleteAuthAlert()
         default: break
         }
     }

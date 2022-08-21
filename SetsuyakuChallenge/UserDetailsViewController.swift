@@ -9,6 +9,11 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
+private enum Cell: Int,CaseIterable {
+    case logoutCell
+    case deleteAccountCell
+}
+
 final class UserDetailsViewController: UIViewController {
     @IBOutlet private weak var userDetailsTableView: UITableView!
 
@@ -101,9 +106,10 @@ extension UserDetailsViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        switch indexPath.row {
-        case 0: showLogoutAlert()
-        case 1: break
+        let cell = Cell(rawValue: indexPath.row)
+        switch cell {
+        case .logoutCell: showLogoutAlert()
+        case .deleteAccountCell: break
         default: break
         }
     }

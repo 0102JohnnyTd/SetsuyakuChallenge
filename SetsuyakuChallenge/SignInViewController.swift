@@ -24,4 +24,14 @@ final class SignInViewController: UIViewController {
     }
 }
 
-extension SignInViewController: UITextFieldDelegate {}
+extension SignInViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }
+
+        if textsIsEmpty[0] || textsIsEmpty[1] {
+            loginButton.isEnabled = false
+        } else {
+            loginButton.isEnabled = true
+        }
+    }
+}

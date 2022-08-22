@@ -6,13 +6,46 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class SignInViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var loginButton: UIButton!
 
+    private var textFields: [UITextField] { [emailTextField, passwordTextField] }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpTextFields()
+    }
+
+    private func setUpTextFields() {
+        textFields.forEach { $0.delegate = self }
+    }
+
+    private func login() {
+        let email = emailTextField.text!
+        let password = passwordTextField.text!
+        Auth.auth().signIn(withEmail: email, password: password) { (res, err) in
+            if let err = err {
+                print("ログイン情報の取得に失敗しました")
+                return
+            }
+            print("ログイン情報の取得に成功しました")
+            self.dismiss(animated: true)
+        }
+    }
+}
+
+extension SignInViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }
+
+        if textsIsEmpty[0] || textsIsEmpty[1] {
+            loginButton.isEnabled = false
+        } else {
+            loginButton.isEnabled = true
+        }
     }
 }

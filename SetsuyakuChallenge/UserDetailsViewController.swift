@@ -88,7 +88,6 @@ final class UserDetailsViewController: UIViewController {
         present(alert, animated: true)
     }
 
-
     private func deleteAccount() {
         Auth.auth().currentUser?.delete() { (error) in
             if error == nil {
@@ -113,7 +112,7 @@ extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = userDetailsTableView.dequeueReusableHeaderFooterView(withIdentifier: UserDetailsTableViewHeaderView.identifier) as! UserDetailsTableViewHeaderView
 
-        header.configure(name: user?.name ?? "取得に失敗しました", email: user?.email ?? "取得に失敗しました")
+        header.configure(name: user?.name ?? "情報を取得中..", email: user?.email ?? "情報を取得中..")
 
         return header
     }

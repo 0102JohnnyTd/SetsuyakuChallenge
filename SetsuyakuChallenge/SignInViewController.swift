@@ -16,5 +16,12 @@ final class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpTextFields()
+    }
+
+    private func setUpTextFields() {
+        textFields.forEach { $0.delegate = self }
     }
 }
+
+extension SignInViewController: UITextFieldDelegate {}

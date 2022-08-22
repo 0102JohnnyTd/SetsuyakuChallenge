@@ -15,8 +15,79 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ログイン" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Etj-By-aOR">
+                                <rect key="frame" x="32" y="76" width="350" height="48"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="toK-bh-7nu">
+                                <rect key="frame" x="32" y="172" width="350" height="149"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="メールアドレス" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEt-sU-mO2">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Egz-ra-h5t">
+                                        <rect key="frame" x="0.0" y="20.5" width="350" height="34"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9A3-to-nAe">
+                                        <rect key="frame" x="0.0" y="54.5" width="350" height="20"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="rIE-tr-9Vo"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="パスワード" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TS8-ia-Ro0">
+                                        <rect key="frame" x="0.0" y="74.5" width="350" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jZ0-2s-Ww5">
+                                        <rect key="frame" x="0.0" y="95" width="350" height="34"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="11C-MP-AQQ">
+                                        <rect key="frame" x="0.0" y="129" width="350" height="20"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="eEy-5W-RhV"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ry-ZR-hK3" userLabel="ログイン">
+                                <rect key="frame" x="32" y="369" width="350" height="38"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="ログイン">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6ry-ZR-hK3" secondAttribute="trailing" constant="32" id="62M-9a-dVL"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="toK-bh-7nu" secondAttribute="trailing" constant="32" id="HYS-fX-12v"/>
+                            <constraint firstItem="6ry-ZR-hK3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="b2D-aB-BXp"/>
+                            <constraint firstItem="6ry-ZR-hK3" firstAttribute="top" secondItem="toK-bh-7nu" secondAttribute="bottom" constant="48" id="l5k-un-VIV"/>
+                            <constraint firstItem="toK-bh-7nu" firstAttribute="top" secondItem="Etj-By-aOR" secondAttribute="bottom" constant="48" id="uS8-BK-iF4"/>
+                            <constraint firstItem="Etj-By-aOR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="32" id="v9I-Gr-Owh"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Etj-By-aOR" secondAttribute="trailing" constant="32" id="vDK-Gb-tAP"/>
+                            <constraint firstItem="toK-bh-7nu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="yqH-dI-MEF"/>
+                            <constraint firstItem="Etj-By-aOR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="z3w-y0-aC3"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -27,6 +98,12 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

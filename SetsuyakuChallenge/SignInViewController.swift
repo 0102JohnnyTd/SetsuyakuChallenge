@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class SignInViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
@@ -21,6 +22,19 @@ final class SignInViewController: UIViewController {
 
     private func setUpTextFields() {
         textFields.forEach { $0.delegate = self }
+    }
+
+    private func login() {
+        let email = emailTextField.text!
+        let password = passwordTextField.text!
+        Auth.auth().signIn(withEmail: email, password: password) { (res, err) in
+            if let err = err {
+                print("ログイン情報の取得に失敗しました")
+                return
+            }
+            print("ログイン情報の取得に成功しました")
+            self.dismiss(animated: true)
+        }
     }
 }
 

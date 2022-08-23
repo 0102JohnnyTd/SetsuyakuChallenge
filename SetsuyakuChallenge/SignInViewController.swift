@@ -21,12 +21,8 @@ final class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTextFields()
+        setUpButton()
     }
-
-    private func setUpTextFields() {
-        textFields.forEach { $0.delegate = self }
-    }
-
     private func login() {
         let email = emailTextField.text!
         let password = passwordTextField.text!
@@ -38,6 +34,14 @@ final class SignInViewController: UIViewController {
             print("ログイン情報の取得に成功しました")
             self.dismiss(animated: true)
         }
+    }
+
+    private func setUpTextFields() {
+        textFields.forEach { $0.delegate = self }
+    }
+
+    private func setUpButton() {
+        loginButton.backgroundColor = .mainColor()
     }
 }
 

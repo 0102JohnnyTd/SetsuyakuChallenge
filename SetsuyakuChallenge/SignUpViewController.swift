@@ -27,6 +27,7 @@ final class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTextFileds()
+        setUpButton()
     }
 
     private func registUser() {
@@ -61,6 +62,9 @@ final class SignUpViewController: UIViewController {
     }
     private func setUpTextFileds() {
         textFields.forEach { $0.delegate = self }
+    }
+    private func setUpButton() {
+        signUpButton.backgroundColor = .mainColor()
     }
 }
 

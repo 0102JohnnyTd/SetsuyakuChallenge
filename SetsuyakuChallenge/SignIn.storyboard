@@ -76,7 +76,7 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="didTapLoginButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nwY-RW-axa"/>
+                                    <action selector="didTapSignInButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="dkB-nk-8cL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -96,8 +96,8 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Egz-ra-h5t" id="Zc1-34-X4z"/>
-                        <outlet property="loginButton" destination="6ry-ZR-hK3" id="BEc-zJ-vK7"/>
                         <outlet property="passwordTextField" destination="jZ0-2s-Ww5" id="9iS-7c-ZzV"/>
+                        <outlet property="signInButton" destination="6ry-ZR-hK3" id="BEc-zJ-vK7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

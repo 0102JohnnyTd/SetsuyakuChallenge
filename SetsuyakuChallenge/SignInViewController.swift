@@ -11,8 +11,8 @@ import FirebaseAuth
 final class SignInViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
-    @IBOutlet private weak var loginButton: UIButton!
-    @IBAction private func didTapLoginButton(_ sender: Any) {
+    @IBOutlet private weak var signInButton: UIButton!
+    @IBAction private func didTapSignInButton(_ sender: Any) {
         login()
     }
 
@@ -41,8 +41,8 @@ final class SignInViewController: UIViewController {
     }
 
     private func setUpButton() {
-        loginButton.backgroundColor = .mainColor()
-        loginButton.layer.cornerRadius = 5
+        signInButton.backgroundColor = .mainColor()
+        signInButton.layer.cornerRadius = 5
     }
 }
 
@@ -51,9 +51,9 @@ extension SignInViewController: UITextFieldDelegate {
         let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }
 
         if textsIsEmpty[0] || textsIsEmpty[1] {
-            loginButton.isEnabled = false
+            signInButton.isEnabled = false
         } else {
-            loginButton.isEnabled = true
+            signInButton.isEnabled = true
         }
     }
 }

@@ -13,7 +13,7 @@ final class SignUpViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var userNameTextField: UITextField!
-    @IBOutlet private weak var registButton: UIButton!
+    @IBOutlet private weak var signUpButton: UIButton!
 
     @IBAction private func didTapRegistButton(_ sender: Any) {
         registUser()
@@ -69,9 +69,9 @@ extension SignUpViewController: UITextFieldDelegate {
         let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }
 
         if textsIsEmpty[0] || textsIsEmpty[1] || textsIsEmpty[2] {
-            registButton.isEnabled = false
+            signUpButton.isEnabled = false
         } else {
-            registButton.isEnabled = true
+            signUpButton.isEnabled = true
         }
     }
 }

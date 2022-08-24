@@ -8,6 +8,13 @@
 import UIKit
 
 final class CreateChallengeViewController: UIViewController {
+    @IBOutlet private weak var itemImage: UIImageView!
+    @IBOutlet private weak var itemTextField: UITextField!
+    @IBOutlet private weak var priceTextField: UITextField!
+    @IBOutlet private weak var createChallengeButton: UIButton!
+
+    @IBAction private func didTapButton(_ sender: Any) {
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -93,6 +93,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="チャレンジスタート！">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="VkJ-Xf-To2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -107,6 +110,14 @@
                             <constraint firstItem="ljj-Xe-pkf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="nis-Kb-2PU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createChallengeButton" destination="hb8-oB-ekk" id="xu4-sj-Kez"/>
+                        <outlet property="didTapButton" destination="hb8-oB-ekk" id="KgM-Ef-Ee6"/>
+                        <outlet property="itemImage" destination="CPu-kr-wPk" id="gqD-7P-cVN"/>
+                        <outlet property="itemTextField" destination="7zR-Pe-Omc" id="Tdq-KC-H9o"/>
+                        <outlet property="priceTextField" destination="42W-Sb-CAw" id="FT1-e6-sd8"/>
+                        <outlet property="wantedItemImage" destination="CPu-kr-wPk" id="fO2-uD-dY6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

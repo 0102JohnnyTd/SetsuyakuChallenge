@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -112,11 +112,9 @@
                     </view>
                     <connections>
                         <outlet property="createChallengeButton" destination="hb8-oB-ekk" id="xu4-sj-Kez"/>
-                        <outlet property="didTapButton" destination="hb8-oB-ekk" id="KgM-Ef-Ee6"/>
                         <outlet property="itemImage" destination="CPu-kr-wPk" id="gqD-7P-cVN"/>
                         <outlet property="itemTextField" destination="7zR-Pe-Omc" id="Tdq-KC-H9o"/>
                         <outlet property="priceTextField" destination="42W-Sb-CAw" id="FT1-e6-sd8"/>
-                        <outlet property="wantedItemImage" destination="CPu-kr-wPk" id="fO2-uD-dY6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

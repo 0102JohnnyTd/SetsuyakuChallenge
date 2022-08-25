@@ -16,12 +16,30 @@ final class CreateChallengeViewController: UIViewController {
     @IBAction private func didTapButton(_ sender: Any) {
     }
 
+    private var textFields: [UITextField] { [itemTextField, priceTextField] }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButtonContents()
+        setUpTextFiled()
     }
     private func setUpButtonContents() {
         createChallengeButton.backgroundColor = .mainColor()
         createChallengeButton.layer.cornerRadius = 5
+    }
+    private func setUpTextFiled() {
+        textFields.forEach { $0.delegate = self }
+    }
+}
+
+extension CreateChallengeViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }
+
+        if textsIsEmpty[0] || textsIsEmpty[1] {
+            createChallengeButton.isEnabled = false
+        } else {
+            createChallengeButton.isEnabled = true
+        }
     }
 }

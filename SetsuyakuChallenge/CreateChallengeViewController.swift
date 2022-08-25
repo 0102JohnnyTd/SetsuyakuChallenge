@@ -29,6 +29,10 @@ final class CreateChallengeViewController: UIViewController {
     }
     private func setUpTextFiled() {
         textFields.forEach { $0.delegate = self }
+        setUpNumberPad()
+    }
+    private func setUpNumberPad() {
+        priceTextField.keyboardType = .numberPad
     }
 }
 

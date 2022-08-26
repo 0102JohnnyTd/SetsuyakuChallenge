@@ -28,7 +28,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CPu-kr-wPk">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default Item Image" translatesAutoresizingMaskIntoConstraints="NO" id="CPu-kr-wPk">
                                                 <rect key="frame" x="0.0" y="28.5" width="318" height="318"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="CPu-kr-wPk" secondAttribute="height" multiplier="1:1" id="YGr-nf-fwb"/>
@@ -123,6 +123,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Default Item Image" width="300" height="300"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

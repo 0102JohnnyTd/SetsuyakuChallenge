@@ -23,6 +23,12 @@ final class CreateChallengeViewController: UIViewController {
         setUpButtonContents()
         setUpTextFiled()
     }
+    
+    private func generatePickerController() -> UIImagePickerController {
+        let pickerController = UIImagePickerController()
+        return pickerController
+    }
+
     private func setUpPickerController(pickerController: UIImagePickerController) {
         pickerController.delegate = self
         pickerController.allowsEditing = true

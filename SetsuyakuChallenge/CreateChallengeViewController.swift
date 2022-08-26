@@ -16,12 +16,51 @@ final class CreateChallengeViewController: UIViewController {
     @IBAction private func didTapButton(_ sender: Any) {
     }
 
+    private var textFields: [UITextField] { [itemTextField, priceTextField] }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButtonContents()
+        setUpTextFiled()
+    }
+    private func setUpPickerController(pickerController: UIImagePickerController) {
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
     }
     private func setUpButtonContents() {
         createChallengeButton.backgroundColor = .mainColor()
         createChallengeButton.layer.cornerRadius = 5
+    }
+    private func setUpTextFiled() {
+        textFields.forEach { $0.delegate = self }
+        setUpNumberPad()
+    }
+    private func setUpNumberPad() {
+        priceTextField.keyboardType = .numberPad
+    }
+}
+
+extension CreateChallengeViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }
+
+        if textsIsEmpty[0] || textsIsEmpty[1] {
+            createChallengeButton.isEnabled = false
+        } else {
+            createChallengeButton.isEnabled = true
+        }
+    }
+}
+
+extension CreateChallengeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            self.itemImage.image = image
+        }
+        picker.dismiss(animated: true)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }

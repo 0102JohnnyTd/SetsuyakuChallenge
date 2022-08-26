@@ -26,6 +26,11 @@ final class CreateChallengeViewController: UIViewController {
         setUpTextFiled()
     }
 
+    private func createChallenge() {
+        let challenge = Challenge(itemImage: itemImage.image!, itemName: itemTextField.text!, itemPrice: priceTextField.text!)
+        Challenge.array.append(challenge)
+    }
+
     private func generatePickerController() -> UIImagePickerController {
         let pickerController = UIImagePickerController()
         return pickerController

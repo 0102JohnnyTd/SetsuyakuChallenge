@@ -23,6 +23,10 @@ final class CreateChallengeViewController: UIViewController {
         setUpButtonContents()
         setUpTextFiled()
     }
+    private func setUpPickerController(pickerController: UIImagePickerController) {
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+    }
     private func setUpButtonContents() {
         createChallengeButton.backgroundColor = .mainColor()
         createChallengeButton.layer.cornerRadius = 5
@@ -45,5 +49,18 @@ extension CreateChallengeViewController: UITextFieldDelegate {
         } else {
             createChallengeButton.isEnabled = true
         }
+    }
+}
+
+extension CreateChallengeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            self.itemImage.image = image
+        }
+        picker.dismiss(animated: true)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }

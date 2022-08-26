@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ljj-Xe-pkf">
-                                <rect key="frame" x="48" y="92" width="318" height="519.5"/>
+                                <rect key="frame" x="48" y="92" width="318" height="562"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fte-MU-5Jm">
-                                        <rect key="frame" x="0.0" y="0.0" width="318" height="346.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="318" height="389"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欲しいものの写真 (任意)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYQ-Lf-wFd">
                                                 <rect key="frame" x="0.0" y="0.0" width="318" height="20.5"/>
@@ -34,10 +34,17 @@
                                                     <constraint firstAttribute="width" secondItem="CPu-kr-wPk" secondAttribute="height" multiplier="1:1" id="YGr-nf-fwb"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zua-Zn-gTS" userLabel="Upload Image Button">
+                                                <rect key="frame" x="0.0" y="354.5" width="318" height="34.5"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="画像をアップロードする">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
+                                                </buttonConfiguration>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="37s-DO-N3X">
-                                        <rect key="frame" x="0.0" y="362.5" width="318" height="157"/>
+                                        <rect key="frame" x="0.0" y="405" width="318" height="157"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欲しいもの" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOy-il-EB3">
                                                 <rect key="frame" x="0.0" y="0.0" width="318" height="20.5"/>
@@ -77,7 +84,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb8-oB-ekk">
-                                <rect key="frame" x="48" y="659.5" width="318" height="38"/>
+                                <rect key="frame" x="48" y="702" width="318" height="38"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="チャレンジスタート！">

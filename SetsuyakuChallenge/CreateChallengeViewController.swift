@@ -13,9 +13,9 @@ final class CreateChallengeViewController: UIViewController {
     @IBOutlet private weak var priceTextField: UITextField!
     @IBOutlet private weak var createChallengeButton: UIButton!
 
-    @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
-    }
     @IBAction private func didTapUploadImageButton(_ sender: Any) {
+    }
+    @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
     }
 
     private var textFields: [UITextField] { [itemTextField, priceTextField] }

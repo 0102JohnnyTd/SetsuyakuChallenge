@@ -13,7 +13,9 @@ final class CreateChallengeViewController: UIViewController {
     @IBOutlet private weak var priceTextField: UITextField!
     @IBOutlet private weak var createChallengeButton: UIButton!
 
-    @IBAction private func didTapButton(_ sender: Any) {
+    @IBAction private func didTapUploadImageButton(_ sender: Any) {
+    }
+    @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
     }
 
     private var textFields: [UITextField] { [itemTextField, priceTextField] }
@@ -23,6 +25,12 @@ final class CreateChallengeViewController: UIViewController {
         setUpButtonContents()
         setUpTextFiled()
     }
+
+    private func generatePickerController() -> UIImagePickerController {
+        let pickerController = UIImagePickerController()
+        return pickerController
+    }
+
     private func setUpPickerController(pickerController: UIImagePickerController) {
         pickerController.delegate = self
         pickerController.allowsEditing = true

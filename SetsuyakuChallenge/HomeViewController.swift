@@ -65,7 +65,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = challengeCollectionView.dequeueReusableCell(withReuseIdentifier: ChallengeCollectionViewCell.identifier, for: indexPath) as! ChallengeCollectionViewCell
-        cell.configure()
+        cell.configure(itemName: "お菓子", goalPrice: String(100), itemImage: UIImage(named: "Default Item Image")!)
 
         return cell
     }

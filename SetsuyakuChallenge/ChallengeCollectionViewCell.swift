@@ -35,7 +35,10 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.4
     }
     
-    func configure() {
+    func configure(itemName: String, goalPrice: String, itemImage: UIImage) {
         setUpCellLayout()
+        itemNameLabel.text = itemName
+        goalPriceLabel.text = goalPrice
+        itemImageView.image = itemImage
     }
 }

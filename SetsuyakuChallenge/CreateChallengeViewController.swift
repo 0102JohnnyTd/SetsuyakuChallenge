@@ -14,6 +14,7 @@ final class CreateChallengeViewController: UIViewController {
     @IBOutlet private weak var createChallengeButton: UIButton!
 
     @IBAction private func didTapUploadImageButton(_ sender: Any) {
+        showPickerController()
     }
     @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
         createChallenge()

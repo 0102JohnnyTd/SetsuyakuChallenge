@@ -18,6 +18,7 @@ final class CreateChallengeViewController: UIViewController {
     }
     @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
         createChallenge()
+        navigationController?.popViewController(animated: true)
     }
 
     private var textFields: [UITextField] { [itemTextField, priceTextField] }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1CA2DD2028B5E5B300F401CC /* CreateChallenge.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CA2DD1F28B5E5B300F401CC /* CreateChallenge.storyboard */; };
 		1CA2DD2228B5E5CE00F401CC /* CreateChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA2DD2128B5E5CE00F401CC /* CreateChallengeViewController.swift */; };
+		1CA2DD2428B8A0EA00F401CC /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA2DD2328B8A0E900F401CC /* Challenge.swift */; };
 		1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A3FE28A36021008E1262 /* AppDelegate.swift */; };
 		1CB7A40128A36021008E1262 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A40028A36021008E1262 /* SceneDelegate.swift */; };
 		1CB7A40328A36021008E1262 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A40228A36021008E1262 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		1CA2DD1F28B5E5B300F401CC /* CreateChallenge.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateChallenge.storyboard; sourceTree = "<group>"; };
 		1CA2DD2128B5E5CE00F401CC /* CreateChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewController.swift; sourceTree = "<group>"; };
+		1CA2DD2328B8A0E900F401CC /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		1CB7A3FB28A36021008E1262 /* SetsuyakuChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetsuyakuChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CB7A3FE28A36021008E1262 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CB7A40028A36021008E1262 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				1CD3807F28A4F0C100B2AC80 /* User.swift */,
 				1CD380B728A63C7000B2AC80 /* Option.swift */,
 				1CD380ED28B06E2300B2AC80 /* UIColor+.swift */,
+				1CA2DD2328B8A0E900F401CC /* Challenge.swift */,
 				1CB7A40228A36021008E1262 /* ViewController.swift */,
 				1CB7A40428A36021008E1262 /* Main.storyboard */,
 				1CA2DD2128B5E5CE00F401CC /* CreateChallengeViewController.swift */,
@@ -297,6 +300,7 @@
 				1CD380EC28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift in Sources */,
 				1CD380B628A62CC700B2AC80 /* UserDetailsTableViewCell.swift in Sources */,
 				1CD380B228A6033C00B2AC80 /* UserDetailsTableViewHeaderView.swift in Sources */,
+				1CA2DD2428B8A0EA00F401CC /* Challenge.swift in Sources */,
 				1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */,
 				1CD380F228B3440600B2AC80 /* SignInViewController.swift in Sources */,
 				1CD380EE28B06E2300B2AC80 /* UIColor+.swift in Sources */,

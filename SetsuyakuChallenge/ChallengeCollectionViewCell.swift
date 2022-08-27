@@ -8,10 +8,11 @@
 import UIKit
 
 final class ChallengeCollectionViewCell: UICollectionViewCell {
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var totalLabel: UILabel!
-    @IBOutlet private weak var goalLabel: UILabel!
-
+    @IBOutlet private weak var itemNameLabel: UILabel!
+    @IBOutlet private weak var totalPriceLabel: UILabel!
+    @IBOutlet private weak var goalPriceLabel: UILabel!
+    @IBOutlet private weak var itemImageView: UIImageView!
+    
     static let nib = UINib(nibName: String(describing: ChallengeCollectionViewCell.self), bundle: nil)
     static let identifier = String(describing: ChallengeCollectionViewCell.self)
 
@@ -34,7 +35,10 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.4
     }
     
-    func configure() {
+    func configure(itemName: String, goalPrice: String, itemImage: UIImage) {
         setUpCellLayout()
+        itemNameLabel.text = itemName
+        goalPriceLabel.text = goalPrice
+        itemImageView.image = itemImage
     }
 }

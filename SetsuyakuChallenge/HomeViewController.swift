@@ -60,11 +60,12 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        1
+        Challenge.array.count
     }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = challengeCollectionView.dequeueReusableCell(withReuseIdentifier: ChallengeCollectionViewCell.identifier, for: indexPath) as! ChallengeCollectionViewCell
-        cell.configure()
+        cell.configure(itemName: Challenge.array[indexPath.row].itemName, goalPrice: Challenge.array[indexPath.row].itemPrice, itemImage: Challenge.array[indexPath.row].itemImage)
 
         return cell
     }

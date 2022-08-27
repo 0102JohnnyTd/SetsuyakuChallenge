@@ -16,6 +16,7 @@ final class CreateChallengeViewController: UIViewController {
     @IBAction private func didTapUploadImageButton(_ sender: Any) {
     }
     @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
+        createChallenge()
     }
 
     private var textFields: [UITextField] { [itemTextField, priceTextField] }
@@ -24,6 +25,11 @@ final class CreateChallengeViewController: UIViewController {
         super.viewDidLoad()
         setUpButtonContents()
         setUpTextFiled()
+    }
+
+    private func createChallenge() {
+        let challenge = Challenge(itemImage: itemImage.image!, itemName: itemTextField.text!, itemPrice: priceTextField.text!)
+        Challenge.array.append(challenge)
     }
 
     private func generatePickerController() -> UIImagePickerController {

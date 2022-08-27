@@ -14,9 +14,11 @@ final class CreateChallengeViewController: UIViewController {
     @IBOutlet private weak var createChallengeButton: UIButton!
 
     @IBAction private func didTapUploadImageButton(_ sender: Any) {
+        showPickerController()
     }
     @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
         createChallenge()
+        navigationController?.popViewController(animated: true)
     }
 
     private var textFields: [UITextField] { [itemTextField, priceTextField] }
@@ -25,6 +27,12 @@ final class CreateChallengeViewController: UIViewController {
         super.viewDidLoad()
         setUpButtonContents()
         setUpTextFiled()
+    }
+
+    private func showPickerController() {
+        let pickerController = generatePickerController()
+        setUpPickerController(pickerController: pickerController)
+        present(pickerController, animated: true)
     }
 
     private func createChallenge() {

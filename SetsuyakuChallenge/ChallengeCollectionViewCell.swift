@@ -38,7 +38,7 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
     func configure(itemName: String, goalPrice: String, itemImage: UIImage) {
         setUpCellLayout()
         itemNameLabel.text = itemName
-        goalPriceLabel.text = goalPrice
+        goalPriceLabel.text = "/ " + goalPrice + "円"
         itemImageView.image = itemImage
     }
 }

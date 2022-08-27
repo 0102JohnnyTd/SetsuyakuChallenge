@@ -14,6 +14,7 @@ final class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkIsLogin()
+        challengeCollectionView.reloadData()    
     }
 
     override func viewDidLoad() {

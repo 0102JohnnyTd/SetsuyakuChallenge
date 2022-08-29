@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ljj-Xe-pkf">
-                                <rect key="frame" x="48" y="92" width="318" height="530"/>
+                                <rect key="frame" x="48" y="44" width="318" height="530"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fte-MU-5Jm">
                                         <rect key="frame" x="0.0" y="0.0" width="318" height="389"/>
@@ -34,7 +34,7 @@
                                                     <constraint firstAttribute="width" secondItem="CPu-kr-wPk" secondAttribute="height" multiplier="1:1" id="YGr-nf-fwb"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zua-Zn-gTS" userLabel="Upload Image Button">
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zua-Zn-gTS" userLabel="Upload Image Button">
                                                 <rect key="frame" x="0.0" y="354.5" width="318" height="34.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="画像をアップロードする">
@@ -55,7 +55,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7zR-Pe-Omc">
+                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7zR-Pe-Omc">
                                                 <rect key="frame" x="0.0" y="20.5" width="318" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -94,11 +94,11 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb8-oB-ekk">
-                                <rect key="frame" x="48" y="670" width="318" height="38"/>
+                                <rect key="frame" x="48" y="598" width="318" height="33.5"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="チャレンジスタート！">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="didTapCreateChallengeButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zLI-vZ-eUa"/>
@@ -108,12 +108,12 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ljj-Xe-pkf" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="48" id="7QL-Ot-bA8"/>
+                            <constraint firstItem="ljj-Xe-pkf" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="7QL-Ot-bA8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ljj-Xe-pkf" secondAttribute="trailing" constant="48" id="Ko9-zh-CAs"/>
-                            <constraint firstItem="hb8-oB-ekk" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" priority="249" constant="48" id="Mq5-4v-3St"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hb8-oB-ekk" secondAttribute="bottom" priority="249" constant="48" id="Mq5-4v-3St"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hb8-oB-ekk" secondAttribute="trailing" constant="48" id="UfK-7I-W5d"/>
                             <constraint firstItem="hb8-oB-ekk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="Xa2-CO-1pI"/>
-                            <constraint firstItem="hb8-oB-ekk" firstAttribute="top" secondItem="ljj-Xe-pkf" secondAttribute="bottom" constant="48" id="hyU-Wg-MAy"/>
+                            <constraint firstItem="hb8-oB-ekk" firstAttribute="top" secondItem="ljj-Xe-pkf" secondAttribute="bottom" constant="24" id="hyU-Wg-MAy"/>
                             <constraint firstItem="ljj-Xe-pkf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="nis-Kb-2PU"/>
                         </constraints>
                     </view>

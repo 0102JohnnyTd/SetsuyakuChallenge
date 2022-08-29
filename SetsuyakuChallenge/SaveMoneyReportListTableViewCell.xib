@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,8 +12,39 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OMf-37-SFJ">
+                    <rect key="frame" x="16" y="16" width="382" height="104"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="浮いた金額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NzD-Nj-zkX">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コンビニでアイス買うか悩んだけど我慢した。コンビニでアイス買うか悩んだけど我慢した。コンビニでアイス買うか悩んだけど我慢した。コンビニでアイス買うか悩んだけど我慢した。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mo2-Se-ZkK">
+                            <rect key="frame" x="0.0" y="32" width="382" height="72"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZS9-77-ER8">
+                    <rect key="frame" x="0.0" y="136" width="414" height="14"/>
+                    <color key="backgroundColor" systemColor="systemRedColor"/>
+                </view>
+            </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="ZS9-77-ER8" firstAttribute="top" secondItem="OMf-37-SFJ" secondAttribute="bottom" constant="16" id="0aF-XA-8uh"/>
+                <constraint firstAttribute="trailing" secondItem="OMf-37-SFJ" secondAttribute="trailing" constant="16" id="1Sl-uz-q1o"/>
+                <constraint firstItem="ZS9-77-ER8" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="AXO-ht-G28"/>
+                <constraint firstItem="ZS9-77-ER8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="P9U-hW-VrC"/>
+                <constraint firstItem="OMf-37-SFJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Yc5-U8-UBb"/>
+                <constraint firstItem="ZS9-77-ER8" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="jY5-1g-9oy"/>
+                <constraint firstItem="OMf-37-SFJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="ygQ-gA-kFO"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="130" y="40"/>
         </view>
@@ -22,6 +52,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -8,6 +8,7 @@
 import UIKit
 
 class SaveMoneyReportListViewController: UIViewController {
+    @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

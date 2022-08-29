@@ -13,7 +13,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="pep-mf-sLz">
-                    <rect key="frame" x="16" y="16" width="382" height="118"/>
+                    <rect key="frame" x="16" y="16" width="382" height="120"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="I2a-dO-VLd">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="100"/>
@@ -67,7 +67,7 @@
                             </subviews>
                         </stackView>
                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5MO-H9-Xkt">
-                            <rect key="frame" x="0.0" y="116" width="382" height="2"/>
+                            <rect key="frame" x="0.0" y="116" width="382" height="4"/>
                         </progressView>
                     </subviews>
                 </stackView>
@@ -75,7 +75,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="pep-mf-sLz" secondAttribute="trailing" constant="16" id="2pW-Av-NWH"/>
                 <constraint firstItem="pep-mf-sLz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Isq-W8-OPi"/>
-                <constraint firstAttribute="bottom" secondItem="pep-mf-sLz" secondAttribute="bottom" constant="16" id="JfL-mn-Z7R"/>
+                <constraint firstAttribute="bottom" secondItem="pep-mf-sLz" secondAttribute="bottom" priority="249" constant="16" id="JfL-mn-Z7R"/>
                 <constraint firstItem="pep-mf-sLz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="mMV-tD-TSV"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

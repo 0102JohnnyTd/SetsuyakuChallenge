@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C6DF4A428BCE54B002F52D0 /* SaveMoneyReportList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */; };
+		1C6DF4A628BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A528BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift */; };
+		1C6DF4A828BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A728BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib */; };
+		1C6DF4AA28BCE9D5002F52D0 /* SaveMoneyReportListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A928BCE9D4002F52D0 /* SaveMoneyReportListTableViewCell.swift */; };
 		1CA2DD2028B5E5B300F401CC /* CreateChallenge.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CA2DD1F28B5E5B300F401CC /* CreateChallenge.storyboard */; };
 		1CA2DD2228B5E5CE00F401CC /* CreateChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA2DD2128B5E5CE00F401CC /* CreateChallengeViewController.swift */; };
 		1CA2DD2428B8A0EA00F401CC /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA2DD2328B8A0E900F401CC /* Challenge.swift */; };
@@ -38,6 +42,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaveMoneyReportList.storyboard; sourceTree = "<group>"; };
+		1C6DF4A528BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMoneyReportListViewController.swift; sourceTree = "<group>"; };
+		1C6DF4A728BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveMoneyReportListTableViewCell.xib; sourceTree = "<group>"; };
+		1C6DF4A928BCE9D4002F52D0 /* SaveMoneyReportListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMoneyReportListTableViewCell.swift; sourceTree = "<group>"; };
 		1CA2DD1F28B5E5B300F401CC /* CreateChallenge.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateChallenge.storyboard; sourceTree = "<group>"; };
 		1CA2DD2128B5E5CE00F401CC /* CreateChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewController.swift; sourceTree = "<group>"; };
 		1CA2DD2328B8A0E900F401CC /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
@@ -113,6 +121,10 @@
 				1CA2DD2328B8A0E900F401CC /* Challenge.swift */,
 				1CB7A40228A36021008E1262 /* ViewController.swift */,
 				1CB7A40428A36021008E1262 /* Main.storyboard */,
+				1C6DF4A928BCE9D4002F52D0 /* SaveMoneyReportListTableViewCell.swift */,
+				1C6DF4A728BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib */,
+				1C6DF4A528BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift */,
+				1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */,
 				1CA2DD2128B5E5CE00F401CC /* CreateChallengeViewController.swift */,
 				1CA2DD1F28B5E5B300F401CC /* CreateChallenge.storyboard */,
 				1CB7A41928A3A79E008E1262 /* SignUpViewController.swift */,
@@ -222,9 +234,11 @@
 				1CA2DD2028B5E5B300F401CC /* CreateChallenge.storyboard in Resources */,
 				1CD380C228A8F51B00B2AC80 /* Home.storyboard in Resources */,
 				1CD380B028A602FF00B2AC80 /* UserDetailsTableViewHeaderView.xib in Resources */,
+				1C6DF4A828BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib in Resources */,
 				1CD380F028B343E500B2AC80 /* SignIn.storyboard in Resources */,
 				1CB7A40628A36021008E1262 /* Main.storyboard in Resources */,
 				1CD380B428A62CB000B2AC80 /* UserDetailsTableViewCell.xib in Resources */,
+				1C6DF4A428BCE54B002F52D0 /* SaveMoneyReportList.storyboard in Resources */,
 				1CB7A41528A3643B008E1262 /* SignUp.storyboard in Resources */,
 				1CD380AC28A5FB9A00B2AC80 /* UserDetails.storyboard in Resources */,
 			);
@@ -296,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C6DF4A628BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift in Sources */,
 				1CB7A40328A36021008E1262 /* ViewController.swift in Sources */,
 				1CD380EC28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift in Sources */,
 				1CD380B628A62CC700B2AC80 /* UserDetailsTableViewCell.swift in Sources */,
@@ -308,6 +323,7 @@
 				1CD380C428A8F53A00B2AC80 /* HomeViewController.swift in Sources */,
 				1CD3808028A4F0C100B2AC80 /* User.swift in Sources */,
 				1CA2DD2228B5E5CE00F401CC /* CreateChallengeViewController.swift in Sources */,
+				1C6DF4AA28BCE9D5002F52D0 /* SaveMoneyReportListTableViewCell.swift in Sources */,
 				1CD380AE28A5FC5D00B2AC80 /* UserDetailsViewController.swift in Sources */,
 				1CD380B828A63C7000B2AC80 /* Option.swift in Sources */,
 				1CB7A40128A36021008E1262 /* SceneDelegate.swift in Sources */,

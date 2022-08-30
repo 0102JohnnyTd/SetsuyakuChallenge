@@ -8,10 +8,10 @@
 import UIKit
 
 class SaveMoneyReportListTableViewCell: UITableViewCell {
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setUpBackgroundView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -20,4 +20,8 @@ class SaveMoneyReportListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    private func setUpBackgroundView() {
+        self.backgroundView = UIView()
+        backgroundView?.backgroundColor = .mainColor()
+    }
 }

@@ -8,6 +8,9 @@
 import UIKit
 
 class SaveMoneyReportListTableViewCell: UITableViewCell {
+    static let nib = UINib(nibName: String(describing: SaveMoneyReportListTableViewCell.self), bundle: nil)
+    static let identifier = String(describing: SaveMoneyReportListTableViewCell.self)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

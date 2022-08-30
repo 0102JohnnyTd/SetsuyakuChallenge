@@ -10,21 +10,32 @@ import UIKit
 class SaveMoneyReportListViewController: UIViewController {
     @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
 
+    private let sampleArray = ["セル１", "セル2", "セル3"]
+
+    static let identifier = "SaveMoneyReportList"
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpTableView()
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setUpTableView() {
+        saveMoneyReportListTableView.delegate = self
+        saveMoneyReportListTableView.dataSource = self
+        registerTableViewCell()
     }
-    */
 
+    private func registerTableViewCell() {
+        saveMoneyReportListTableView.register(SaveMoneyReportListTableViewCell.nib, forCellReuseIdentifier: SaveMoneyReportListTableViewCell.identifier)
+    }
+}
+
+extension SaveMoneyReportListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        sampleArray.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        saveMoneyReportListTableView.dequeueReusableCell(withIdentifier: SaveMoneyReportListTableViewCell.identifier, for: indexPath) as! SaveMoneyReportListTableViewCell
+    }
 }

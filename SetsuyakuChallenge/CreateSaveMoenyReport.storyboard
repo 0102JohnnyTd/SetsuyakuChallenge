@@ -85,6 +85,11 @@
                             <constraint firstItem="6FD-SD-c7L" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="48" id="gdo-du-Fio"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createReportButton" destination="erM-UY-C8Q" id="nIh-DY-ZYA"/>
+                        <outlet property="memoTextView" destination="k4M-ee-bFP" id="INj-ev-QQ2"/>
+                        <outlet property="priceTextField" destination="yMQ-98-59o" id="cOD-BT-3M3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

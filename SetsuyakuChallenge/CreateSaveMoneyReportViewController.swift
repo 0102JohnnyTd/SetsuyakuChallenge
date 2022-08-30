@@ -8,6 +8,12 @@
 import UIKit
 
 class CreateSaveMoneyReportViewController: UIViewController {
+    @IBOutlet private weak var priceTextField: UITextField!
+
+    @IBOutlet private weak var memoTextView: UITextView!
+
+    @IBOutlet private weak var createReportButton: UIButton!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

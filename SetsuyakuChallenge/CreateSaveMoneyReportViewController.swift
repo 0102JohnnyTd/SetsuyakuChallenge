@@ -14,11 +14,15 @@ class CreateSaveMoneyReportViewController: UIViewController {
 
     @IBOutlet private weak var createReportButton: UIButton!
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()
         setUpTextView()
+    }
+
+    private func createReport() {
+        let saveMoneyReport = SaveMoneyReport(price: priceTextField.text!, memo: memoTextView.text!)
+        SaveMoneyReport.array.append(saveMoneyReport)
     }
 
     private func setUpButton() {

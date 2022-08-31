@@ -38,6 +38,12 @@ final class HomeViewController: UIViewController {
         present(nav, animated: true)
     }
 
+    private func showSaveMoneyReportListVC() {
+        let navController = UIStoryboard(name: SaveMoneyReportListViewController.storyboardName, bundle: nil).instantiateInitialViewController() as! UINavigationController
+        let saveMoneyReportListVC = navController.topViewController as! SaveMoneyReportListViewController
+        navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
+    }
+
     private func setUpCollectionView() {
         challengeCollectionView.delegate = self
         challengeCollectionView.dataSource = self
@@ -69,5 +75,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.configure(itemName: Challenge.array[indexPath.row].itemName, goalPrice: Challenge.array[indexPath.row].itemPrice, itemImage: Challenge.array[indexPath.row].itemImage)
 
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showSaveMoneyReportListVC()
     }
 }

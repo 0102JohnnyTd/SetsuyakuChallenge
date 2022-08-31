@@ -64,8 +64,7 @@ final class SignUpViewController: UIViewController {
         textFields.forEach { $0.delegate = self }
     }
     private func setUpButton() {
-        signUpButton.backgroundColor = .mainColor()
-        signUpButton.layer.cornerRadius = 5
+        signUpButton.mainButton()
     }
 }
 

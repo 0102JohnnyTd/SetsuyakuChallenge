@@ -41,8 +41,7 @@ final class SignInViewController: UIViewController {
     }
 
     private func setUpButton() {
-        signInButton.backgroundColor = .mainColor()
-        signInButton.layer.cornerRadius = 5
+        signInButton.mainButton()
     }
 }
 

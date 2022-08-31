@@ -49,9 +49,8 @@ final class CreateChallengeViewController: UIViewController {
         pickerController.delegate = self
         pickerController.allowsEditing = true
     }
-    private func setUpButtonContents() {
-        createChallengeButton.backgroundColor = .mainColor()
-        createChallengeButton.layer.cornerRadius = 5
+    private func setUpButton() {
+        createChallengeButton.mainButton()
     }
     private func setUpTextFiled() {
         textFields.forEach { $0.delegate = self }

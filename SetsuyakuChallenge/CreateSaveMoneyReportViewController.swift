@@ -18,9 +18,13 @@ class CreateSaveMoneyReportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()
+        setUpTextView()
     }
 
     private func setUpButton() {
         createReportButton.mainButton()
+    }
+    private func setUpTextView() {
+        memoTextView.layer.cornerRadius = 5
     }
 }

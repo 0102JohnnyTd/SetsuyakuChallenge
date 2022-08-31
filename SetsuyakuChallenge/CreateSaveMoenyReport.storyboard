@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6FD-SD-c7L">
-                                <rect key="frame" x="48" y="92" width="318" height="175"/>
+                                <rect key="frame" x="48" y="92" width="318" height="340.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="浮いた金額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEU-aF-2Zc">
                                         <rect key="frame" x="0.0" y="0.0" width="318" height="20.5"/>
@@ -55,11 +55,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="コンビニでアイス買うか悩んだけど我慢した。コンビニでアイス買うか悩んだけど我慢した。コンビニでアイス買うか悩んだけど我慢した。コンビニでアイス買うか悩んだけど我慢した。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="k4M-ee-bFP">
-                                        <rect key="frame" x="0.0" y="95" width="318" height="80"/>
+                                        <rect key="frame" x="0.0" y="95" width="318" height="245.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="KpW-SA-UHc"/>
-                                        </constraints>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -67,7 +64,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="erM-UY-C8Q">
-                                <rect key="frame" x="48" y="291" width="318" height="31"/>
+                                <rect key="frame" x="48" y="456.5" width="318" height="31"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="メモを追加"/>
@@ -83,6 +80,7 @@
                             <constraint firstItem="erM-UY-C8Q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="Ob0-h7-BNf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="erM-UY-C8Q" secondAttribute="trailing" constant="48" id="Rwx-dH-YMU"/>
                             <constraint firstItem="6FD-SD-c7L" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="48" id="gdo-du-Fio"/>
+                            <constraint firstItem="k4M-ee-bFP" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.3" id="uAE-Rw-ETp"/>
                         </constraints>
                     </view>
                     <connections>

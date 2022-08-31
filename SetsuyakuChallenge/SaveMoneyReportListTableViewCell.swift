@@ -9,21 +9,19 @@ import UIKit
 
 class SaveMoneyReportListTableViewCell: UITableViewCell {
     @IBOutlet private weak var priceLabel: UILabel!
-    @IBOutlet private weak var reportLabel: UILabel!
+    @IBOutlet private weak var memoLabel: UILabel!
     
     static let nib = UINib(nibName: String(describing: SaveMoneyReportListTableViewCell.self), bundle: nil)
     static let identifier = String(describing: SaveMoneyReportListTableViewCell.self)
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         setUpBackgroundView()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    private func configure(price: String, memo: String) {
+        priceLabel.text = price
+        memoLabel.text = memo
     }
 
     private func setUpBackgroundView() {

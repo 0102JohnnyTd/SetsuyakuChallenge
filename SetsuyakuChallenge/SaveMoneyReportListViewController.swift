@@ -10,7 +10,9 @@ import UIKit
 class SaveMoneyReportListViewController: UIViewController {
     @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
 
+    static let storyboardName = "SaveMoneyReportList"
     static let identifier = "SaveMoneyReportList"
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

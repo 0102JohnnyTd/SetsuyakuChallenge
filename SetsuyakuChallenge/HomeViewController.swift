@@ -38,6 +38,12 @@ final class HomeViewController: UIViewController {
         present(nav, animated: true)
     }
 
+    private func showSaveMoneyReportListVC() {
+        let navController = UIStoryboard(name: SaveMoneyReportListViewController.storyboardName, bundle: nil).instantiateInitialViewController() as! UINavigationController
+        let saveMoneyReportListVC = navController.topViewController as! SaveMoneyReportListViewController
+        navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
+    }
+
     private func setUpCollectionView() {
         challengeCollectionView.delegate = self
         challengeCollectionView.dataSource = self

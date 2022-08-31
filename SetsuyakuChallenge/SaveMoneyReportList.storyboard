@@ -31,7 +31,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wNw-Xw-BKG">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="bIl-ML-AU5"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="bIl-ML-AU5">
+                            <connections>
+                                <segue destination="Nqd-3t-Z2h" kind="push" id="S91-qb-T79"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="saveMoneyReportListTableView" destination="rAp-Nl-5ed" id="CCc-sS-bZ1"/>
@@ -40,6 +44,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="939.13043478260875" y="23.4375"/>
+        </scene>
+        <!--CreateSaveMoenyReport-->
+        <scene sceneID="HXG-Jf-Zad">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CreateSaveMoenyReport" id="Nqd-3t-Z2h" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ELK-uY-HtF"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R4s-Fj-clK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1516" y="-217"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J7r-ne-dNJ">

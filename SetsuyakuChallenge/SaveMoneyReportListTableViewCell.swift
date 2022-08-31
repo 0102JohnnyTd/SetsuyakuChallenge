@@ -19,7 +19,7 @@ class SaveMoneyReportListTableViewCell: UITableViewCell {
         setUpBackgroundView()
     }
 
-    private func configure(price: String, memo: String) {
+    func configure(price: String, memo: String) {
         priceLabel.text = price
         memoLabel.text = memo
     }

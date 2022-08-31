@@ -10,8 +10,6 @@ import UIKit
 class SaveMoneyReportListViewController: UIViewController {
     @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
 
-    private let sampleArray = ["セル１", "セル2", "セル3"]
-
     static let identifier = "SaveMoneyReportList"
 
     override func viewDidLoad() {
@@ -32,7 +30,7 @@ class SaveMoneyReportListViewController: UIViewController {
 
 extension SaveMoneyReportListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sampleArray.count
+        SaveMoneyReport.array.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

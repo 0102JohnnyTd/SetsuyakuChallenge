@@ -8,6 +8,9 @@
 import UIKit
 
 class SaveMoneyReportListTableViewCell: UITableViewCell {
+    @IBOutlet private weak var priceLabel: UILabel!
+    @IBOutlet private weak var reportLabel: UILabel!
+    
     static let nib = UINib(nibName: String(describing: SaveMoneyReportListTableViewCell.self), bundle: nil)
     static let identifier = String(describing: SaveMoneyReportListTableViewCell.self)
     

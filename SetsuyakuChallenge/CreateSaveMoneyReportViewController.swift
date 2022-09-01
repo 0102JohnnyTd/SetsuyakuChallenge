@@ -8,12 +8,14 @@
 import UIKit
 
 class CreateSaveMoneyReportViewController: UIViewController {
+
+    @IBOutlet private weak var priceSwicth: UISwitch!
+
     @IBOutlet private weak var priceTextField: UITextField!
 
     @IBOutlet private weak var memoTextView: UITextView!
 
     @IBOutlet private weak var createReportButton: UIButton!
-
 
     @IBAction private func didTapButton(_ sender: Any) {
         checkIsTextFieldPrice()
@@ -38,7 +40,6 @@ class CreateSaveMoneyReportViewController: UIViewController {
 
     private func createReport(price: Int) {
         let saveMoneyReport = SaveMoneyReport(price: price, memo: memoTextView.text!)
-
         SaveMoneyReport.array.append(saveMoneyReport)
     }
 
@@ -47,7 +48,7 @@ class CreateSaveMoneyReportViewController: UIViewController {
         present(alertController, animated: true)
     }
     private func generateInputErrorAlert() -> UIAlertController {
-        let alertController =  UIAlertController(title: "入力エラー", message: "浮いた金額には数値を入れてください", preferredStyle: .alert)
+        let alertController =  UIAlertController(title: "入力エラー", message: "金額は数値以外の値を入れてないでください", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
 
         return alertController

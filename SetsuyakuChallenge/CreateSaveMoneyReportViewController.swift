@@ -14,6 +14,10 @@ class CreateSaveMoneyReportViewController: UIViewController {
 
     @IBOutlet private weak var createReportButton: UIButton!
 
+
+    @IBAction private func didTapButton(_ sender: Any) {
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()

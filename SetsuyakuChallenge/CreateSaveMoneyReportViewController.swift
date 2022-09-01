@@ -35,7 +35,8 @@ class CreateSaveMoneyReportViewController: UIViewController {
             showAlert()
             return
         }
-        createReport(price: price)
+        let signPrice = priceSwicth.isOn ? price : -price
+        createReport(price: signPrice)
     }
 
     private func createReport(price: Int) {

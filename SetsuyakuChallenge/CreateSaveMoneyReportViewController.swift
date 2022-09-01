@@ -27,6 +27,16 @@ class CreateSaveMoneyReportViewController: UIViewController {
         SaveMoneyReport.array.append(saveMoneyReport)
     }
 
+    private func checkIsTextFieldValue() {
+        let inputPrice = priceTextField.textToInt
+
+        guard let price = inputPrice else {
+            showAlert()
+            return
+        }
+        createReport(price: price)
+    }
+
     private func showAlert() {
         let alertController = generateInputErrorAlert()
         present(alertController, animated: true)

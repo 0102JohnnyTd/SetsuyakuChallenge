@@ -31,6 +31,10 @@ class CreateSaveMoneyReportViewController: UIViewController {
     }
     private func setUpTextFiled() {
         priceTextField.delegate = self
+        setUpNumberPad()
+    }
+    private func setUpNumberPad() {
+        priceTextField.keyboardType = .numberPad
     }
     private func setUpTextView() {
         memoTextView.layer.cornerRadius = 5

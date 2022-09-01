@@ -17,9 +17,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6FD-SD-c7L">
-                                <rect key="frame" x="48" y="92" width="318" height="340.5"/>
+                                <rect key="frame" x="48" y="107" width="318" height="340.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="浮いた金額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEU-aF-2Zc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="金額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEU-aF-2Zc">
                                         <rect key="frame" x="0.0" y="0.0" width="318" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -65,23 +65,45 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="erM-UY-C8Q">
-                                <rect key="frame" x="48" y="480.5" width="318" height="31"/>
+                                <rect key="frame" x="48" y="495.5" width="318" height="31"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="メモを追加"/>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dhE-PD-Kpb">
+                                <rect key="frame" x="133.5" y="52" width="147" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="ー" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2F-If-dXl">
+                                        <rect key="frame" x="0.0" y="0.0" width="49" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lx6-RY-1ef">
+                                        <rect key="frame" x="49" y="0.0" width="51" height="31"/>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＋" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCx-sx-apf">
+                                        <rect key="frame" x="98" y="0.0" width="49" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="erM-UY-C8Q" firstAttribute="top" secondItem="6FD-SD-c7L" secondAttribute="bottom" constant="48" id="2nD-lu-3Kx"/>
+                            <constraint firstItem="dhE-PD-Kpb" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="4bt-uQ-PlA"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6FD-SD-c7L" secondAttribute="trailing" constant="48" id="6iq-6b-Hh0"/>
                             <constraint firstItem="6FD-SD-c7L" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="Ef3-nx-6zk"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="erM-UY-C8Q" secondAttribute="bottom" priority="249" constant="48" id="Fdp-gr-TpL"/>
                             <constraint firstItem="erM-UY-C8Q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="Ob0-h7-BNf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="erM-UY-C8Q" secondAttribute="trailing" constant="48" id="Rwx-dH-YMU"/>
-                            <constraint firstItem="6FD-SD-c7L" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="48" id="gdo-du-Fio"/>
+                            <constraint firstItem="6FD-SD-c7L" firstAttribute="top" secondItem="dhE-PD-Kpb" secondAttribute="bottom" constant="24" id="gdo-du-Fio"/>
                             <constraint firstItem="k4M-ee-bFP" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.3" id="uAE-Rw-ETp"/>
+                            <constraint firstItem="dhE-PD-Kpb" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="vDY-6L-OHk"/>
                         </constraints>
                     </view>
                     <connections>

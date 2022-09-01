@@ -22,6 +22,8 @@ class CreateSaveMoneyReportViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    private let priceManager = PriceManager.shared
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()
@@ -37,6 +39,7 @@ class CreateSaveMoneyReportViewController: UIViewController {
             return
         }
         let signPrice = priceSwicth.isOn ? price : -price
+        priceManager.calculate(price: signPrice)
         createReport(price: signPrice)
     }
 

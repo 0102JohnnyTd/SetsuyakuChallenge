@@ -16,6 +16,7 @@ class CreateSaveMoneyReportViewController: UIViewController {
 
 
     @IBAction private func didTapButton(_ sender: Any) {
+        checkIsTextFieldPrice()
     }
 
     override func viewDidLoad() {
@@ -25,13 +26,7 @@ class CreateSaveMoneyReportViewController: UIViewController {
         setUpTextFiled()
     }
 
-    private func createReport(price: Int) {
-        let saveMoneyReport = SaveMoneyReport(price: price, memo: memoTextView.text!)
-
-        SaveMoneyReport.array.append(saveMoneyReport)
-    }
-
-    private func checkIsTextFieldValue() {
+    private func checkIsTextFieldPrice() {
         let inputPrice = priceTextField.textToInt
 
         guard let price = inputPrice else {
@@ -39,6 +34,12 @@ class CreateSaveMoneyReportViewController: UIViewController {
             return
         }
         createReport(price: price)
+    }
+
+    private func createReport(price: Int) {
+        let saveMoneyReport = SaveMoneyReport(price: price, memo: memoTextView.text!)
+
+        SaveMoneyReport.array.append(saveMoneyReport)
     }
 
     private func showAlert() {

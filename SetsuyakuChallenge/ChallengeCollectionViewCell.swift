@@ -16,6 +16,12 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
     static let nib = UINib(nibName: String(describing: ChallengeCollectionViewCell.self), bundle: nil)
     static let identifier = String(describing: ChallengeCollectionViewCell.self)
 
+    private let priceManager = PriceManager.shared
+
+    override func awakeFromNib() {
+        priceManager.delegate = self
+    }
+
     private func setUpCellLayout() {
         setUpBackgroundView()
         setUpContentView()
@@ -40,5 +46,11 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
         itemNameLabel.text = itemName
         goalPriceLabel.text = "/ " + goalPrice + "円"
         itemImageView.image = itemImage
+    }
+}
+
+extension ChallengeCollectionViewCell: PriceManagerDelegate {
+    func didChangePrice(price: Int) {
+        <#code#>
     }
 }

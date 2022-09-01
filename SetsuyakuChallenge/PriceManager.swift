@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PriceManagerDelegate: AnyObject {
-    func didChangePrice()
+    func didChangePrice(price: Int)
 }
 
 final class PriceManager {
@@ -25,6 +25,6 @@ final class PriceManager {
     }
 
     private func notify() {
-        delegate?.didChangePrice()
+        delegate?.didChangePrice(price: totalPrice)
     }
 }

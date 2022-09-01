@@ -22,17 +22,19 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
         priceManager.delegate = self
     }
 
+    private func upDateTotalPriceLabel(price: Int) {
+        totalPriceLabel.text = String(price)
+    }
+
     private func setUpCellLayout() {
         setUpBackgroundView()
         setUpContentView()
     }
-    
     private func setUpBackgroundView() {
         self.backgroundView = UIView()
         self.backgroundView?.backgroundColor = .mainColor()
         self.backgroundView?.layer.cornerRadius = 10.0
     }
-
     private func setUpContentView() {
         self.contentView.layer.masksToBounds = true
         self.layer.masksToBounds = false

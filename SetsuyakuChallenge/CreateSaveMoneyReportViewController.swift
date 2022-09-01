@@ -18,6 +18,7 @@ class CreateSaveMoneyReportViewController: UIViewController {
         super.viewDidLoad()
         setUpButton()
         setUpTextView()
+        setUpTextFiled()
     }
 
     private func createReport() {
@@ -28,7 +29,20 @@ class CreateSaveMoneyReportViewController: UIViewController {
     private func setUpButton() {
         createReportButton.mainButton()
     }
+    private func setUpTextFiled() {
+        priceTextField.delegate = self
+    }
     private func setUpTextView() {
         memoTextView.layer.cornerRadius = 5
+    }
+}
+
+extension CreateSaveMoneyReportViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if priceTextField.text?.isEmpty ?? true {
+            createReportButton.isEnabled = false
+        } else {
+            createReportButton.isEnabled = true
+        }
     }
 }

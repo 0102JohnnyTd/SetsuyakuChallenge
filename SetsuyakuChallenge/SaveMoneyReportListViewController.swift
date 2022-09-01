@@ -38,7 +38,7 @@ extension SaveMoneyReportListViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = saveMoneyReportListTableView.dequeueReusableCell(withIdentifier: SaveMoneyReportListTableViewCell.identifier, for: indexPath) as! SaveMoneyReportListTableViewCell
 
-        cell.configure(price:SaveMoneyReport.array[indexPath.row].price , memo: SaveMoneyReport.array[indexPath.row].memo)
+        cell.configure(price: String(SaveMoneyReport.array[indexPath.row].price), memo: SaveMoneyReport.array[indexPath.row].memo)
 
         return cell
     }

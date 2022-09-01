@@ -21,8 +21,9 @@ class CreateSaveMoneyReportViewController: UIViewController {
         setUpTextFiled()
     }
 
-    private func createReport() {
-        let saveMoneyReport = SaveMoneyReport(price: priceTextField.text!, memo: memoTextView.text!)
+    private func createReport(price: Int) {
+        let saveMoneyReport = SaveMoneyReport(price: price, memo: memoTextView.text!)
+
         SaveMoneyReport.array.append(saveMoneyReport)
     }
 

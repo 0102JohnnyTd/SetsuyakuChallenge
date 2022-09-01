@@ -19,6 +19,10 @@ class SaveMoneyReportListViewController: UIViewController {
         setUpTableView()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        saveMoneyReportListTableView.reloadData()
+    }
+
     private func setUpTableView() {
         saveMoneyReportListTableView.delegate = self
         saveMoneyReportListTableView.dataSource = self

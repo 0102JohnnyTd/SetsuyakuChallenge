@@ -20,6 +20,7 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         priceManager.delegate = self
+        totalPriceLabel.text = String(priceManager.totalPrice)
     }
 
     private func upDateTotalPriceLabel(price: Int) {

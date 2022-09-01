@@ -27,6 +27,10 @@ class CreateSaveMoneyReportViewController: UIViewController {
         SaveMoneyReport.array.append(saveMoneyReport)
     }
 
+    private func showAlert() {
+        let alertController = generateInputErrorAlert()
+        present(alertController, animated: true)
+    }
     private func generateInputErrorAlert() -> UIAlertController {
         let alertController =  UIAlertController(title: "入力エラー", message: "浮いた金額には数値を入れてください", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default))

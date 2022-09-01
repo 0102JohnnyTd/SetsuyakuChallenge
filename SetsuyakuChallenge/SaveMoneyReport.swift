@@ -8,7 +8,7 @@
 import Foundation
 
 struct SaveMoneyReport {
-    var price: String
+    var price: Int
     var memo: String
 
     static var array: [SaveMoneyReport] = []

@@ -55,7 +55,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="コンビニでアイス買うか悩んだけど我慢した。コンビニでアイス買うか悩んだけど我慢した。コンビニでアイス買うか悩んだけど我慢した。コンビニでアイス買うか悩んだけど我慢した。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="k4M-ee-bFP">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="k4M-ee-bFP">
                                         <rect key="frame" x="0.0" y="95" width="318" height="245.5"/>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <color key="textColor" systemColor="labelColor"/>

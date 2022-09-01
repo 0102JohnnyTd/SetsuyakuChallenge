@@ -19,6 +19,7 @@ class CreateSaveMoneyReportViewController: UIViewController {
 
     @IBAction private func didTapButton(_ sender: Any) {
         checkIsTextFieldPrice()
+        navigationController?.popViewController(animated: true)
     }
 
     override func viewDidLoad() {

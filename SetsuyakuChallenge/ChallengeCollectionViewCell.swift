@@ -53,6 +53,6 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
 
 extension ChallengeCollectionViewCell: PriceManagerDelegate {
     func didChangePrice(price: Int) {
-        <#code#>
+        upDateTotalPriceLabel(price: price)
     }
 }

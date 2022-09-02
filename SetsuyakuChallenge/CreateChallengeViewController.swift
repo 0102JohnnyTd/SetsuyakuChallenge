@@ -35,6 +35,11 @@ final class CreateChallengeViewController: UIViewController {
         present(pickerController, animated: true)
     }
 
+    private func showAlert() {
+        let alertController = generateInputErrorAlert()
+        present(alertController, animated: true)
+    }
+
     private func createChallenge() {
         let challenge = Challenge(itemImage: itemImage.image!, itemName: itemTextField.text!, itemPrice: priceTextField.text!)
         Challenge.array.append(challenge)

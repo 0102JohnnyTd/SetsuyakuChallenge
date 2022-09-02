@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SaveMoneyReportListTableViewCell: UITableViewCell {
+final class SaveMoneyReportListTableViewCell: UITableViewCell {
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var memoLabel: UILabel!
     

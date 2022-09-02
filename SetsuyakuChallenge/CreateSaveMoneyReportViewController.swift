@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateSaveMoneyReportViewController: UIViewController {
+final class CreateSaveMoneyReportViewController: UIViewController {
 
     @IBOutlet private weak var priceSwicth: UISwitch!
 

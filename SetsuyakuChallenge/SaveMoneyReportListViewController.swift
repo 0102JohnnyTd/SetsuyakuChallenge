@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SaveMoneyReportListViewController: UIViewController {
+final class SaveMoneyReportListViewController: UIViewController {
     @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
 
     static let storyboardName = "SaveMoneyReportList"

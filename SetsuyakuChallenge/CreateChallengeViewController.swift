@@ -17,8 +17,7 @@ final class CreateChallengeViewController: UIViewController {
         showPickerController()
     }
     @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
-        createChallenge()
-        navigationController?.popViewController(animated: true)
+        checkIsTextField()
     }
 
     private var textFields: [UITextField] { [itemTextField, priceTextField] }
@@ -35,9 +34,33 @@ final class CreateChallengeViewController: UIViewController {
         present(pickerController, animated: true)
     }
 
+
+    private func checkIsTextField() {
+        let inputPrice = priceTextField.textToInt
+
+        guard inputPrice != nil else {
+            showAlert()
+            return
+        }
+        createChallenge()
+        navigationController?.popViewController(animated: true)
+    }
+
+    private func showAlert() {
+        let alertController = generateInputErrorAlert()
+        present(alertController, animated: true)
+    }
+
     private func createChallenge() {
         let challenge = Challenge(itemImage: itemImage.image!, itemName: itemTextField.text!, itemPrice: priceTextField.text!)
         Challenge.array.append(challenge)
+    }
+
+    private func generateInputErrorAlert() -> UIAlertController {
+        let alertController = UIAlertController(title: AlertTitle.inputError, message: AlertMessage.inputError, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
+
+        return alertController
     }
 
     private func generatePickerController() -> UIImagePickerController {

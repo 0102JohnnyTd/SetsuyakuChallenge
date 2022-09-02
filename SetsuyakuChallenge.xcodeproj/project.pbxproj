@@ -44,6 +44,7 @@
 		1CEB237C28BF45F500D3FE15 /* SaveMoneyReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237B28BF45F500D3FE15 /* SaveMoneyReport.swift */; };
 		1CEB237E28C0A1E600D3FE15 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237D28C0A1E600D3FE15 /* UITextField+.swift */; };
 		1CEB238028C0C47B00D3FE15 /* PriceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237F28C0C47B00D3FE15 /* PriceManager.swift */; };
+		1CEB238228C1F11E00D3FE15 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB238128C1F11E00D3FE15 /* AlertManager.swift */; };
 		9DC38D5127426FCCFA123819 /* Pods_SetsuyakuChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9559AA5CFA7CEF13DE1E1D23 /* Pods_SetsuyakuChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		1CEB237B28BF45F500D3FE15 /* SaveMoneyReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMoneyReport.swift; sourceTree = "<group>"; };
 		1CEB237D28C0A1E600D3FE15 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		1CEB237F28C0C47B00D3FE15 /* PriceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceManager.swift; sourceTree = "<group>"; };
+		1CEB238128C1F11E00D3FE15 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		357490A01650221DBC3F0C39 /* Pods-SetsuyakuChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetsuyakuChallenge.debug.xcconfig"; path = "Target Support Files/Pods-SetsuyakuChallenge/Pods-SetsuyakuChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		9559AA5CFA7CEF13DE1E1D23 /* Pods_SetsuyakuChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SetsuyakuChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61DB092B882EF53AA343305 /* Pods-SetsuyakuChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetsuyakuChallenge.release.xcconfig"; path = "Target Support Files/Pods-SetsuyakuChallenge/Pods-SetsuyakuChallenge.release.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				1CA2DD2328B8A0E900F401CC /* Challenge.swift */,
 				1CEB237B28BF45F500D3FE15 /* SaveMoneyReport.swift */,
 				1CEB237F28C0C47B00D3FE15 /* PriceManager.swift */,
+				1CEB238128C1F11E00D3FE15 /* AlertManager.swift */,
 				1CB7A40228A36021008E1262 /* ViewController.swift */,
 				1CB7A40428A36021008E1262 /* Main.storyboard */,
 				1CEB237528BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift */,
@@ -335,6 +338,7 @@
 				1CD380B628A62CC700B2AC80 /* UserDetailsTableViewCell.swift in Sources */,
 				1CD380B228A6033C00B2AC80 /* UserDetailsTableViewHeaderView.swift in Sources */,
 				1CA2DD2428B8A0EA00F401CC /* Challenge.swift in Sources */,
+				1CEB238228C1F11E00D3FE15 /* AlertManager.swift in Sources */,
 				1CEB237A28BE5E1100D3FE15 /* UIButton+.swift in Sources */,
 				1CEB237628BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift in Sources */,
 				1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */,

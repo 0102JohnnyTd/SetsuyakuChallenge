@@ -40,6 +40,13 @@ final class CreateChallengeViewController: UIViewController {
         Challenge.array.append(challenge)
     }
 
+    private func generateInputErrorAlert() -> UIAlertController {
+        let alertController = UIAlertController(title: "入力エラー", message: "金額は数値以外の値を入れないでください", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+
+        return alertController
+    }
+
     private func generatePickerController() -> UIImagePickerController {
         let pickerController = UIImagePickerController()
         return pickerController

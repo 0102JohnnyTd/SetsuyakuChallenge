@@ -59,7 +59,7 @@ final class HomeViewController: UIViewController {
     }
 
     private func setUpCellSize() -> CGSize {
-        let width = UIScreen.main.bounds.width - 48
+        let width = UIScreen.main.bounds.width - 32
         let height = width * 0.5
         return CGSize(width: width, height: height)
     }

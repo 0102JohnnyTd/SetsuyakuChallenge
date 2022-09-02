@@ -89,18 +89,20 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Hj-wk-e26">
-                                <rect key="frame" x="32" y="553.5" width="350" height="31"/>
+                                <rect key="frame" x="32" y="553.5" width="350" height="32"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウントをお持ちの方：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kVM-Vb-1Jf">
-                                        <rect key="frame" x="0.0" y="0.0" width="208" height="31"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="184" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2JZ-nH-WAO">
-                                        <rect key="frame" x="208" y="0.0" width="142" height="31"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2JZ-nH-WAO" userLabel="Show Sign In Button">
+                                        <rect key="frame" x="184" y="0.0" width="166" height="32"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="ログイン"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="ログイン">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="15"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <segue destination="86n-8p-S36" kind="push" id="qdi-Kd-bpw"/>
                                         </connections>

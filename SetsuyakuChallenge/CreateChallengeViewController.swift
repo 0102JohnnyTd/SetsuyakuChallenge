@@ -41,8 +41,8 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func generateInputErrorAlert() -> UIAlertController {
-        let alertController = UIAlertController(title: "入力エラー", message: "金額は数値以外の値を入れないでください", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        let alertController = UIAlertController(title: AlertMessage.inputError, message: AlertTitle.inputError, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
 
         return alertController
     }

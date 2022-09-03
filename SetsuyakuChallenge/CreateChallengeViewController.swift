@@ -12,7 +12,7 @@ import FirebaseStorage
 
 
 final class CreateChallengeViewController: UIViewController {
-    @IBOutlet private weak var itemImage: UIImageView!
+    @IBOutlet private weak var itemImageView: UIImageView!
     @IBOutlet private weak var itemTextField: UITextField!
     @IBOutlet private weak var priceTextField: UITextField!
     @IBOutlet private weak var createChallengeButton: UIButton!
@@ -93,7 +93,7 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func saveImageData(storageRef: StorageReference) {
-        let image = itemImage.image!
+        let image = itemImageView.image!
         guard let uploadImage = image.jpegData(compressionQuality: 0.3) else { return }
 
         storageRef.putData(uploadImage) { (metaData, err) in
@@ -108,7 +108,7 @@ final class CreateChallengeViewController: UIViewController {
     
 
     private func createChallenge() {
-        let challenge = Challenge(itemImage: itemImage.image!, itemName: itemTextField.text!, itemPrice: priceTextField.text!)
+        let challenge = Challenge(itemImage: itemImageView.image!, itemName: itemTextField.text!, itemPrice: priceTextField.text!)
         Challenge.array.append(challenge)
     }
 
@@ -158,7 +158,7 @@ extension CreateChallengeViewController: UITextFieldDelegate {
 extension CreateChallengeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
-            self.itemImage.image = image
+            self.itemImageView.image = image
         }
         picker.dismiss(animated: true)
     }

@@ -121,7 +121,7 @@
                     </view>
                     <connections>
                         <outlet property="createChallengeButton" destination="hb8-oB-ekk" id="xu4-sj-Kez"/>
-                        <outlet property="itemImage" destination="CPu-kr-wPk" id="gqD-7P-cVN"/>
+                        <outlet property="itemImageView" destination="CPu-kr-wPk" id="gqD-7P-cVN"/>
                         <outlet property="itemTextField" destination="7zR-Pe-Omc" id="Tdq-KC-H9o"/>
                         <outlet property="priceTextField" destination="42W-Sb-CAw" id="FT1-e6-sd8"/>
                     </connections>

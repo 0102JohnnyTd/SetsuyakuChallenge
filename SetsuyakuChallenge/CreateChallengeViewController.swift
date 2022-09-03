@@ -54,6 +54,15 @@ final class CreateChallengeViewController: UIViewController {
         present(pickerController, animated: true)
     }
 
+    private func saveData() {
+        let fileName = NSUUID().uuidString
+        let storageRef = Storage.storage().reference().child("item_image").child(fileName)
+        saveImageData(storageRef: storageRef)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.fetchImageURL(storageRef: storageRef)
+        }
+    }
+
     private func fetchImageURL(storageRef: StorageReference){
         storageRef.downloadURL { (url, err) in
             if let err = err {

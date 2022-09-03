@@ -54,6 +54,22 @@ final class CreateChallengeViewController: UIViewController {
         present(pickerController, animated: true)
     }
 
+    private func saveChallengeData(imageURL: String) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let itemName = itemTextField.text!
+        let itemPrice = priceTextField.text!
+
+        let docData = ["ImageURL": imageURL, "name": itemName, "price": itemPrice] as [String: Any]
+        let userRef = Firestore.firestore().collection("challenges").document(uid)
+
+        userRef.setData(docData) { (err) in
+            if let err = err {
+            print("FireStroreへの保存に失敗しました: \(err)")
+        }
+            print("FireStoreへの保存に成功しました")
+        }
+    }
+
     private func saveImageData(storageRef: StorageReference) {
         let image = itemImage.image!
         guard let uploadImage = image.jpegData(compressionQuality: 0.3) else { return }
@@ -66,6 +82,8 @@ final class CreateChallengeViewController: UIViewController {
             print("Firestorageへの情報の保存に成功しました")
         }
     }
+
+    
 
     private func createChallenge() {
         let challenge = Challenge(itemImage: itemImage.image!, itemName: itemTextField.text!, itemPrice: priceTextField.text!)

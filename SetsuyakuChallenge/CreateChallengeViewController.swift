@@ -54,6 +54,18 @@ final class CreateChallengeViewController: UIViewController {
         present(pickerController, animated: true)
     }
 
+    private func fetchImageURL(storageRef: StorageReference){
+        storageRef.downloadURL { (url, err) in
+            if let err = err {
+                print("Firestorageのデータの取得に失敗しました \(err)")
+                return
+            }
+            print("Firestorageのデータの取得に成功しました")
+            guard let itemImageURL = url?.absoluteString else { return }
+            self.saveChallengeData(imageURL: itemImageURL)
+        }
+    }
+
     private func saveChallengeData(imageURL: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let itemName = itemTextField.text!

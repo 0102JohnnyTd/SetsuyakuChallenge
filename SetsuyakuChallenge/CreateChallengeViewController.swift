@@ -32,13 +32,6 @@ final class CreateChallengeViewController: UIViewController {
         setUpTextFiled()
     }
 
-    private func showPickerController() {
-        let pickerController = generatePickerController()
-        setUpPickerController(pickerController: pickerController)
-        present(pickerController, animated: true)
-    }
-
-
     private func checkIsTextField() {
         let inputPrice = priceTextField.textToInt
 
@@ -53,6 +46,25 @@ final class CreateChallengeViewController: UIViewController {
     private func showAlert() {
         let alertController = generateInputErrorAlert()
         present(alertController, animated: true)
+    }
+
+    private func showPickerController() {
+        let pickerController = generatePickerController()
+        setUpPickerController(pickerController: pickerController)
+        present(pickerController, animated: true)
+    }
+
+    private func saveImageData(storageRef: StorageReference) {
+        let image = itemImage.image!
+        guard let uploadImage = image.jpegData(compressionQuality: 0.3) else { return }
+
+        storageRef.putData(uploadImage) { (metaData, err) in
+            if let err = err {
+                print("Firestorageへの情報の保存に失敗しました \(err)")
+                return
+            }
+            print("Firestorageへの情報の保存に成功しました")
+        }
     }
 
     private func createChallenge() {
@@ -76,13 +88,16 @@ final class CreateChallengeViewController: UIViewController {
         pickerController.delegate = self
         pickerController.allowsEditing = true
     }
+
     private func setUpButton() {
         createChallengeButton.mainButton()
     }
+
     private func setUpTextFiled() {
         textFields.forEach { $0.delegate = self }
         setUpNumberPad()
     }
+
     private func setUpNumberPad() {
         priceTextField.keyboardType = .numberPad
     }

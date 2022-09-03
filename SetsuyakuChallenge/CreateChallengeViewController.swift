@@ -39,6 +39,7 @@ final class CreateChallengeViewController: UIViewController {
             showAlert()
             return
         }
+        saveData()
         createChallenge()
         navigationController?.popViewController(animated: true)
     }

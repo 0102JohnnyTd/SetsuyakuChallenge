@@ -64,7 +64,7 @@ final class CreateChallengeViewController: UIViewController {
         }
     }
 
-    private func fetchImageURL(storageRef: StorageReference){
+    private func fetchImageURL(storageRef: StorageReference) {
         storageRef.downloadURL { (url, err) in
             if let err = err {
                 print("Firestorageのデータの取得に失敗しました \(err)")

@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseStorage
+
 
 final class CreateChallengeViewController: UIViewController {
     @IBOutlet private weak var itemImage: UIImageView!

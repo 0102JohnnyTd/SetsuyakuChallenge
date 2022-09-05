@@ -26,6 +26,7 @@ final class CreateChallengeViewController: UIViewController {
 
     private var textFields: [UITextField] { [nameTextField, goalAmountTextField] }
 
+    private let fileName = NSUUID().uuidString
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +57,7 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func saveData() {
-        let fileName = NSUUID().uuidString
+
         let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
         saveImageData(storageRef: storageRef)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -77,14 +78,13 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func saveChallengeData(imageURL: String) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
         let name = nameTextField.text!
         let goalAmount = goalAmountTextField.text!
 
         let docData = [ChallengesDocDataKey.imageURL: imageURL, ChallengesDocDataKey.name: name, ChallengesDocDataKey.goalAmount: goalAmount] as [String: Any]
-        let userRef = Firestore.firestore().collection(CollectionName.challenges).document(uid)
 
-        userRef.setData(docData) { (err) in
+        let challengeRef = Firestore.firestore().collection(CollectionName.challenges).document(fileName)
+        challengeRef.setData(docData) { (err) in
             if let err = err {
             print("FireStroreへの保存に失敗しました: \(err)")
         }

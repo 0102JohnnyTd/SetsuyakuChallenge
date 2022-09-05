@@ -11,5 +11,6 @@ target 'SetsuyakuChallenge' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'Firebase/Storage'
+  pod 'Kingfisher', '~> 7.0'
 
 end

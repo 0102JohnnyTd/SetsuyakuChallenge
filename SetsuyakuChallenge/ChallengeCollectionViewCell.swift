@@ -8,10 +8,10 @@
 import UIKit
 
 final class ChallengeCollectionViewCell: UICollectionViewCell {
-    @IBOutlet private weak var itemNameLabel: UILabel!
-    @IBOutlet private weak var totalPriceLabel: UILabel!
-    @IBOutlet private weak var goalPriceLabel: UILabel!
-    @IBOutlet private weak var itemImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var totalAmountLabel: UILabel!
+    @IBOutlet private weak var goalAmountLabel: UILabel!
+    @IBOutlet private weak var imageView: UIImageView!
     
     static let nib = UINib(nibName: String(describing: ChallengeCollectionViewCell.self), bundle: nil)
     static let identifier = String(describing: ChallengeCollectionViewCell.self)
@@ -20,11 +20,11 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         priceManager.delegate = self
-        totalPriceLabel.text = String(priceManager.totalPrice)
+        totalAmountLabel.text = String(priceManager.totalPrice)
     }
 
     private func upDateTotalPriceLabel(price: Int) {
-        totalPriceLabel.text = String(price)
+        totalAmountLabel.text = String(price)
     }
 
     private func setUpCellLayout() {
@@ -46,9 +46,9 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
     
     func configure(itemName: String, goalPrice: String, itemImage: UIImage) {
         setUpCellLayout()
-        itemNameLabel.text = itemName
-        goalPriceLabel.text = "/ " + goalPrice + "円"
-        itemImageView.image = itemImage
+        nameLabel.text = itemName
+        goalAmountLabel.text = "/ " + goalPrice + "円"
+        imageView.image = itemImage
     }
 }
 

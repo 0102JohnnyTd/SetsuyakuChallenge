@@ -44,11 +44,10 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.4
     }
     
-    func configure(itemName: String, goalPrice: String, itemImage: UIImage) {
+    func configure(name: String, goalAmount: Int, imageURL: String) {
         setUpCellLayout()
-        nameLabel.text = itemName
-        goalAmountLabel.text = "/ " + goalPrice + "円"
-        imageView.image = itemImage
+        nameLabel.text = name
+        goalAmountLabel.text = "/ " + String(goalAmount) + "円"
     }
 }
 

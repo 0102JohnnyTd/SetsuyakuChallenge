@@ -47,7 +47,7 @@ final class HomeViewController: UIViewController {
             }
         }
     }
-    
+
     private func showSignUpVC() {
         print(#function)
 
@@ -86,7 +86,7 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Challenge.array.count
+        challenges.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

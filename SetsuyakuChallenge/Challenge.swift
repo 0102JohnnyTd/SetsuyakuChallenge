@@ -10,8 +10,8 @@ import UIKit
 
 struct Challenge {
     var imageURL: String
-    var itemName: String
-    var itemPrice: String
+    var name: String
+    var goalAmount: Int
 
     static var array: [Challenge] = []
 }

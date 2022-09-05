@@ -25,5 +25,5 @@ enum UsersDocDataKey {
 enum ChallengesDocDataKey {
     static let imageURL = "imageURL"
     static let name = "name"
-    static let price = "price"
+    static let goalAmount = "goalAmount"
 }

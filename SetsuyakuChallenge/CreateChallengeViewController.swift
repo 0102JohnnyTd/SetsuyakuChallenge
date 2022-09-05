@@ -78,9 +78,9 @@ final class CreateChallengeViewController: UIViewController {
     private func saveChallengeData(imageURL: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let name = nameTextField.text!
-        let price = goalAmountTextField.text!
+        let goalAmount = goalAmountTextField.text!
 
-        let docData = [ChallengesDocDataKey.imageURL: imageURL, ChallengesDocDataKey.name: name, ChallengesDocDataKey.price: price] as [String: Any]
+        let docData = [ChallengesDocDataKey.imageURL: imageURL, ChallengesDocDataKey.name: name, ChallengesDocDataKey.goalAmount: goalAmount] as [String: Any]
         let userRef = Firestore.firestore().collection(CollectionName.challenges).document(uid)
 
         userRef.setData(docData) { (err) in

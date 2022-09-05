@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct Challenge {
-    var itemImage: UIImage
+    var imageURL: String
     var itemName: String
     var itemPrice: String
 

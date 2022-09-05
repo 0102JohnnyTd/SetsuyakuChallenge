@@ -40,7 +40,6 @@ final class CreateChallengeViewController: UIViewController {
             return
         }
         saveData()
-        createChallenge()
         navigationController?.popViewController(animated: true)
     }
 
@@ -103,13 +102,6 @@ final class CreateChallengeViewController: UIViewController {
             }
             print("Firestorageへの情報の保存に成功しました")
         }
-    }
-
-    
-
-    private func createChallenge() {
-        let challenge = Challenge(itemImage: itemImageView.image!, itemName: itemTextField.text!, itemPrice: priceTextField.text!)
-        Challenge.array.append(challenge)
     }
 
     private func generateInputErrorAlert() -> UIAlertController {

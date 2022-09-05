@@ -23,6 +23,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
+        fetchChallengeData()
     }
 
     private func checkIsLogin() {
@@ -41,9 +42,7 @@ final class HomeViewController: UIViewController {
             snapshots?.documents.forEach {
                 let dic = $0.data()
                 let challenge = Challenge.init(dic: dic)
-
                 self.challenges.append(challenge)
-                self.challengeCollectionView.reloadData()
             }
         }
     }
@@ -91,7 +90,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = challengeCollectionView.dequeueReusableCell(withReuseIdentifier: ChallengeCollectionViewCell.identifier, for: indexPath) as! ChallengeCollectionViewCell
-        
+
 //        cell.configure(itemName: Challenge.array[indexPath.row].itemName, goalPrice: Challenge.array[indexPath.row].itemPrice, itemImage: Challenge.array[indexPath.row].itemImage)
 
         return cell

@@ -26,9 +26,6 @@ final class CreateChallengeViewController: UIViewController {
 
     private var textFields: [UITextField] { [nameTextField, goalAmountTextField] }
 
-    override func viewWillAppear(_ animated: Bool) {
-        fetchChallengeData()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

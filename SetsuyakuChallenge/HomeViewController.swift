@@ -17,7 +17,6 @@ final class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkIsLogin()
-        challengeCollectionView.reloadData()    
     }
 
     override func viewDidLoad() {
@@ -44,6 +43,7 @@ final class HomeViewController: UIViewController {
                 let challenge = Challenge.init(dic: dic)
                 self.challenges.append(challenge)
             }
+            self.challengeCollectionView.reloadData()
         }
     }
 

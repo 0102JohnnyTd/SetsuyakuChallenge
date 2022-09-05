@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var challengeCollectionView: UICollectionView!
@@ -31,6 +32,22 @@ final class HomeViewController: UIViewController {
         print("現在ログイン状態です")
     }
 
+    private func fetchChallengeData() {
+        Firestore.firestore().collection(CollectionName.challenges).getDocuments { (snapshots, err) in
+            if let err = err {
+                print("データの取得に失敗しました: \(err)")
+            }
+            print("データの取得に成功しました")
+            snapshots?.documents.forEach {
+                let dic = $0.data()
+                let challenge = Challenge.init(dic: dic)
+
+                self.challenges.append(challenge)
+                self.challengeCollectionView.reloadData()
+            }
+        }
+    }
+    
     private func showSignUpVC() {
         print(#function)
 

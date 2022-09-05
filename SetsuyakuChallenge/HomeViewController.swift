@@ -91,7 +91,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = challengeCollectionView.dequeueReusableCell(withReuseIdentifier: ChallengeCollectionViewCell.identifier, for: indexPath) as! ChallengeCollectionViewCell
 
-//        cell.configure(itemName: Challenge.array[indexPath.row].itemName, goalPrice: Challenge.array[indexPath.row].itemPrice, itemImage: Challenge.array[indexPath.row].itemImage)
+        cell.configure(name: challenges[indexPath.row].name, goalAmount: challenges[indexPath.row].goalAmount, imageURL: challenges[indexPath.row].imageURL)
 
         return cell
     }

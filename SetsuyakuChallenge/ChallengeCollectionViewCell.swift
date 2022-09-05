@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ChallengeCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var nameLabel: UILabel!
@@ -48,6 +49,7 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
         setUpCellLayout()
         nameLabel.text = name
         goalAmountLabel.text = "/ " + String(goalAmount) + "円"
+        imageView.kf.setImage(with: URL(string: imageURL))
     }
 }
 

@@ -56,7 +56,7 @@ final class CreateChallengeViewController: UIViewController {
 
     private func saveData() {
         let fileName = NSUUID().uuidString
-        let storageRef = Storage.storage().reference().child("item_image").child(fileName)
+        let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
         saveImageData(storageRef: storageRef)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.fetchImageURL(storageRef: storageRef)
@@ -77,11 +77,11 @@ final class CreateChallengeViewController: UIViewController {
 
     private func saveChallengeData(imageURL: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let itemName = itemTextField.text!
-        let itemPrice = priceTextField.text!
+        let name = itemTextField.text!
+        let price = priceTextField.text!
 
-        let docData = ["ImageURL": imageURL, "name": itemName, "price": itemPrice] as [String: Any]
-        let userRef = Firestore.firestore().collection("challenges").document(uid)
+        let docData = [ChallengesDocDataKey.imageURL: imageURL, ChallengesDocDataKey.name: name, ChallengesDocDataKey.price: price] as [String: Any]
+        let userRef = Firestore.firestore().collection(CollectionName.challenges).document(uid)
 
         userRef.setData(docData) { (err) in
             if let err = err {

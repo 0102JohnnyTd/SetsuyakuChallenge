@@ -48,9 +48,9 @@ final class SignUpViewController: UIViewController {
     private func saveData(email: String, name: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        let docData = ["email": email, "name": name, "createdAt": Timestamp()] as [String: Any]
+        let docData = [UsersDocDataKey.email: email, UsersDocDataKey.name: name, UsersDocDataKey.createdAt: Timestamp()] as [String: Any]
 
-        let userRef = Firestore.firestore().collection("users").document(uid)
+        let userRef = Firestore.firestore().collection(CollectionName.users).document(uid)
 
         userRef.setData(docData) { (err) in
             if let err = err {

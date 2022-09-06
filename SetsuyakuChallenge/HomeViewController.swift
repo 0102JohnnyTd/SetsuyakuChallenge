@@ -7,19 +7,22 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var challengeCollectionView: UICollectionView!
 
+    private var challenges: [Challenge] = []
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkIsLogin()
-        challengeCollectionView.reloadData()    
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
+        fetchChallengeData()
     }
 
     private func checkIsLogin() {
@@ -27,6 +30,26 @@ final class HomeViewController: UIViewController {
             showSignUpVC()
         }
         print("現在ログイン状態です")
+    }
+
+    private func fetchChallengeData() {
+        Firestore.firestore().collection(CollectionName.challenges).addSnapshotListener { (snapshots, err) in
+            if let err = err {
+                print("データの取得に失敗しました: \(err)")
+            }
+            snapshots?.documentChanges.forEach {
+                switch $0.type {
+                case .added:
+                    let dic = $0.document.data()
+                    let challenge = Challenge.init(dic: dic)
+
+                    self.challenges.append(challenge)
+                    self.challengeCollectionView.reloadData()
+                case .modified, .removed:
+                    break
+                }
+            }
+        }
     }
 
     private func showSignUpVC() {
@@ -67,12 +90,13 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Challenge.array.count
+        challenges.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = challengeCollectionView.dequeueReusableCell(withReuseIdentifier: ChallengeCollectionViewCell.identifier, for: indexPath) as! ChallengeCollectionViewCell
-        cell.configure(itemName: Challenge.array[indexPath.row].itemName, goalPrice: Challenge.array[indexPath.row].itemPrice, itemImage: Challenge.array[indexPath.row].itemImage)
+
+        cell.configure(name: challenges[indexPath.row].name, goalAmount: challenges[indexPath.row].goalAmount, imageURL: challenges[indexPath.row].imageURL)
 
         return cell
     }

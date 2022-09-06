@@ -9,9 +9,13 @@ import Foundation
 import UIKit
 
 struct Challenge {
-    var itemImage: UIImage
-    var itemName: String
-    var itemPrice: String
+    var imageURL: String
+    var name: String
+    var goalAmount: Int
 
-    static var array: [Challenge] = []
+    init(dic: [String: Any]) {
+        self.imageURL = dic[ChallengesDocDataKey.imageURL] as! String
+        self.name = dic[ChallengesDocDataKey.name] as! String
+        self.goalAmount = dic[ChallengesDocDataKey.goalAmount] as! Int
+    }
 }

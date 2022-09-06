@@ -121,9 +121,9 @@
                     </view>
                     <connections>
                         <outlet property="createChallengeButton" destination="hb8-oB-ekk" id="xu4-sj-Kez"/>
-                        <outlet property="itemImageView" destination="CPu-kr-wPk" id="gqD-7P-cVN"/>
-                        <outlet property="itemTextField" destination="7zR-Pe-Omc" id="Tdq-KC-H9o"/>
-                        <outlet property="priceTextField" destination="42W-Sb-CAw" id="FT1-e6-sd8"/>
+                        <outlet property="goalAmountTextField" destination="42W-Sb-CAw" id="FT1-e6-sd8"/>
+                        <outlet property="imageView" destination="CPu-kr-wPk" id="gqD-7P-cVN"/>
+                        <outlet property="nameTextField" destination="7zR-Pe-Omc" id="Tdq-KC-H9o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

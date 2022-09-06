@@ -41,7 +41,7 @@ final class UserDetailsViewController: UIViewController {
     private func getData() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+        Firestore.firestore().collection(CollectionName.users).document(uid).getDocument { (snapshot, err) in
             if let err = err {
                 print("ユーザー情報の取得に失敗しました: \(err)")
             }
@@ -100,7 +100,7 @@ final class UserDetailsViewController: UIViewController {
 
     private func deleteAccountData() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("users").document(uid).delete() { err in
+        Firestore.firestore().collection(CollectionName.users).document(uid).delete() { err in
             if let err = err {
                 print("エラー:\(String(describing: err.localizedDescription))")
             }

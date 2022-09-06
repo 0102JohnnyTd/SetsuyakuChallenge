@@ -12,9 +12,9 @@ import FirebaseStorage
 
 
 final class CreateChallengeViewController: UIViewController {
-    @IBOutlet private weak var itemImageView: UIImageView!
-    @IBOutlet private weak var itemTextField: UITextField!
-    @IBOutlet private weak var priceTextField: UITextField!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var nameTextField: UITextField!
+    @IBOutlet private weak var goalAmountTextField: UITextField!
     @IBOutlet private weak var createChallengeButton: UIButton!
 
     @IBAction private func didTapUploadImageButton(_ sender: Any) {
@@ -24,8 +24,10 @@ final class CreateChallengeViewController: UIViewController {
         checkIsTextField()
     }
 
-    private var textFields: [UITextField] { [itemTextField, priceTextField] }
+    private var textFields: [UITextField] { [nameTextField, goalAmountTextField] }
 
+    private let fileName = NSUUID().uuidString
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()
@@ -33,14 +35,13 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func checkIsTextField() {
-        let inputPrice = priceTextField.textToInt
+        let inputPrice = goalAmountTextField.textToInt
 
         guard inputPrice != nil else {
             showAlert()
             return
         }
         saveData()
-        createChallenge()
         navigationController?.popViewController(animated: true)
     }
 
@@ -56,8 +57,7 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func saveData() {
-        let fileName = NSUUID().uuidString
-        let storageRef = Storage.storage().reference().child("item_image").child(fileName)
+        let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
         saveImageData(storageRef: storageRef)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.fetchImageURL(storageRef: storageRef)
@@ -77,14 +77,13 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func saveChallengeData(imageURL: String) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let itemName = itemTextField.text!
-        let itemPrice = priceTextField.text!
+        let name = nameTextField.text!
+        let goalAmount = goalAmountTextField.text!
 
-        let docData = ["ImageURL": imageURL, "name": itemName, "price": itemPrice] as [String: Any]
-        let userRef = Firestore.firestore().collection("challenges").document(uid)
+        let docData = [ChallengesDocDataKey.imageURL: imageURL, ChallengesDocDataKey.name: name, ChallengesDocDataKey.goalAmount: Int(goalAmount)!] as [String: Any]
 
-        userRef.setData(docData) { (err) in
+        let challengeRef = Firestore.firestore().collection(CollectionName.challenges).document(fileName)
+        challengeRef.setData(docData) { (err) in
             if let err = err {
             print("FireStroreへの保存に失敗しました: \(err)")
         }
@@ -93,7 +92,7 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func saveImageData(storageRef: StorageReference) {
-        let image = itemImageView.image!
+        let image = imageView.image!
         guard let uploadImage = image.jpegData(compressionQuality: 0.3) else { return }
 
         storageRef.putData(uploadImage) { (metaData, err) in
@@ -103,13 +102,6 @@ final class CreateChallengeViewController: UIViewController {
             }
             print("Firestorageへの情報の保存に成功しました")
         }
-    }
-
-    
-
-    private func createChallenge() {
-        let challenge = Challenge(itemImage: itemImageView.image!, itemName: itemTextField.text!, itemPrice: priceTextField.text!)
-        Challenge.array.append(challenge)
     }
 
     private func generateInputErrorAlert() -> UIAlertController {
@@ -139,7 +131,7 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func setUpNumberPad() {
-        priceTextField.keyboardType = .numberPad
+        goalAmountTextField.keyboardType = .numberPad
     }
 }
 
@@ -158,7 +150,7 @@ extension CreateChallengeViewController: UITextFieldDelegate {
 extension CreateChallengeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
-            self.itemImageView.image = image
+            self.imageView.image = image
         }
         picker.dismiss(animated: true)
     }

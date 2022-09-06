@@ -14,9 +14,8 @@ struct User {
     let name: String
 
     init(dic: [String: Any]) {
-        self.email = dic["email"] as! String
-        self.createdAt = dic["createdAt"] as! Timestamp
-//        self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
-        self.name = dic["name"] as! String
+        self.email = dic[UsersDocDataKey.email] as! String
+        self.name = dic[UsersDocDataKey.name] as! String
+        self.createdAt = dic[UsersDocDataKey.createdAt] as! Timestamp
     }
 }

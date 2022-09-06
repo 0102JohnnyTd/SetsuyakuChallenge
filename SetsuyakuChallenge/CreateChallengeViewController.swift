@@ -57,7 +57,6 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func saveData() {
-
         let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
         saveImageData(storageRef: storageRef)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -81,7 +80,7 @@ final class CreateChallengeViewController: UIViewController {
         let name = nameTextField.text!
         let goalAmount = goalAmountTextField.text!
 
-        let docData = [ChallengesDocDataKey.imageURL: imageURL, ChallengesDocDataKey.name: name, ChallengesDocDataKey.goalAmount: goalAmount] as [String: Any]
+        let docData = [ChallengesDocDataKey.imageURL: imageURL, ChallengesDocDataKey.name: name, ChallengesDocDataKey.goalAmount: Int(goalAmount)!] as [String: Any]
 
         let challengeRef = Firestore.firestore().collection(CollectionName.challenges).document(fileName)
         challengeRef.setData(docData) { (err) in

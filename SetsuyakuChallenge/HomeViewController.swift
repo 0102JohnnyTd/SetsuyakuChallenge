@@ -33,17 +33,22 @@ final class HomeViewController: UIViewController {
     }
 
     private func fetchChallengeData() {
-        Firestore.firestore().collection(CollectionName.challenges).getDocuments { (snapshots, err) in
+        Firestore.firestore().collection(CollectionName.challenges).addSnapshotListener { (snapshots, err) in
             if let err = err {
                 print("データの取得に失敗しました: \(err)")
             }
-            print("データの取得に成功しました")
-            snapshots?.documents.forEach {
-                let dic = $0.data()
-                let challenge = Challenge.init(dic: dic)
-                self.challenges.append(challenge)
+            snapshots?.documentChanges.forEach {
+                switch $0.type {
+                case .added:
+                    let dic = $0.document.data()
+                    let challenge = Challenge.init(dic: dic)
+
+                    self.challenges.append(challenge)
+                    self.challengeCollectionView.reloadData()
+                case .modified, .removed:
+                    break
+                }
             }
-            self.challengeCollectionView.reloadData()
         }
     }
 

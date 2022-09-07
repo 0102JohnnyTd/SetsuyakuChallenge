@@ -13,6 +13,9 @@ final class SaveMoneyReportListViewController: UIViewController {
     static let storyboardName = "SaveMoneyReportList"
     static let identifier = "SaveMoneyReportList"
 
+    private let segueID = "ShowCreateReportVCSegue"
+
+    var challenge: Challenge?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,13 @@ final class SaveMoneyReportListViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         saveMoneyReportListTableView.reloadData()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueID {
+            let createSaveMoneyReportVC = segue.destination as! CreateSaveMoneyReportViewController
+            createSaveMoneyReportVC.challenge = challenge
+        }
     }
 
     private func setUpTableView() {
@@ -42,7 +52,7 @@ extension SaveMoneyReportListViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = saveMoneyReportListTableView.dequeueReusableCell(withIdentifier: SaveMoneyReportListTableViewCell.identifier, for: indexPath) as! SaveMoneyReportListTableViewCell
 
-        cell.configure(price: String(SaveMoneyReport.array[indexPath.row].price), memo: SaveMoneyReport.array[indexPath.row].memo)
+//        cell.configure(price: String(SaveMoneyReport.array[indexPath.row].price), memo: SaveMoneyReport.array[indexPath.row].memo)
 
         return cell
     }

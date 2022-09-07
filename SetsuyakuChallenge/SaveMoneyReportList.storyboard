@@ -33,7 +33,7 @@
                     <navigationItem key="navigationItem" id="wNw-Xw-BKG">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="bIl-ML-AU5">
                             <connections>
-                                <segue destination="Nqd-3t-Z2h" kind="push" id="S91-qb-T79"/>
+                                <segue destination="Nqd-3t-Z2h" kind="push" identifier="ShowCreateReportVCSegue" id="S91-qb-T79"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

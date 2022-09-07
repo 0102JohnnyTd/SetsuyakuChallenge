@@ -53,6 +53,10 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    private func passDataToSaveMoneyReportListVC(saveMoneyReportListVC: SaveMoneyReportListViewController, row: Int) {
+        saveMoneyReportListVC.challenge = challenges[row]
+    }
+
     private func showSignUpVC() {
         print(#function)
 
@@ -62,9 +66,10 @@ final class HomeViewController: UIViewController {
         present(nav, animated: true)
     }
 
-    private func showSaveMoneyReportListVC() {
+    private func showSaveMoneyReportListVC(row: Int) {
         let navController = UIStoryboard(name: SaveMoneyReportListViewController.storyboardName, bundle: nil).instantiateInitialViewController() as! UINavigationController
         let saveMoneyReportListVC = navController.topViewController as! SaveMoneyReportListViewController
+        passDataToSaveMoneyReportListVC(saveMoneyReportListVC: saveMoneyReportListVC, row: row)
         navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
     }
 
@@ -103,6 +108,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showSaveMoneyReportListVC()
+        showSaveMoneyReportListVC(row: indexPath.row)
     }
 }

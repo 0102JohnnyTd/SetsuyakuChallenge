@@ -13,6 +13,7 @@ final class SaveMoneyReportListViewController: UIViewController {
     static let storyboardName = "SaveMoneyReportList"
     static let identifier = "SaveMoneyReportList"
 
+    var challenge: Challenge?
 
     override func viewDidLoad() {
         super.viewDidLoad()

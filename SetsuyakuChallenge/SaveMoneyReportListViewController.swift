@@ -16,6 +16,7 @@ final class SaveMoneyReportListViewController: UIViewController {
     private let segueID = "ShowCreateReportVCSegue"
 
     var challenge: Challenge?
+    private var saveMoneyReports: [SaveMoneyReport] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()

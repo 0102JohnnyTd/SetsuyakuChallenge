@@ -13,6 +13,8 @@ final class SaveMoneyReportListViewController: UIViewController {
     static let storyboardName = "SaveMoneyReportList"
     static let identifier = "SaveMoneyReportList"
 
+    private let segueID = "ShowCreateReportVCSegue"
+
     var challenge: Challenge?
 
     override func viewDidLoad() {
@@ -22,6 +24,13 @@ final class SaveMoneyReportListViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         saveMoneyReportListTableView.reloadData()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueID {
+            let createSaveMoneyReportVC = segue.destination as! CreateSaveMoneyReportViewController
+            createSaveMoneyReportVC.challenge = challenge
+        }
     }
 
     private func setUpTableView() {

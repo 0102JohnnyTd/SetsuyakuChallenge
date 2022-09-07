@@ -9,7 +9,6 @@ import UIKit
 import FirebaseFirestore
 
 final class CreateSaveMoneyReportViewController: UIViewController {
-
     @IBOutlet private weak var priceSwicth: UISwitch!
 
     @IBOutlet private weak var priceTextField: UITextField!
@@ -46,10 +45,10 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         priceManager.calculate(price: signPrice)
 
 
-        let docData = [SaveMoneyReportsDocDataKey.savingAmount: signPrice, SaveMoneyReportsDocDataKey.memo: memo] as [String : Any]
+        let docData = [SaveMoneyReportsDocDataKey.savingAmount: signPrice, SaveMoneyReportsDocDataKey.memo: memo] as [String: Any]
 
         guard let  challengeDocID = challenge?.docID else { return }
-        Firestore.firestore().collection(CollectionName.challenges).document(challengeDocID).collection(CollectionName.reports).document().setData(docData) { (err) in
+        Firestore.firestore().collection(CollectionName.challenges).document(challengeDocID).collection(CollectionName.reports).document().setData(docData) { err in
             if let err = err {
                 print("Firestoreへの保存に失敗しました: \(err)")
             }

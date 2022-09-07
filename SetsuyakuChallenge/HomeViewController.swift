@@ -41,7 +41,8 @@ final class HomeViewController: UIViewController {
                 switch $0.type {
                 case .added:
                     let dic = $0.document.data()
-                    let challenge = Challenge.init(dic: dic)
+                    var challenge = Challenge.init(dic: dic)
+                    challenge.docID = $0.document.documentID
 
                     self.challenges.append(challenge)
                     self.challengeCollectionView.reloadData()

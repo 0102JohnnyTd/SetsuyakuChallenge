@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 final class SaveMoneyReportListViewController: UIViewController {
     @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
@@ -21,6 +22,7 @@ final class SaveMoneyReportListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
+        fetchSaveMoneyReportData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -31,6 +33,26 @@ final class SaveMoneyReportListViewController: UIViewController {
         if segue.identifier == segueID {
             let createSaveMoneyReportVC = segue.destination as! CreateSaveMoneyReportViewController
             createSaveMoneyReportVC.challenge = challenge
+        }
+    }
+
+    private func fetchSaveMoneyReportData() {
+        Firestore.firestore().collection(CollectionName.reports).addSnapshotListener { snapshots, err  in
+            if let err = err {
+                print("データの取得に失敗しました: \(err)")
+            }
+            snapshots?.documentChanges.forEach {
+                switch $0.type {
+                case .added:
+                    let dic = $0.document.data()
+                    let saveMoneyReport = SaveMoneyReport.init(dic: dic)
+
+                    self.saveMoneyReports.append(saveMoneyReport)
+                    self.saveMoneyReportListTableView.reloadData()
+                case .modified, .removed:
+                    break
+                }
+            }
         }
     }
 

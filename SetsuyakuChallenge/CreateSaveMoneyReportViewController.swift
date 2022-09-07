@@ -24,6 +24,8 @@ final class CreateSaveMoneyReportViewController: UIViewController {
 
     private let priceManager = PriceManager.shared
 
+    var challenge: Challenge?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()

@@ -14,6 +14,7 @@ enum StorageFileName {
 enum CollectionName {
     static let users = "users"
     static let challenges = "challenges"
+    static let reports = "reports"
 }
 
 enum UsersDocDataKey {

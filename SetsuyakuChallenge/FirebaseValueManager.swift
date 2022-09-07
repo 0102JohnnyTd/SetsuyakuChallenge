@@ -28,3 +28,8 @@ enum ChallengesDocDataKey {
     static let name = "name"
     static let goalAmount = "goalAmount"
 }
+
+enum SaveMoneyReportsDocDataKey {
+    static let savingAmount = "savingAmount"
+    static let memo = "memo"
+}

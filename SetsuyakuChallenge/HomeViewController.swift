@@ -115,4 +115,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-extension HomeViewController: UIAdaptivePresentationControllerDelegate {}
+extension HomeViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        challenges.removeAll()
+        challengeCollectionView.reloadData()
+        fetchChallengeData()
+    }
+}

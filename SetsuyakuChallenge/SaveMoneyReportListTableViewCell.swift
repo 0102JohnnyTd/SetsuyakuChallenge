@@ -19,8 +19,8 @@ final class SaveMoneyReportListTableViewCell: UITableViewCell {
         setUpBackgroundView()
     }
 
-    func configure(price: String, memo: String) {
-        priceLabel.text = price
+    func configure(savingAmount: Int, memo: String) {
+        priceLabel.text = "浮いた金額: " + String(savingAmount) + "円"
         memoLabel.text = memo
     }
 

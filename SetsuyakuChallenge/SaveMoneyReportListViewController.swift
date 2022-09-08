@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 import FirebaseFirestore
 
 final class SaveMoneyReportListViewController: UIViewController {
@@ -33,8 +34,12 @@ final class SaveMoneyReportListViewController: UIViewController {
     }
 
     private func fetchSaveMoneyReportData() {
-        guard let challengeID = challenge?.docID else { return }
-        Firestore.firestore().collection(CollectionName.challenges).document(challengeID).collection(CollectionName.reports).addSnapshotListener { snapshots, err  in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let challengeDocID = challenge?.docID else { return }
+
+        let saveMoneyReportRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID).collection(CollectionName.reports)
+
+        saveMoneyReportRef.addSnapshotListener { snapshots, err  in
             if let err = err {
                 print("saveMoneyReportデータの取得に失敗しました: \(err)")
             }

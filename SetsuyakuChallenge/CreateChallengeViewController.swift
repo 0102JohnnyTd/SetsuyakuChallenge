@@ -82,8 +82,9 @@ final class CreateChallengeViewController: UIViewController {
 
         let docData = [ChallengesDocDataKey.imageURL: imageURL, ChallengesDocDataKey.name: name, ChallengesDocDataKey.goalAmount: Int(goalAmount)!] as [String: Any]
 
-        let challengeRef = Firestore.firestore().collection(CollectionName.challenges).document(fileName)
-        challengeRef.setData(docData) { (err) in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
+        challengeRef.document(fileName).setData(docData) { (err) in
             if let err = err {
             print("FireStroreへの保存に失敗しました: \(err)")
         }

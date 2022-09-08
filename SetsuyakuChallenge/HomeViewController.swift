@@ -60,12 +60,13 @@ final class HomeViewController: UIViewController {
     }
 
     private func showSignUpVC() {
-        print(#function)
+        let navController = UIStoryboard(name: SignUpViewController.storyboardName, bundle: nil).instantiateInitialViewController() as! UINavigationController
+        navController.modalPresentationStyle = .fullScreen
 
-        let signUpVC = UIStoryboard(name: SignUpViewController.storyboardName, bundle: nil).instantiateViewController(withIdentifier: SignUpViewController.identifier) as! SignUpViewController
-        let nav = UINavigationController(rootViewController: signUpVC)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
+        let signUpVC = navController.topViewController as! SignUpViewController
+        signUpVC.presentationController?.delegate = self
+
+        present(navController, animated: true)
     }
 
     private func showSaveMoneyReportListVC(row: Int) {
@@ -113,3 +114,5 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         showSaveMoneyReportListVC(row: indexPath.row)
     }
 }
+
+extension HomeViewController: UIAdaptivePresentationControllerDelegate {}

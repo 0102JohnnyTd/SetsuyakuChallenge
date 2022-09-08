@@ -26,13 +26,13 @@ final class SignInViewController: UIViewController {
     private func login() {
         let email = emailTextField.text!
         let password = passwordTextField.text!
-        Auth.auth().signIn(withEmail: email, password: password) { (res, err) in
+        Auth.auth().signIn(withEmail: email, password: password) { res, err in
             if let err = err {
                 print("ログイン情報の取得に失敗しました")
                 return
             }
             print("ログイン情報の取得に成功しました")
-            self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 

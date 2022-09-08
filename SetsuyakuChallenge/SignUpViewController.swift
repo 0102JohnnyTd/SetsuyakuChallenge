@@ -52,7 +52,7 @@ final class SignUpViewController: UIViewController {
 
         let userRef = Firestore.firestore().collection(CollectionName.users).document(uid)
 
-        userRef.setData(docData) { (err) in
+        userRef.setData(docData) { err in
             if let err = err {
                 print("FireStroreへの保存に失敗しました: \(err)")
             }
@@ -77,5 +77,15 @@ extension SignUpViewController: UITextFieldDelegate {
         } else {
             signUpButton.isEnabled = true
         }
+    }
+}
+
+extension SignUpViewController {
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: completion)
+        guard let presentationController = presentationController else {
+            return
+        }
+        presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
     }
 }

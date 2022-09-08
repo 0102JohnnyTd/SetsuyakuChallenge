@@ -25,10 +25,6 @@ final class SaveMoneyReportListViewController: UIViewController {
         fetchSaveMoneyReportData()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        saveMoneyReportListTableView.reloadData()
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueID {
             let createSaveMoneyReportVC = segue.destination as! CreateSaveMoneyReportViewController
@@ -37,10 +33,12 @@ final class SaveMoneyReportListViewController: UIViewController {
     }
 
     private func fetchSaveMoneyReportData() {
-        Firestore.firestore().collection(CollectionName.reports).addSnapshotListener { snapshots, err  in
+        guard let challengeID = challenge?.docID else { return }
+        Firestore.firestore().collection(CollectionName.challenges).document(challengeID).collection(CollectionName.reports).addSnapshotListener { snapshots, err  in
             if let err = err {
-                print("データの取得に失敗しました: \(err)")
+                print("saveMoneyReportデータの取得に失敗しました: \(err)")
             }
+            print("saveMoneyReportデータの取得に成功しました")
             snapshots?.documentChanges.forEach {
                 switch $0.type {
                 case .added:

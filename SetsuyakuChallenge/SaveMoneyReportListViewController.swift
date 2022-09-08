@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 final class SaveMoneyReportListViewController: UIViewController {
     @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
@@ -16,20 +17,40 @@ final class SaveMoneyReportListViewController: UIViewController {
     private let segueID = "ShowCreateReportVCSegue"
 
     var challenge: Challenge?
+    private var saveMoneyReports: [SaveMoneyReport] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        saveMoneyReportListTableView.reloadData()
+        fetchSaveMoneyReportData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueID {
             let createSaveMoneyReportVC = segue.destination as! CreateSaveMoneyReportViewController
             createSaveMoneyReportVC.challenge = challenge
+        }
+    }
+
+    private func fetchSaveMoneyReportData() {
+        guard let challengeID = challenge?.docID else { return }
+        Firestore.firestore().collection(CollectionName.challenges).document(challengeID).collection(CollectionName.reports).addSnapshotListener { snapshots, err  in
+            if let err = err {
+                print("saveMoneyReportデータの取得に失敗しました: \(err)")
+            }
+            print("saveMoneyReportデータの取得に成功しました")
+            snapshots?.documentChanges.forEach {
+                switch $0.type {
+                case .added:
+                    let dic = $0.document.data()
+                    let saveMoneyReport = SaveMoneyReport.init(dic: dic)
+
+                    self.saveMoneyReports.append(saveMoneyReport)
+                    self.saveMoneyReportListTableView.reloadData()
+                case .modified, .removed:
+                    break
+                }
+            }
         }
     }
 
@@ -46,13 +67,13 @@ final class SaveMoneyReportListViewController: UIViewController {
 
 extension SaveMoneyReportListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        SaveMoneyReport.array.count
+        saveMoneyReports.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = saveMoneyReportListTableView.dequeueReusableCell(withIdentifier: SaveMoneyReportListTableViewCell.identifier, for: indexPath) as! SaveMoneyReportListTableViewCell
 
-//        cell.configure(price: String(SaveMoneyReport.array[indexPath.row].price), memo: SaveMoneyReport.array[indexPath.row].memo)
+        cell.configure(savingAmount: saveMoneyReports[indexPath.row].savingAmount, memo: saveMoneyReports[indexPath.row].memo)
 
         return cell
     }

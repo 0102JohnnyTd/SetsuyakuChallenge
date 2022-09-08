@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 import FirebaseFirestore
 
 final class CreateSaveMoneyReportViewController: UIViewController {
@@ -43,10 +44,13 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         let signPrice = priceSwicth.isOn ? price : -price
         priceManager.calculate(price: signPrice)
 
-        let docData = [SaveMoneyReportsDocDataKey.savingAmount: signPrice, SaveMoneyReportsDocDataKey.memo: memo] as [String: Any]
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let  challengeDocID = challenge?.docID else { return }
+        let docData = [SaveMoneyReportsDocDataKey.savingAmount: signPrice, SaveMoneyReportsDocDataKey.memo: memo] as [String: Any]
 
-        Firestore.firestore().collection(CollectionName.challenges).document(challengeDocID).collection(CollectionName.reports).document().setData(docData) { err in
+        let saveMoneyReportRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID).collection(CollectionName.reports)
+
+        saveMoneyReportRef.document().setData(docData) { err in
             if let err = err {
                 print("Firestoreへの保存に失敗しました: \(err)")
             }

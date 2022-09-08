@@ -33,7 +33,9 @@ final class HomeViewController: UIViewController {
     }
 
     private func fetchChallengeData() {
-        Firestore.firestore().collection(CollectionName.challenges).addSnapshotListener { (snapshots, err) in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
+        challengeRef.addSnapshotListener { snapshots, err in
             if let err = err {
                 print("データの取得に失敗しました: \(err)")
             }

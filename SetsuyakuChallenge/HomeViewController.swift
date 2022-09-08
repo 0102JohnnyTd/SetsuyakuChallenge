@@ -28,8 +28,9 @@ final class HomeViewController: UIViewController {
     private func checkIsLogin() {
         if Auth.auth().currentUser == nil {
             showSignUpVC()
+        } else {
+            print("現在ログイン状態です")
         }
-        print("現在ログイン状態です")
     }
 
     private func fetchChallengeData() {

@@ -24,6 +24,11 @@ final class SignUpViewController: UIViewController {
 
     private var textFields: [UITextField] { [emailTextField, passwordTextField, userNameTextField] }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkIsLogin()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTextFileds()
@@ -60,6 +65,15 @@ final class SignUpViewController: UIViewController {
             self.dismiss(animated: true)
         }
     }
+
+    private func checkIsLogin() {
+        if Auth.auth().currentUser != nil {
+            dismiss(animated: true)
+        } else {
+            print("現在ログアウト状態です")
+        }
+    }
+
     private func setUpTextFileds() {
         textFields.forEach { $0.delegate = self }
     }

@@ -24,6 +24,11 @@ final class SignUpViewController: UIViewController {
 
     private var textFields: [UITextField] { [emailTextField, passwordTextField, userNameTextField] }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkIsLogin()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTextFileds()
@@ -52,7 +57,7 @@ final class SignUpViewController: UIViewController {
 
         let userRef = Firestore.firestore().collection(CollectionName.users).document(uid)
 
-        userRef.setData(docData) { (err) in
+        userRef.setData(docData) { err in
             if let err = err {
                 print("FireStroreへの保存に失敗しました: \(err)")
             }
@@ -60,6 +65,15 @@ final class SignUpViewController: UIViewController {
             self.dismiss(animated: true)
         }
     }
+
+    private func checkIsLogin() {
+        if Auth.auth().currentUser != nil {
+            dismiss(animated: true)
+        } else {
+            print("現在ログアウト状態です")
+        }
+    }
+
     private func setUpTextFileds() {
         textFields.forEach { $0.delegate = self }
     }
@@ -77,5 +91,15 @@ extension SignUpViewController: UITextFieldDelegate {
         } else {
             signUpButton.isEnabled = true
         }
+    }
+}
+
+extension SignUpViewController {
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: completion)
+        guard let presentationController = presentationController else {
+            return
+        }
+        presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
     }
 }

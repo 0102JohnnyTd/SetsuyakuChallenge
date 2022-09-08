@@ -28,8 +28,9 @@ final class HomeViewController: UIViewController {
     private func checkIsLogin() {
         if Auth.auth().currentUser == nil {
             showSignUpVC()
+        } else {
+            print("現在ログイン状態です")
         }
-        print("現在ログイン状態です")
     }
 
     private func fetchChallengeData() {
@@ -60,12 +61,13 @@ final class HomeViewController: UIViewController {
     }
 
     private func showSignUpVC() {
-        print(#function)
+        let navController = UIStoryboard(name: SignUpViewController.storyboardName, bundle: nil).instantiateInitialViewController() as! UINavigationController
+        navController.modalPresentationStyle = .fullScreen
 
-        let signUpVC = UIStoryboard(name: SignUpViewController.storyboardName, bundle: nil).instantiateViewController(withIdentifier: SignUpViewController.identifier) as! SignUpViewController
-        let nav = UINavigationController(rootViewController: signUpVC)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
+        let signUpVC = navController.topViewController as! SignUpViewController
+        signUpVC.presentationController?.delegate = self
+
+        present(navController, animated: true)
     }
 
     private func showSaveMoneyReportListVC(row: Int) {
@@ -111,5 +113,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         showSaveMoneyReportListVC(row: indexPath.row)
+    }
+}
+
+extension HomeViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        challenges.removeAll()
+        challengeCollectionView.reloadData()
+        fetchChallengeData()
     }
 }

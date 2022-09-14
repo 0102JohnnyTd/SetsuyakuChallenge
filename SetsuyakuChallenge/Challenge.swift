@@ -12,12 +12,8 @@ struct Challenge {
     var imageURL: String
     var name: String
     var goalAmount: Int
+    var reports: [SaveMoneyReport]
+    var totalSavingAmount: Int
 
     var docID: String?
-
-    init(dic: [String: Any]) {
-        self.imageURL = dic[ChallengesDocDataKey.imageURL] as! String
-        self.name = dic[ChallengesDocDataKey.name] as! String
-        self.goalAmount = dic[ChallengesDocDataKey.goalAmount] as! Int
-    }
 }

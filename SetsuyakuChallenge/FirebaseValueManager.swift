@@ -16,20 +16,3 @@ enum CollectionName {
     static let challenges = "challenges"
     static let reports = "reports"
 }
-
-enum UsersDocDataKey {
-    static let email = "email"
-    static let name = "name"
-    static let createdAt = "createdAt"
-}
-
-enum ChallengesDocDataKey {
-    static let imageURL = "imageURL"
-    static let name = "name"
-    static let goalAmount = "goalAmount"
-}
-
-enum SaveMoneyReportsDocDataKey {
-    static let savingAmount = "savingAmount"
-    static let memo = "memo"
-}

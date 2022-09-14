@@ -7,10 +7,10 @@ target 'SetsuyakuChallenge' do
 
   # Pods for SetsuyakuChallenge
   pod 'IQKeyboardManagerSwift'
+  pod 'Kingfisher', '~> 7.0'
   pod 'FirebaseAnalytics'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'Firebase/Storage'
-  pod 'Kingfisher', '~> 7.0'
-
+  pod 'FirebaseFirestoreSwift', '8.3.0-beta'
 end

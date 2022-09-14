@@ -53,16 +53,16 @@ final class SignUpViewController: UIViewController {
     private func saveData(email: String, name: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        let docData = [UsersDocDataKey.email: email, UsersDocDataKey.name: name, UsersDocDataKey.createdAt: Timestamp()] as [String: Any]
+        let user = User(email: email, createdAt: Timestamp(), name: name)
 
         let userRef = Firestore.firestore().collection(CollectionName.users).document(uid)
 
-        userRef.setData(docData) { err in
-            if let err = err {
-                print("FireStroreへの保存に失敗しました: \(err)")
-            }
+        do {
+            try userRef.setData(from: user)
             print("FireStoreへの保存に成功しました")
             self.dismiss(animated: true)
+        } catch {
+            print("FireStroreへの保存に失敗しました: \(error.localizedDescription)")
         }
     }
 

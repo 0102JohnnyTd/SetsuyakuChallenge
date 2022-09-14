@@ -45,12 +45,18 @@ final class UserDetailsViewController: UIViewController {
             if let err = err {
                 print("ユーザー情報の取得に失敗しました: \(err)")
             }
-            print("ユーザー情報の取得に成功しました")
-            let data = snapshot?.data()
-            self.user  = User.init(dic: data!)
-            self.userDetailsTableView.reloadData()
+            do {
+                let user = try snapshot?.data(as: User.self)
+                self.user = user
+                self.userDetailsTableView.reloadData()
+                print("ユーザー情報の取得に成功しました")
+            } catch {
+
+            }
         }
     }
+
+
 
     private func showLogoutAlert() {
         let logoutAlert = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)

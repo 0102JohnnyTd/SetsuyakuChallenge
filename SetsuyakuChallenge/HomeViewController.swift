@@ -14,14 +14,14 @@ final class HomeViewController: UIViewController {
 
     private var challenges: [Challenge] = []
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        checkIsLogin()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkIsLogin()
         fetchChallengeData()
     }
 
@@ -29,28 +29,36 @@ final class HomeViewController: UIViewController {
         if Auth.auth().currentUser == nil {
             showSignUpVC()
         } else {
+            print(Auth.auth().currentUser)
             print("現在ログイン状態です")
         }
     }
 
     private func fetchChallengeData() {
+        challenges.removeAll()
+
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
-        challengeRef.addSnapshotListener { snapshots, err in
-            if let err = err {
-                print("データの取得に失敗しました: \(err)")
-            }
-            snapshots?.documentChanges.forEach {
-                switch $0.type {
-                case .added:
-                    let dic = $0.document.data()
-                    var challenge = Challenge.init(dic: dic)
-                    challenge.docID = $0.document.documentID
 
-                    self.challenges.append(challenge)
-                    self.challengeCollectionView.reloadData()
-                case .modified, .removed:
-                    break
+        challengeRef.getDocuments { snapshots, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            snapshots?.documents.forEach { snapshot in
+                do {
+                    var challenge = try snapshot.data(as: Challenge.self)
+                    challenge?.docID = snapshot.documentID
+                    challenge?.totalSavingAmount = 0
+                    challenge?.reports.forEach {
+                        challenge?.totalSavingAmount += $0.savingAmount
+                    }
+                    if let challenge = challenge {
+                        self.challenges.append(challenge)
+                        self.challengeCollectionView.reloadData()
+                    }
+                } catch {
+                    print(error)
                 }
             }
         }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Challenge {
+struct Challenge: Codable {
     var imageURL: String
     var name: String
     var goalAmount: Int

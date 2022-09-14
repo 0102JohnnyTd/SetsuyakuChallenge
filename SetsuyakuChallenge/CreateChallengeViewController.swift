@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseFirestoreSwift
 
 
 final class CreateChallengeViewController: UIViewController {
@@ -25,8 +26,6 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private var textFields: [UITextField] { [nameTextField, goalAmountTextField] }
-
-    private let fileName = NSUUID().uuidString
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +56,7 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private func saveData() {
+        let fileName = NSUUID().uuidString
         let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
         saveImageData(storageRef: storageRef)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -78,25 +78,23 @@ final class CreateChallengeViewController: UIViewController {
 
     private func saveChallengeData(imageURL: String) {
         let name = nameTextField.text!
-        let goalAmount = goalAmountTextField.text!
+        let goalAmount = goalAmountTextField.textToInt!
 
-        let docData = [ChallengesDocDataKey.imageURL: imageURL, ChallengesDocDataKey.name: name, ChallengesDocDataKey.goalAmount: Int(goalAmount)!] as [String: Any]
-
+        let challenge = Challenge(imageURL: imageURL, name: name, goalAmount: goalAmount, reports: [], totalSavingAmount: 0)
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
-        challengeRef.document(fileName).setData(docData) { (err) in
-            if let err = err {
-            print("FireStroreへの保存に失敗しました: \(err)")
-        }
-            print("FireStoreへの保存に成功しました")
+        do {
+            try challengeRef.document().setData(from: challenge)
+        } catch {
+            print("error: \(error.localizedDescription)")
         }
     }
-
+    
     private func saveImageData(storageRef: StorageReference) {
         let image = imageView.image!
         guard let uploadImage = image.jpegData(compressionQuality: 0.3) else { return }
 
-        storageRef.putData(uploadImage) { (metaData, err) in
+        storageRef.putData(uploadImage, metadata: nil) { storageMetadata, err in
             if let err = err {
                 print("Firestorageへの情報の保存に失敗しました \(err)")
                 return

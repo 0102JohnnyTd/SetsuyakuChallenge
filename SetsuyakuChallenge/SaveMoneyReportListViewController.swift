@@ -18,12 +18,16 @@ final class SaveMoneyReportListViewController: UIViewController {
     private let segueID = "ShowCreateReportVCSegue"
 
     var challenge: Challenge?
-    private var saveMoneyReports: [SaveMoneyReport] = []
+    private var challenges: [Challenge] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
-        fetchSaveMoneyReportData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchChallengeData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -33,28 +37,27 @@ final class SaveMoneyReportListViewController: UIViewController {
         }
     }
 
-    private func fetchSaveMoneyReportData() {
+    private func fetchChallengeData() {
+        challenges.removeAll()
+
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let challengeDocID = challenge?.docID else { return }
+        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
 
-        let saveMoneyReportRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID).collection(CollectionName.reports)
-
-        saveMoneyReportRef.addSnapshotListener { snapshots, err  in
-            if let err = err {
-                print("saveMoneyReportデータの取得に失敗しました: \(err)")
+        print("challengesをremoveAllした： \(self.challenges)")
+        challengeRef.getDocument { snapshot, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
             }
-            print("saveMoneyReportデータの取得に成功しました")
-            snapshots?.documentChanges.forEach {
-                switch $0.type {
-                case .added:
-                    let dic = $0.document.data()
-                    let saveMoneyReport = SaveMoneyReport.init(dic: dic)
-
-                    self.saveMoneyReports.append(saveMoneyReport)
+            do {
+                let challenge = try snapshot?.data(as: Challenge.self)
+                if let challenge = challenge {
+                    self.challenge?.reports = challenge.reports
                     self.saveMoneyReportListTableView.reloadData()
-                case .modified, .removed:
-                    break
                 }
+            } catch {
+                print(error)
             }
         }
     }
@@ -72,13 +75,13 @@ final class SaveMoneyReportListViewController: UIViewController {
 
 extension SaveMoneyReportListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        saveMoneyReports.count
+        challenge?.reports.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = saveMoneyReportListTableView.dequeueReusableCell(withIdentifier: SaveMoneyReportListTableViewCell.identifier, for: indexPath) as! SaveMoneyReportListTableViewCell
-
-        cell.configure(savingAmount: saveMoneyReports[indexPath.row].savingAmount, memo: saveMoneyReports[indexPath.row].memo)
+        
+        cell.configure(savingAmount: challenge?.reports[indexPath.row].savingAmount ?? 0, memo: challenge?.reports[indexPath.row].memo ?? "")
 
         return cell
     }

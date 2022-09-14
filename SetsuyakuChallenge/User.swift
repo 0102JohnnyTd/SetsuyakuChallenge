@@ -8,14 +8,14 @@
 import Foundation
 import FirebaseFirestore
 
-struct User {
+struct User: Codable {
     let email: String
     let createdAt: Timestamp
     let name: String
 
-    init(dic: [String: Any]) {
-        self.email = dic[UsersDocDataKey.email] as! String
-        self.name = dic[UsersDocDataKey.name] as! String
-        self.createdAt = dic[UsersDocDataKey.createdAt] as! Timestamp
-    }
+//    init(dic: [String: Any]) {
+//        self.email = dic[UsersDocDataKey.email] as! String
+//        self.name = dic[UsersDocDataKey.name] as! String
+//        self.createdAt = dic[UsersDocDataKey.createdAt] as! Timestamp
+//    }
 }

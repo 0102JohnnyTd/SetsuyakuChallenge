@@ -16,3 +16,4 @@ disabled_rules:
   - function_body_length
   - type_name
   - large_tuple
+  - file_length

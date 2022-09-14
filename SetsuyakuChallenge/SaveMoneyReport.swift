@@ -7,12 +7,7 @@
 
 import Foundation
 
-struct SaveMoneyReport {
+struct SaveMoneyReport: Codable {
     var savingAmount: Int
     var memo: String
-
-    init(dic: [String: Any]) {
-        self.savingAmount = dic[SaveMoneyReportsDocDataKey.savingAmount] as! Int
-        self.memo = dic[SaveMoneyReportsDocDataKey.memo] as! String
-    }
 }

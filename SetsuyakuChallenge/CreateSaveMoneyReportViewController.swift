@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 final class CreateSaveMoneyReportViewController: UIViewController {
     @IBOutlet private weak var priceSwicth: UISwitch!
@@ -46,15 +47,16 @@ final class CreateSaveMoneyReportViewController: UIViewController {
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let  challengeDocID = challenge?.docID else { return }
-        let docData = [SaveMoneyReportsDocDataKey.savingAmount: signPrice, SaveMoneyReportsDocDataKey.memo: memo] as [String: Any]
 
-        let saveMoneyReportRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID).collection(CollectionName.reports)
+        let saveMoneyReport = SaveMoneyReport(savingAmount: signPrice, memo: memo)
 
-        saveMoneyReportRef.document().setData(docData) { err in
-            if let err = err {
-                print("Firestoreへの保存に失敗しました: \(err)")
-            }
-            print("Firestoreへの保存に成功しました")
+        challenge?.reports.append(saveMoneyReport)
+
+        let challegenRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
+        do {
+            try challegenRef.setData(from: challenge)
+        } catch {
+            print("error: \(error.localizedDescription)")
         }
     }
 

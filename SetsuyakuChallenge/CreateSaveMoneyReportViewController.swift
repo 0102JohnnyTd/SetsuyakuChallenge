@@ -24,8 +24,6 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-    private let priceManager = PriceManager.shared
-
     var challenge: Challenge?
 
     override func viewDidLoad() {
@@ -43,7 +41,6 @@ final class CreateSaveMoneyReportViewController: UIViewController {
             return
         }
         let signPrice = priceSwicth.isOn ? price : -price
-        priceManager.calculate(price: signPrice)
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let  challengeDocID = challenge?.docID else { return }

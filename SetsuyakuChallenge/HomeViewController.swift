@@ -49,8 +49,10 @@ final class HomeViewController: UIViewController {
     private func compareValue() {
         challenges.enumerated().forEach {
             if $0.element.totalSavingAmount >= $0.element.goalAmount {
+                // Firestoreで保存した値をHomeで表示させるのでこのtoggleはなくても良い気がするのだが、万が一にも保存が失敗した時のことを考えると不安なので一応残しておく。
                 let index = $0.offset
                 challenges[index].isChallenge.toggle()
+                updateDataForFireStore(challenge: $0.element)
                 showTargetAchievementAlert(completedChallenge: $0.element, name: $0.element.name)
             }
             print("どの値も目標達成してないぜ")
@@ -85,6 +87,20 @@ final class HomeViewController: UIViewController {
                 } catch {
                     print(error)
                 }
+            }
+        }
+    }
+
+    private func updateDataForFireStore(challenge: Challenge) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let challengeID = challenge.docID else { return }
+        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeID)
+
+        challengeRef.updateData([FieldValue.isChallenge: false]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
             }
         }
     }

@@ -12,6 +12,10 @@ import FirebaseFirestore
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var challengeCollectionView: UICollectionView!
 
+    @IBOutlet private weak var segmentedControl: UISegmentedControl!
+
+    @IBAction private func segment(_ sender: Any) {}
+
     private var challenges: [Challenge] = []
 
     override func viewDidLoad() {

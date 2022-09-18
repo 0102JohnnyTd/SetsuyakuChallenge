@@ -54,6 +54,7 @@ final class SaveMoneyReportListViewController: UIViewController {
                 let challenge = try snapshot?.data(as: Challenge.self)
                 if let challenge = challenge {
                     self.challenge?.reports = challenge.reports
+                    self.challenges.append(challenge)
                     self.saveMoneyReportListTableView.reloadData()
                 }
             } catch {

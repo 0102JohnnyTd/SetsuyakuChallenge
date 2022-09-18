@@ -86,7 +86,11 @@ final class HomeViewController: UIViewController {
                         challenge?.totalSavingAmount += $0.savingAmount
                     }
                     if let challenge = challenge {
-                        self.challenges.append(challenge)
+                        if challenge.isChallenge {
+                            self.challenges.append(challenge)
+                        } else {
+                            self.completedChallenges.append(challenge)
+                        }
                         self.challengeCollectionView.reloadData()
                         self.compareValue()
                     }

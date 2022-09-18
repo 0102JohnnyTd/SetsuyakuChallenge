@@ -98,6 +98,16 @@ final class HomeViewController: UIViewController {
         navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
     }
 
+    
+
+    private func generateCongratsAlert(completedChallenge: Challenge, name: String) -> UIAlertController {
+        let alertController = UIAlertController(title: AlertTitle.congrats, message: "目標『\(name)』" + AlertMessage.congrats, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default) { [weak self] _ in
+        })
+        return alertController
+    }
+
     private func setUpCollectionView() {
         challengeCollectionView.delegate = self
         challengeCollectionView.dataSource = self

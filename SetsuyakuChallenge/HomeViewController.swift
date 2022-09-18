@@ -17,6 +17,14 @@ final class HomeViewController: UIViewController {
     @IBAction private func segment(_ sender: Any) {}
 
     private var challenges: [Challenge] = []
+    private var completedChallenges: [Challenge] = []
+    private var filteredChallenges: [Challenge] {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return challenges
+        } else {
+            return completedChallenges
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +48,7 @@ final class HomeViewController: UIViewController {
 
     private func fetchChallengeData() {
         challenges.removeAll()
+        completedChallenges.removeAll()
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
@@ -69,7 +78,7 @@ final class HomeViewController: UIViewController {
     }
 
     private func passDataToSaveMoneyReportListVC(saveMoneyReportListVC: SaveMoneyReportListViewController, row: Int) {
-        saveMoneyReportListVC.challenge = challenges[row]
+        saveMoneyReportListVC.challenge = filteredChallenges[row]
     }
 
     private func showSignUpVC() {
@@ -112,13 +121,13 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        challenges.count
+        filteredChallenges.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = challengeCollectionView.dequeueReusableCell(withReuseIdentifier: ChallengeCollectionViewCell.identifier, for: indexPath) as! ChallengeCollectionViewCell
 
-        cell.configure(name: challenges[indexPath.row].name, goalAmount: challenges[indexPath.row].goalAmount, imageURL: challenges[indexPath.row].imageURL, totalSavingAmount: challenges[indexPath.row].totalSavingAmount)
+        cell.configure(name: filteredChallenges[indexPath.row].name, goalAmount: filteredChallenges[indexPath.row].goalAmount, imageURL: filteredChallenges[indexPath.row].imageURL, totalSavingAmount: filteredChallenges[indexPath.row].totalSavingAmount)
 
         return cell
     }
@@ -131,6 +140,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension HomeViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         challenges.removeAll()
+        completedChallenges.removeAll()
         challengeCollectionView.reloadData()
         fetchChallengeData()
     }

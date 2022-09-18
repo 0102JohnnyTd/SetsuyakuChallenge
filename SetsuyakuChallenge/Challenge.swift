@@ -14,6 +14,7 @@ struct Challenge: Codable {
     var goalAmount: Int
     var reports: [SaveMoneyReport]
     var totalSavingAmount: Int
+    var isChallenge: Bool
 
     var docID: String?
 }

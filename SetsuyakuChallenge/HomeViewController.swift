@@ -14,7 +14,13 @@ final class HomeViewController: UIViewController {
 
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
 
-    @IBAction private func segment(_ sender: Any) {}
+    @IBAction private func segment(_ sender: Any) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            challengeCollectionView.reloadData()
+        } else {
+            challengeCollectionView.reloadData()
+        }
+    }
 
     private var challenges: [Challenge] = []
     private var completedChallenges: [Challenge] = []

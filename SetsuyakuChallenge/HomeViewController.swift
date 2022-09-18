@@ -47,9 +47,11 @@ final class HomeViewController: UIViewController {
     }
 
     private func compareValue() {
-        challenges.forEach {
-            if $0.totalSavingAmount >= $0.goalAmount {
-                showTargetAchievementAlert(completedChallenge: $0, name: $0.name)
+        challenges.enumerated().forEach {
+            if $0.element.totalSavingAmount >= $0.element.goalAmount {
+                let index = $0.offset
+                challenges[index].isChallenge.toggle()
+                showTargetAchievementAlert(completedChallenge: $0.element, name: $0.element.name)
             }
             print("どの値も目標達成してないぜ")
         }

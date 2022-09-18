@@ -46,6 +46,15 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    private func compareValue() {
+        challenges.forEach {
+            if $0.totalSavingAmount >= $0.goalAmount {
+                showTargetAchievementAlert(completedChallenge: $0, name: $0.name)
+            }
+            print("どの値も目標達成してないぜ")
+        }
+    }
+
     private func fetchChallengeData() {
         challenges.removeAll()
         completedChallenges.removeAll()
@@ -69,6 +78,7 @@ final class HomeViewController: UIViewController {
                     if let challenge = challenge {
                         self.challenges.append(challenge)
                         self.challengeCollectionView.reloadData()
+                        self.compareValue()
                     }
                 } catch {
                     print(error)

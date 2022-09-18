@@ -135,6 +135,7 @@ final class HomeViewController: UIViewController {
         let alertController = UIAlertController(title: AlertTitle.targetaAchievement, message: "目標『\(name)』" + AlertMessage.targetaAchievement, preferredStyle: .alert)
 
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default) { [weak self] _ in
+            self?.completedChallenges.append(completedChallenge)
         })
         return alertController
     }

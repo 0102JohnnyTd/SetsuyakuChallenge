@@ -98,10 +98,13 @@ final class HomeViewController: UIViewController {
         navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
     }
 
-    
+    private func showTargetAchievementAlert(completedChallenge: Challenge, name: String) {
+        let alertController = generateTargetAchievementAlert(completedChallenge: completedChallenge, name: name)
+        present(alertController, animated: true)
+    }
 
-    private func generateCongratsAlert(completedChallenge: Challenge, name: String) -> UIAlertController {
-        let alertController = UIAlertController(title: AlertTitle.congrats, message: "目標『\(name)』" + AlertMessage.congrats, preferredStyle: .alert)
+    private func generateTargetAchievementAlert(completedChallenge: Challenge, name: String) -> UIAlertController {
+        let alertController = UIAlertController(title: AlertTitle.targetaAchievement, message: "目標『\(name)』" + AlertMessage.targetaAchievement, preferredStyle: .alert)
 
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default) { [weak self] _ in
         })

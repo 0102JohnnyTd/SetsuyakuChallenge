@@ -136,6 +136,8 @@ final class HomeViewController: UIViewController {
 
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default) { [weak self] _ in
             self?.completedChallenges.append(completedChallenge)
+            self?.challenges.removeAll { $0.isChallenge == false }
+            self?.challengeCollectionView.reloadData()
         })
         return alertController
     }

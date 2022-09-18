@@ -80,7 +80,7 @@ final class CreateChallengeViewController: UIViewController {
         let name = nameTextField.text!
         let goalAmount = goalAmountTextField.textToInt!
 
-        let challenge = Challenge(imageURL: imageURL, name: name, goalAmount: goalAmount, reports: [], totalSavingAmount: 0)
+        let challenge = Challenge(imageURL: imageURL, name: name, goalAmount: goalAmount, reports: [], totalSavingAmount: 0, isChallenge: true)
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
         do {

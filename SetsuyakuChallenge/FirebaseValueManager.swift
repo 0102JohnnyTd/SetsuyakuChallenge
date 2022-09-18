@@ -16,3 +16,7 @@ enum CollectionName {
     static let challenges = "challenges"
     static let reports = "reports"
 }
+
+enum FieldValue {
+    static let isChallenge = "isChallenge"
+}

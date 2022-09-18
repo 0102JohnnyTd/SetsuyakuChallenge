@@ -16,17 +16,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G5G-qL-ZpO">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Srp-v8-g7V">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tMc-Pw-ntq">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DLc-4J-6P4">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
+                                        <segments>
+                                            <segment title="チャレンジ中"/>
+                                            <segment title="達成済み"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segment:" destination="Y6W-OH-hqX" eventType="valueChanged" id="0n8-Hb-T7z"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G5G-qL-ZpO">
+                                        <rect key="frame" x="0.0" y="47" width="414" height="727"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tMc-Pw-ntq">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-6R-5EV" userLabel="Show Create Challenge View Controller Button">
                                 <rect key="frame" x="258" y="716" width="124" height="114"/>
                                 <state key="normal" title="Button"/>
@@ -39,12 +54,12 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Srp-v8-g7V" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="9Bf-ye-JlQ"/>
+                            <constraint firstItem="Srp-v8-g7V" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="GzJ-gP-d9c"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2Pd-6R-5EV" secondAttribute="bottom" constant="32" id="NA8-P8-wGI"/>
-                            <constraint firstItem="G5G-qL-ZpO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Q2c-BO-I04"/>
-                            <constraint firstItem="G5G-qL-ZpO" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="TJC-73-G3Z"/>
-                            <constraint firstItem="G5G-qL-ZpO" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="f9a-jK-0qn"/>
+                            <constraint firstItem="Srp-v8-g7V" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="aCI-Pn-eNA"/>
+                            <constraint firstItem="Srp-v8-g7V" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="lrp-qu-5Eo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2Pd-6R-5EV" secondAttribute="trailing" constant="32" id="x3N-9B-Fee"/>
-                            <constraint firstItem="G5G-qL-ZpO" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="yxe-ys-PMK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9qF-EI-zhc">
@@ -56,6 +71,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="challengeCollectionView" destination="G5G-qL-ZpO" id="OXg-km-fZy"/>
+                        <outlet property="segmentedControl" destination="DLc-4J-6P4" id="PBH-qi-duJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

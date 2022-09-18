@@ -9,10 +9,12 @@ import Foundation
 
 enum AlertMessage {
     static let inputError = "金額は数値以外の値を入れないでください"
+    static let targetaAchievement = "の貯金が貯まりました🥳"
 }
 
 enum AlertTitle {
     static let inputError = "入力エラー"
+    static let targetaAchievement = "🎉おめでとう🎉"
 }
 
 enum AlertAction {

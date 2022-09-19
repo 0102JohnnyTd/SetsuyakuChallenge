@@ -32,6 +32,7 @@ final class CreateChallengeViewController: UIViewController {
         super.viewDidLoad()
         setUpButton()
         setUpTextFiled()
+        indicator.isHidden = true
     }
 
     private func checkIsTextField() {
@@ -42,7 +43,12 @@ final class CreateChallengeViewController: UIViewController {
             return
         }
         saveData()
-        navigationController?.popViewController(animated: true)
+        startIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.stopIndicator()
+            self.navigationController?.popViewController(animated: true)
+        }
+
     }
 
     private func showAlert() {

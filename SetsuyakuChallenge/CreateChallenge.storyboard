@@ -106,11 +106,16 @@
                                     <action selector="didTapCreateChallengeButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zLI-vZ-eUa"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eqL-l5-2zr">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="eqL-l5-2zr" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="39R-o1-EXO"/>
                             <constraint firstItem="ljj-Xe-pkf" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="7QL-Ot-bA8"/>
+                            <constraint firstItem="eqL-l5-2zr" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="KEu-3b-KzF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ljj-Xe-pkf" secondAttribute="trailing" constant="48" id="Ko9-zh-CAs"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hb8-oB-ekk" secondAttribute="bottom" priority="249" constant="48" id="Mq5-4v-3St"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hb8-oB-ekk" secondAttribute="trailing" constant="48" id="UfK-7I-W5d"/>
@@ -123,12 +128,13 @@
                         <outlet property="createChallengeButton" destination="hb8-oB-ekk" id="xu4-sj-Kez"/>
                         <outlet property="goalAmountTextField" destination="42W-Sb-CAw" id="FT1-e6-sd8"/>
                         <outlet property="imageView" destination="CPu-kr-wPk" id="gqD-7P-cVN"/>
+                        <outlet property="indicator" destination="eqL-l5-2zr" id="5ZS-je-ekz"/>
                         <outlet property="nameTextField" destination="7zR-Pe-Omc" id="Tdq-KC-H9o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45" y="38"/>
+            <point key="canvasLocation" x="44.927536231884062" y="37.5"/>
         </scene>
     </scenes>
     <resources>

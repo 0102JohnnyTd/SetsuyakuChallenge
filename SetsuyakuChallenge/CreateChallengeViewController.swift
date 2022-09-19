@@ -17,6 +17,7 @@ final class CreateChallengeViewController: UIViewController {
     @IBOutlet private weak var nameTextField: UITextField!
     @IBOutlet private weak var goalAmountTextField: UITextField!
     @IBOutlet private weak var createChallengeButton: UIButton!
+    @IBOutlet private weak var indicator: UIActivityIndicatorView!
 
     @IBAction private func didTapUploadImageButton(_ sender: Any) {
         showPickerController()
@@ -31,6 +32,7 @@ final class CreateChallengeViewController: UIViewController {
         super.viewDidLoad()
         setUpButton()
         setUpTextFiled()
+        indicator.isHidden = true
     }
 
     private func checkIsTextField() {
@@ -41,7 +43,12 @@ final class CreateChallengeViewController: UIViewController {
             return
         }
         saveData()
-        navigationController?.popViewController(animated: true)
+        startIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.stopIndicator()
+            self.navigationController?.popViewController(animated: true)
+        }
+
     }
 
     private func showAlert() {
@@ -101,6 +108,18 @@ final class CreateChallengeViewController: UIViewController {
             }
             print("Firestorageへの情報の保存に成功しました")
         }
+    }
+
+    private func startIndicator() {
+        indicator.isHidden = false
+        view.alpha = 0.5
+        indicator.startAnimating()
+    }
+
+    private func stopIndicator() {
+        indicator.stopAnimating()
+        indicator.isHidden = true
+        view.alpha = 1.0
     }
 
     private func generateInputErrorAlert() -> UIAlertController {

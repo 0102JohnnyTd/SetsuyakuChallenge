@@ -17,6 +17,7 @@ final class CreateChallengeViewController: UIViewController {
     @IBOutlet private weak var nameTextField: UITextField!
     @IBOutlet private weak var goalAmountTextField: UITextField!
     @IBOutlet private weak var createChallengeButton: UIButton!
+    @IBOutlet private weak var indicator: UIActivityIndicatorView!
 
     @IBAction private func didTapUploadImageButton(_ sender: Any) {
         showPickerController()

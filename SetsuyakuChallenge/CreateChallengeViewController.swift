@@ -104,6 +104,18 @@ final class CreateChallengeViewController: UIViewController {
         }
     }
 
+    private func startIndicator() {
+        indicator.isHidden = false
+        view.alpha = 0.5
+        indicator.startAnimating()
+    }
+
+    private func stopIndicator() {
+        indicator.stopAnimating()
+        indicator.isHidden = true
+        view.alpha = 1.0
+    }
+
     private func generateInputErrorAlert() -> UIAlertController {
         let alertController = UIAlertController(title: AlertTitle.inputError, message: AlertMessage.inputError, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))

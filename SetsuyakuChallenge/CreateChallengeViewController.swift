@@ -48,7 +48,6 @@ final class CreateChallengeViewController: UIViewController {
             self.stopIndicator()
             self.navigationController?.popViewController(animated: true)
         }
-
     }
 
     private func showAlert() {

@@ -13,7 +13,8 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var totalAmountLabel: UILabel!
     @IBOutlet private weak var goalAmountLabel: UILabel!
     @IBOutlet private weak var imageView: UIImageView!
-    
+    @IBOutlet private weak var progressView: UIProgressView!
+
     static let nib = UINib(nibName: String(describing: ChallengeCollectionViewCell.self), bundle: nil)
     static let identifier = String(describing: ChallengeCollectionViewCell.self)
 
@@ -44,5 +45,6 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
         goalAmountLabel.text = "/ " + String(goalAmount) + "円"
         imageView.kf.setImage(with: URL(string: imageURL))
         totalAmountLabel.text = String(totalSavingAmount)
+        progressView.progress = Float(totalSavingAmount) / Float(goalAmount)
     }
 }

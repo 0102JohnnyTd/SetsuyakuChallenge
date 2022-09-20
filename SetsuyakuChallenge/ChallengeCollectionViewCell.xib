@@ -94,6 +94,7 @@
                 <outlet property="goalAmountLabel" destination="zEs-eX-jZg" id="HVS-nx-Oml"/>
                 <outlet property="imageView" destination="pg8-f8-gik" id="Hkc-xC-DxM"/>
                 <outlet property="nameLabel" destination="KI3-Ud-LLo" id="UYt-bT-ptl"/>
+                <outlet property="progressView" destination="5MO-H9-Xkt" id="2mc-Sa-h3c"/>
                 <outlet property="totalAmountLabel" destination="xlg-Q6-CjW" id="J4b-d3-Bh0"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="53.571428571428569"/>

@@ -9,25 +9,28 @@ import UIKit
 
 final class ResetPasswordViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
-
+    @IBOutlet private weak var sendEmailButton: UIButton!
     @IBAction private func didTapButton(_ sender: Any) {
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpTextField()
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setUpTextField() {
+        emailTextField.delegate = self
     }
-    */
+}
 
+extension ResetPasswordViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let email = emailTextField.text else { return }
+
+        if email.isEmpty {
+            sendEmailButton.isEnabled = false
+        } else {
+            sendEmailButton.isEnabled = true
+        }
+    }
 }

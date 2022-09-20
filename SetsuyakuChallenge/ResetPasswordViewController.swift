@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ResetPasswordViewController: UIViewController {
+final class ResetPasswordViewController: UIViewController {
+    @IBOutlet private weak var emailTextField: UITextField!
+
+    @IBAction private func didTapButton(_ sender: Any) {
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

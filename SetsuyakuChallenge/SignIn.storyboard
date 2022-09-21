@@ -79,12 +79,36 @@
                                     <action selector="didTapSignInButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="dkB-nk-8cL"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4t-ym-Rfw">
+                                <rect key="frame" x="32" y="443" width="350" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="パスワードをお忘れの方：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sF3-35-ZYg">
+                                        <rect key="frame" x="0.0" y="0.0" width="264.5" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvs-4J-Qw1">
+                                        <rect key="frame" x="264.5" y="0.0" width="85.5" height="32"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="リセット">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="Bc4-ai-qKm" kind="show" id="cHY-VC-YbB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6ry-ZR-hK3" secondAttribute="trailing" constant="32" id="62M-9a-dVL"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="X4t-ym-Rfw" secondAttribute="trailing" constant="32" id="65i-O9-loX"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="toK-bh-7nu" secondAttribute="trailing" constant="32" id="HYS-fX-12v"/>
+                            <constraint firstItem="X4t-ym-Rfw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="NpP-Dx-i52"/>
+                            <constraint firstItem="X4t-ym-Rfw" firstAttribute="top" secondItem="6ry-ZR-hK3" secondAttribute="bottom" constant="48" id="SkV-pB-qZv"/>
                             <constraint firstItem="6ry-ZR-hK3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="b2D-aB-BXp"/>
                             <constraint firstItem="6ry-ZR-hK3" firstAttribute="top" secondItem="toK-bh-7nu" secondAttribute="bottom" constant="48" id="l5k-un-VIV"/>
                             <constraint firstItem="toK-bh-7nu" firstAttribute="top" secondItem="Etj-By-aOR" secondAttribute="bottom" constant="48" id="uS8-BK-iF4"/>
@@ -104,6 +128,16 @@
                 <exit id="Qqc-8d-Xge" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="45" y="38"/>
+        </scene>
+        <!--ResetPassword-->
+        <scene sceneID="4C8-d7-TTO">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ResetPassword" id="Bc4-ai-qKm" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="La2-gA-whf"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6xX-o2-AKW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="655" y="-14"/>
         </scene>
     </scenes>
     <resources>

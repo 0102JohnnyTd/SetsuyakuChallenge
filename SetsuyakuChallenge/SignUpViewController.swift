@@ -16,7 +16,7 @@ final class SignUpViewController: UIViewController {
     @IBOutlet private weak var signUpButton: UIButton!
 
     @IBAction private func didTapRegistButton(_ sender: Any) {
-        registUser()
+        signUp()
     }
 
     static let storyboardName = "SignUp"
@@ -35,14 +35,15 @@ final class SignUpViewController: UIViewController {
         setUpButton()
     }
 
-    private func registUser() {
+    private func signUp() {
         let email = emailTextField.text!
         let password = passwordTextField.text!
         let userName = userNameTextField.text!
 
         Auth.auth().createUser(withEmail: email, password: password) { [self] (res, err) in
-            if let err = err {
+            if let err = err as NSError? {
                 print("認証情報の保存に失敗しました: \(err)")
+                self.showSignUpErrorAlert(err: err)
                 return
             }
             print("認証情報の保存に成功しました")
@@ -72,6 +73,27 @@ final class SignUpViewController: UIViewController {
         } else {
             print("現在ログアウト状態です")
         }
+    }
+
+    private func showSignUpErrorAlert(err: NSError) {
+        if let errCode = AuthErrorCode(rawValue: err.code) {
+            var message: String
+            switch errCode {
+            case .invalidEmail:      message = AlertMessage.invalidEmail
+            case .emailAlreadyInUse: message = AlertMessage.emailAlreadyInUse
+            case .weakPassword:      message = AlertMessage.weakPassword
+            default:                 message = AlertMessage.someErrors
+            }
+            let alertController = generateSignUpErrorAlert(title: AlertTitle.signUpError, message: message)
+            self.present(alertController, animated: true)
+        }
+    }
+
+    private func generateSignUpErrorAlert(title: String, message: String?) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
+
+        return alertController
     }
 
     private func setUpTextFileds() {

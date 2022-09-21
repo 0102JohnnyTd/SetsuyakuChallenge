@@ -28,12 +28,27 @@ final class SignInViewController: UIViewController {
         let email = emailTextField.text!
         let password = passwordTextField.text!
         Auth.auth().signIn(withEmail: email, password: password) { _, err in
-            if let err = err {
+            if let err = err as NSError? {
                 print("ログイン情報の取得に失敗しました")
+                self.showLoginErrorAlert(err: err)
                 return
             }
             print("ログイン情報の取得に成功しました")
             self.navigationController?.popViewController(animated: true)
+        }
+    }
+
+    private func showLoginErrorAlert(err: NSError) {
+        if let errCode = AuthErrorCode(rawValue: err.code) {
+            var message: String
+            switch errCode {
+            case .userNotFound:  message = AlertMessage.userNotFound
+            case .wrongPassword: message = AlertMessage.wrongPassword
+            case .invalidEmail:  message = AlertMessage.invalidEmail
+            default:             message = "エラー: \(err.localizedDescription)"
+            }
+            let alertController = generateLoginErrorAlert(title: AlertTitle.loginError, message: message)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 

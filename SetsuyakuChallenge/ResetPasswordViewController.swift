@@ -27,9 +27,14 @@ final class ResetPasswordViewController: UIViewController {
             if let error = error {
                 print("送信エラーです： \(error.localizedDescription)")
             } else {
-                print("\(email)宛にメールを送信しました。")
+                self.showEmailSendCompleteAlert(email: email)
             }
         }
+    }
+
+    private func showEmailSendCompleteAlert(email: String) {
+        let alertController = generateEmailSendCompleteAlert(email: email)
+        present(alertController, animated: true)
     }
 
     private func generateEmailSendCompleteAlert(email: String) -> UIAlertController {

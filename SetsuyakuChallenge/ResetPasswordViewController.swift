@@ -32,6 +32,16 @@ final class ResetPasswordViewController: UIViewController {
         }
     }
 
+    private func generateEmailSendCompleteAlert(email: String) -> UIAlertController {
+        let alertController = UIAlertController(title: AlertTitle.emailSendComplete, message: email + AlertMessage.emailSendComplete, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        })
+
+        return alertController
+    }
+
     private func setUpTextField() {
         emailTextField.delegate = self
     }

@@ -74,6 +74,13 @@ final class SignUpViewController: UIViewController {
         }
     }
 
+    private func generateSignUpErrorAlert(title: String, message: String?) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
+
+        return alertController
+    }
+
     private func setUpTextFileds() {
         textFields.forEach { $0.delegate = self }
     }

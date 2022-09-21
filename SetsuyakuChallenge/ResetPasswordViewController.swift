@@ -16,10 +16,15 @@ final class ResetPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTextField()
+        setUpButton()
     }
 
     private func setUpTextField() {
         emailTextField.delegate = self
+    }
+
+    private func setUpButton() {
+        sendEmailButton.mainButton()
     }
 }
 

@@ -41,8 +41,9 @@ final class SignUpViewController: UIViewController {
         let userName = userNameTextField.text!
 
         Auth.auth().createUser(withEmail: email, password: password) { [self] (res, err) in
-            if let err = err {
+            if let err = err as NSError? {
                 print("認証情報の保存に失敗しました: \(err)")
+                self.showSignUpErrorAlert(err: err)
                 return
             }
             print("認証情報の保存に成功しました")
@@ -71,6 +72,20 @@ final class SignUpViewController: UIViewController {
             dismiss(animated: true)
         } else {
             print("現在ログアウト状態です")
+        }
+    }
+
+    private func showSignUpErrorAlert(err: NSError) {
+        if let errCode = AuthErrorCode(rawValue: err.code) {
+            var message: String
+            switch errCode {
+            case .invalidEmail:      message = AlertMessage.invalidEmail
+            case .emailAlreadyInUse: message = AlertMessage.emailAlreadyInUse
+            case .weakPassword:      message = AlertMessage.weakPassword
+            default:                 message = AlertMessage.someErrors
+            }
+            let alertController = generateSignUpErrorAlert(title: AlertTitle.signUpError, message: message)
+            self.present(alertController, animated: true)
         }
     }
 

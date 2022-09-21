@@ -45,7 +45,7 @@ final class SignInViewController: UIViewController {
             case .userNotFound:  message = AlertMessage.userNotFound
             case .wrongPassword: message = AlertMessage.wrongPassword
             case .invalidEmail:  message = AlertMessage.invalidEmail
-            default:             message = "エラー: \(err.localizedDescription)"
+            default:             message = AlertMessage.someErrors
             }
             let alertController = generateLoginErrorAlert(title: AlertTitle.loginError, message: message)
             self.present(alertController, animated: true, completion: nil)

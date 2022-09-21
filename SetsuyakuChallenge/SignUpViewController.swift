@@ -16,7 +16,7 @@ final class SignUpViewController: UIViewController {
     @IBOutlet private weak var signUpButton: UIButton!
 
     @IBAction private func didTapRegistButton(_ sender: Any) {
-        registUser()
+        signUp()
     }
 
     static let storyboardName = "SignUp"
@@ -35,7 +35,7 @@ final class SignUpViewController: UIViewController {
         setUpButton()
     }
 
-    private func registUser() {
+    private func signUp() {
         let email = emailTextField.text!
         let password = passwordTextField.text!
         let userName = userNameTextField.text!

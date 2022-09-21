@@ -23,10 +23,11 @@ final class SignInViewController: UIViewController {
         setUpTextFields()
         setUpButton()
     }
+
     private func login() {
         let email = emailTextField.text!
         let password = passwordTextField.text!
-        Auth.auth().signIn(withEmail: email, password: password) { res, err in
+        Auth.auth().signIn(withEmail: email, password: password) { _, err in
             if let err = err {
                 print("ログイン情報の取得に失敗しました")
                 return
@@ -34,6 +35,13 @@ final class SignInViewController: UIViewController {
             print("ログイン情報の取得に成功しました")
             self.navigationController?.popViewController(animated: true)
         }
+    }
+
+    private func generateLoginErrorAlert(title: String, message: String?) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
+
+        return alertController
     }
 
     private func setUpTextFields() {

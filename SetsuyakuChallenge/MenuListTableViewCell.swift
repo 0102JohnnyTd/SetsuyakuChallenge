@@ -8,7 +8,9 @@
 import UIKit
 
 final class MenuListTableViewCell: UITableViewCell {
-
+    @IBOutlet private weak var titileLabel: UILabel!
+    @IBOutlet private weak var detailLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

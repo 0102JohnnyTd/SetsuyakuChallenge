@@ -27,9 +27,44 @@ final class MenuListViewController: UIViewController {
         menuListTableView.dataSource = self
         menuListTableView.register(MenuListTableViewCell.nib, forCellReuseIdentifier: MenuListTableViewCell.identifier)
     }
+
+    private func setUpSection(section: Int) -> UIView {
+        let headerView = generateHeaderView()
+        let titleLabel = generateTitleLabel()
+        setUpTitleLabelConstraint(title: titleLabel, headerView: headerView)
+        titleLabel.text = MenuListTableViewCell.sectionNameArray[section]
+        return headerView
+    }
+
+    private func generateHeaderView() -> UIView {
+        let headerView = UIView()
+        headerView.backgroundColor = .mainColor()
+        return headerView
+    }
+
+    private func generateTitleLabel() -> UILabel {
+        let titleLabel = UILabel()
+        titleLabel.textColor = .white
+        return titleLabel
+    }
+
+    private func setUpTitleLabelConstraint(title: UILabel, headerView: UIView) {
+        headerView.addSubview(title)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+        title.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16).isActive = true
+    }
 }
 
 extension MenuListViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        Section.allCases.count
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        setUpSection(section: section)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sampleArray.count
     }

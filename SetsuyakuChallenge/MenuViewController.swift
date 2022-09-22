@@ -8,7 +8,7 @@
 import UIKit
 
 final class MenuViewController: UIViewController {
-    
+    @IBOutlet private weak var menuListTableViewCell: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
     }

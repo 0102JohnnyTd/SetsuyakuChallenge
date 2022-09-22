@@ -14,6 +14,10 @@ final class MenuListTableViewCell: UITableViewCell {
     static let nib = UINib(nibName: String(describing: MenuListTableViewCell.self), bundle: nil)
     static let identifier = String(describing: MenuListTableViewCell.self)
 
+    static let sectionNameArray = ["サポート", "一般"]
+    static let supportSectionCellName = ["お問い合わせ"]
+    static let generalSectionCellName = ["アプリのバージョン", "利用規約", "プライバシーポリシー"]
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

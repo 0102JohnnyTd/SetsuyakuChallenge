@@ -7,6 +7,11 @@
 
 import UIKit
 
+private enum Section: Int, CaseIterable {
+    case supportSection
+    case generalSection
+}
+
 final class MenuListViewController: UIViewController {
     @IBOutlet private weak var menuListTableView: UITableView!
 

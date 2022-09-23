@@ -63,7 +63,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9qF-EI-zhc">
-                        <barButtonItem key="rightBarButtonItem" title="プロフィール" id="aDb-hf-dUW">
+                        <barButtonItem key="leftBarButtonItem" title="メニュー" image="gearshape.fill" catalog="system" id="3iJ-01-yFI">
+                            <connections>
+                                <segue destination="PZj-Fj-TLk" kind="push" id="lWa-cB-Zu7"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="プロフィール" image="person.fill" catalog="system" id="aDb-hf-dUW">
                             <connections>
                                 <segue destination="LJt-EZ-tVB" kind="push" id="ikV-mq-Fb1"/>
                             </connections>
@@ -88,6 +93,16 @@
             </objects>
             <point key="canvasLocation" x="1615" y="189"/>
         </scene>
+        <!--MenuList-->
+        <scene sceneID="uH5-rd-bGc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MenuList" id="PZj-Fj-TLk" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="lj4-40-gUJ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rB3-tl-dVg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1635" y="-86"/>
+        </scene>
         <!--UserDetails-->
         <scene sceneID="xha-1B-ITc">
             <objects>
@@ -96,7 +111,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uDI-f2-eaq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1531" y="-219"/>
+            <point key="canvasLocation" x="1636" y="38"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="STn-Kg-6Zf">
@@ -119,6 +134,8 @@
     </scenes>
     <resources>
         <image name="RegistChallengeButton" width="100" height="100"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

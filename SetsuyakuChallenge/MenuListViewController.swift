@@ -24,8 +24,8 @@ private enum GeneralSectionCell: Int, CaseIterable {
 
 private enum URLManager {
     static let form = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSflWh3XRQS74ocT8WfpWCAMq1vlU35ZsPhdCLTmupQ5GyjAdA/viewform")!
-    static let termsOfService = URL(string: "https://sites.google.com/view/uita-termsofservice/%E3%83%9B%E3%83%BC%E3%83%A0")
-    static let privacyPolicy = URL(string: "https://sites.google.com/view/uita-privacypolicy/%E3%83%9B%E3%83%BC%E3%83%A0")
+    static let termsOfService = URL(string: "https://sites.google.com/view/uita-termsofservice/%E3%83%9B%E3%83%BC%E3%83%A0")!
+    static let privacyPolicy = URL(string: "https://sites.google.com/view/uita-privacypolicy/%E3%83%9B%E3%83%BC%E3%83%A0")!
 }
 
 final class MenuListViewController: UIViewController {
@@ -103,5 +103,26 @@ extension MenuListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         menuListTableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier, for: indexPath) as! MenuListTableViewCell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let sectionType = Section(rawValue: indexPath.section)
+
+        switch sectionType {
+        case .supportSection: let supportSectionCell = SupportSectionCell(rawValue: indexPath.row)
+            switch supportSectionCell {
+            case .formCell: showSafariVC(url: URLManager.form)
+            case .none: break
+            }
+        case .generalSection: let generalSectionCell = GeneralSectionCell(rawValue: indexPath.row)
+            switch generalSectionCell {
+            case .termsOfServiceCell: showSafariVC(url: URLManager.termsOfService)
+            case .privacyPolicyCell: showSafariVC(url: URLManager.privacyPolicy)
+            case .none: break
+            }
+        case .none: break
+        }
     }
 }

@@ -12,6 +12,15 @@ private enum Section: Int, CaseIterable {
     case generalSection
 }
 
+private enum SupportSectionCell: Int, CaseIterable {
+    case formCell
+}
+
+private enum GeneralSectionCell: Int, CaseIterable {
+    case termsOfServiceCell
+    case privacyPolicyCell
+}
+
 private enum URLManager {
     static let form = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSflWh3XRQS74ocT8WfpWCAMq1vlU35ZsPhdCLTmupQ5GyjAdA/viewform")!
     static let termsOfService = URL(string: "https://sites.google.com/view/uita-termsofservice/%E3%83%9B%E3%83%BC%E3%83%A0")
@@ -72,7 +81,13 @@ extension MenuListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sampleArray.count
+        let sectionType = Section(rawValue: section)
+
+        switch sectionType {
+        case .supportSection: return SupportSectionCell.allCases.count
+        case .generalSection: return GeneralSectionCell.allCases.count
+        case .none: return 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

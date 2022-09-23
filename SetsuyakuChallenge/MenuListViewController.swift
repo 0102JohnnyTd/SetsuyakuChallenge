@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 private enum Section: Int, CaseIterable {
     case supportSection
@@ -37,18 +38,14 @@ final class MenuListViewController: UIViewController {
         setUpTableView()
     }
 
-    private func setUpTableView() {
-        menuListTableView.delegate = self
-        menuListTableView.dataSource = self
-        menuListTableView.register(MenuListTableViewCell.nib, forCellReuseIdentifier: MenuListTableViewCell.identifier)
+    private func showSafariVC(url: URL) {
+        let safariVC = generateSafariVC(url: url)
+        present(safariVC, animated: true)
     }
 
-    private func setUpSection(section: Int) -> UIView {
-        let headerView = generateHeaderView()
-        let titleLabel = generateTitleLabel()
-        setUpTitleLabelConstraint(title: titleLabel, headerView: headerView)
-        titleLabel.text = MenuListTableViewCell.sectionNameArray[section]
-        return headerView
+    private func generateSafariVC(url: URL) -> SFSafariViewController {
+        let safariVC = SFSafariViewController(url: url)
+        return safariVC
     }
 
     private func generateHeaderView() -> UIView {
@@ -61,6 +58,20 @@ final class MenuListViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.textColor = .white
         return titleLabel
+    }
+
+    private func setUpTableView() {
+        menuListTableView.delegate = self
+        menuListTableView.dataSource = self
+        menuListTableView.register(MenuListTableViewCell.nib, forCellReuseIdentifier: MenuListTableViewCell.identifier)
+    }
+
+    private func setUpSection(section: Int) -> UIView {
+        let headerView = generateHeaderView()
+        let titleLabel = generateTitleLabel()
+        setUpTitleLabelConstraint(title: titleLabel, headerView: headerView)
+        titleLabel.text = MenuListTableViewCell.sectionNameArray[section]
+        return headerView
     }
 
     private func setUpTitleLabelConstraint(title: UILabel, headerView: UIView) {

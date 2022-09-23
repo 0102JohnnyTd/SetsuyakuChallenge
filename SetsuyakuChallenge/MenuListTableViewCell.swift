@@ -16,16 +16,16 @@ final class MenuListTableViewCell: UITableViewCell {
 
     static let sectionNameArray = ["サポート", "一般"]
     static let supportSectionCellName = ["お問い合わせ"]
-    static let generalSectionCellName = ["アプリのバージョン", "利用規約", "プライバシーポリシー"]
+    static let generalSectionCellName = ["利用規約", "プライバシーポリシー", "アプリのバージョン"]
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func configure(cellNameArray: [String], row: Int) {
+        titleLabel.text = cellNameArray[row]
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func setUpVersion() {
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
 
-        // Configure the view for the selected state
+        detailLabel.text = "\(version) (\(build))"
     }
 }

@@ -20,6 +20,7 @@ private enum SupportSectionCell: Int, CaseIterable {
 private enum GeneralSectionCell: Int, CaseIterable {
     case termsOfServiceCell
     case privacyPolicyCell
+    case appVersionCell
 }
 
 private enum URLManager {
@@ -102,7 +103,24 @@ extension MenuListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        menuListTableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier, for: indexPath) as! MenuListTableViewCell
+        let cell = menuListTableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier, for: indexPath) as! MenuListTableViewCell
+
+        let sectionType = Section(rawValue: indexPath.section)
+        switch sectionType {
+        case .supportSection:
+            cell.configure(cellNameArray: MenuListTableViewCell.supportSectionCellName, row: indexPath.row)
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        case .generalSection:
+            if indexPath.row == GeneralSectionCell.appVersionCell.rawValue {
+                cell.configure(cellNameArray: MenuListTableViewCell.generalSectionCellName, row: indexPath.row )
+                cell.setUpVersion()
+            } else {
+                cell.configure(cellNameArray: MenuListTableViewCell.generalSectionCellName, row: indexPath.row)
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+            }
+        case .none: break
+        }
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -120,6 +138,7 @@ extension MenuListViewController: UITableViewDelegate, UITableViewDataSource {
             switch generalSectionCell {
             case .termsOfServiceCell: showSafariVC(url: URLManager.termsOfService)
             case .privacyPolicyCell: showSafariVC(url: URLManager.privacyPolicy)
+            case .appVersionCell: break
             case .none: break
             }
         case .none: break

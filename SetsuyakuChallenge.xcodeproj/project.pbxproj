@@ -16,6 +16,10 @@
 		1CA2DD2428B8A0EA00F401CC /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA2DD2328B8A0E900F401CC /* Challenge.swift */; };
 		1CACC76328D9683100A1F052 /* ResetPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CACC76228D9683000A1F052 /* ResetPassword.storyboard */; };
 		1CACC76528D9AABB00A1F052 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CACC76428D9AABB00A1F052 /* ResetPasswordViewController.swift */; };
+		1CACC76728DC2ADF00A1F052 /* MenuList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CACC76628DC2ADE00A1F052 /* MenuList.storyboard */; };
+		1CACC76928DC2F0C00A1F052 /* MenuListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CACC76828DC2F0C00A1F052 /* MenuListViewController.swift */; };
+		1CACC77028DC72BC00A1F052 /* MenuListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CACC76E28DC72BC00A1F052 /* MenuListTableViewCell.swift */; };
+		1CACC77128DC72BC00A1F052 /* MenuListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CACC76F28DC72BC00A1F052 /* MenuListTableViewCell.xib */; };
 		1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A3FE28A36021008E1262 /* AppDelegate.swift */; };
 		1CB7A40128A36021008E1262 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A40028A36021008E1262 /* SceneDelegate.swift */; };
 		1CB7A40328A36021008E1262 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A40228A36021008E1262 /* ViewController.swift */; };
@@ -60,6 +64,10 @@
 		1CA2DD2328B8A0E900F401CC /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		1CACC76228D9683000A1F052 /* ResetPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ResetPassword.storyboard; sourceTree = "<group>"; };
 		1CACC76428D9AABB00A1F052 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		1CACC76628DC2ADE00A1F052 /* MenuList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MenuList.storyboard; sourceTree = "<group>"; };
+		1CACC76828DC2F0C00A1F052 /* MenuListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewController.swift; sourceTree = "<group>"; };
+		1CACC76E28DC72BC00A1F052 /* MenuListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListTableViewCell.swift; sourceTree = "<group>"; };
+		1CACC76F28DC72BC00A1F052 /* MenuListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuListTableViewCell.xib; sourceTree = "<group>"; };
 		1CB7A3FB28A36021008E1262 /* SetsuyakuChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetsuyakuChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CB7A3FE28A36021008E1262 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CB7A40028A36021008E1262 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +160,10 @@
 				1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */,
 				1CA2DD2128B5E5CE00F401CC /* CreateChallengeViewController.swift */,
 				1CA2DD1F28B5E5B300F401CC /* CreateChallenge.storyboard */,
+				1CACC76E28DC72BC00A1F052 /* MenuListTableViewCell.swift */,
+				1CACC76F28DC72BC00A1F052 /* MenuListTableViewCell.xib */,
+				1CACC76828DC2F0C00A1F052 /* MenuListViewController.swift */,
+				1CACC76628DC2ADE00A1F052 /* MenuList.storyboard */,
 				1CACC76428D9AABB00A1F052 /* ResetPasswordViewController.swift */,
 				1CACC76228D9683000A1F052 /* ResetPassword.storyboard */,
 				1CD380F128B3440600B2AC80 /* SignInViewController.swift */,
@@ -254,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CACC76728DC2ADF00A1F052 /* MenuList.storyboard in Resources */,
 				1CD380EA28AC8AD200B2AC80 /* ChallengeCollectionViewCell.xib in Resources */,
 				1CB7A40B28A36026008E1262 /* LaunchScreen.storyboard in Resources */,
 				1CB7A40828A36026008E1262 /* Assets.xcassets in Resources */,
@@ -265,6 +278,7 @@
 				1C6DF4A828BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib in Resources */,
 				1CD380F028B343E500B2AC80 /* SignIn.storyboard in Resources */,
 				1CB7A40628A36021008E1262 /* Main.storyboard in Resources */,
+				1CACC77128DC72BC00A1F052 /* MenuListTableViewCell.xib in Resources */,
 				1CD380B428A62CB000B2AC80 /* UserDetailsTableViewCell.xib in Resources */,
 				1CEB237428BE030000D3FE15 /* CreateSaveMoenyReport.storyboard in Resources */,
 				1C6DF4A428BCE54B002F52D0 /* SaveMoneyReportList.storyboard in Resources */,
@@ -355,11 +369,13 @@
 				1CD380EE28B06E2300B2AC80 /* UIColor+.swift in Sources */,
 				1CB7A41A28A3A79E008E1262 /* SignUpViewController.swift in Sources */,
 				1CD380C428A8F53A00B2AC80 /* HomeViewController.swift in Sources */,
+				1CACC76928DC2F0C00A1F052 /* MenuListViewController.swift in Sources */,
 				1CD3808028A4F0C100B2AC80 /* User.swift in Sources */,
 				1CA2DD2228B5E5CE00F401CC /* CreateChallengeViewController.swift in Sources */,
 				1CEB238428C5A94100D3FE15 /* FirebaseValueManager.swift in Sources */,
 				1CEB237C28BF45F500D3FE15 /* SaveMoneyReport.swift in Sources */,
 				1C6DF4AA28BCE9D5002F52D0 /* SaveMoneyReportListTableViewCell.swift in Sources */,
+				1CACC77028DC72BC00A1F052 /* MenuListTableViewCell.swift in Sources */,
 				1CD380AE28A5FC5D00B2AC80 /* UserDetailsViewController.swift in Sources */,
 				1CD380B828A63C7000B2AC80 /* Option.swift in Sources */,
 				1CB7A40128A36021008E1262 /* SceneDelegate.swift in Sources */,

@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Save Money Report List View Controller-->
+        <!--節約メモリスト-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="SaveMoneyReportList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="SaveMoneyReportListViewController" customModule="SetsuyakuChallenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,7 +30,7 @@
                             <constraint firstItem="rAp-Nl-5ed" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="p7t-5s-D5S"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="wNw-Xw-BKG">
+                    <navigationItem key="navigationItem" title="節約メモリスト" id="wNw-Xw-BKG">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="bIl-ML-AU5">
                             <connections>
                                 <segue destination="Nqd-3t-Z2h" kind="push" identifier="ShowCreateReportVCSegue" id="S91-qb-T79"/>

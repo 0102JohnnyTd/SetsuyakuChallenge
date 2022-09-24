@@ -15,4 +15,8 @@ extension UIColor {
     class func mainColor() -> UIColor {
         UIColor.rgb(r: 217, g: 77, b: 75, alpha: 1)
     }
+
+    class func subColor() -> UIColor {
+        UIColor.rgb(r: 100, g: 217, b: 171, alpha: 1)
+    }
 }

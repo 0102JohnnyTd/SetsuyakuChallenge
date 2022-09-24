@@ -25,6 +25,7 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
     private func setUpCellLayout() {
         setUpBackgroundView()
         setUpContentView()
+        setUpProgressView()
     }
     private func setUpBackgroundView() {
         self.backgroundView = UIView()
@@ -37,6 +38,10 @@ final class ChallengeCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOffset = CGSize(width: 2, height: 4)
         self.layer.shadowRadius = 10.0
         self.layer.shadowOpacity = 0.4
+    }
+
+    private func setUpProgressView() {
+        progressView.progressTintColor = .subColor()
     }
     
     func configure(name: String, goalAmount: Int, imageURL: String, totalSavingAmount: Int) {

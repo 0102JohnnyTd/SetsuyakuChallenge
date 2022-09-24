@@ -37,6 +37,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
+        setUpSegmentedControl()
         setUpShowCreateChallengeButton()
     }
 
@@ -161,6 +162,17 @@ final class HomeViewController: UIViewController {
         challengeCollectionView.register(ChallengeCollectionViewCell.nib, forCellWithReuseIdentifier: ChallengeCollectionViewCell.identifier)
         setUpCellLayout()
     }
+
+    private func setUpSegmentedControl() {
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        segmentedControl.selectedSegmentTintColor = .mainColor()
+        segmentedControl.backgroundColor = .systemGray4
+    }
+//    private func setUpSegmentedControl() {
+//        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+//        segmentedControl.selectedSegmentTintColor = .mainColor()
+//        segmentedControl.backgroundColor = .systemGray5
+//    }
 
     private func setUpShowCreateChallengeButton() {
         let width = UIScreen.main.bounds.width / 5

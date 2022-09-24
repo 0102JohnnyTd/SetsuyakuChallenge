@@ -12,6 +12,8 @@ import FirebaseFirestore
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var challengeCollectionView: UICollectionView!
 
+    @IBOutlet private weak var showCreateChallengeVCButton: UIButton!
+
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
 
     @IBAction private func segment(_ sender: Any) {
@@ -35,6 +37,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
+        setUpShowCreateChallengeButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -157,6 +160,23 @@ final class HomeViewController: UIViewController {
         challengeCollectionView.dataSource = self
         challengeCollectionView.register(ChallengeCollectionViewCell.nib, forCellWithReuseIdentifier: ChallengeCollectionViewCell.identifier)
         setUpCellLayout()
+    }
+
+    private func setUpShowCreateChallengeButton() {
+        let width = UIScreen.main.bounds.width / 5
+        setUpButtonSize(width: width)
+        setUpButtonAppearance(width: width)
+    }
+
+    private func setUpButtonSize(width: CGFloat) {
+        showCreateChallengeVCButton.widthAnchor.constraint(equalToConstant: width).isActive = true
+        showCreateChallengeVCButton.heightAnchor.constraint(equalToConstant: width).isActive = true
+    }
+
+    private func setUpButtonAppearance(width: CGFloat) {
+        showCreateChallengeVCButton.backgroundColor = .subColor()
+        showCreateChallengeVCButton.layer.masksToBounds = false
+        showCreateChallengeVCButton.layer.cornerRadius = width / 2
     }
 
     private func setUpCellLayout() {

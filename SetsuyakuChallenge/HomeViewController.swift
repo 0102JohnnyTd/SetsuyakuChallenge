@@ -140,6 +140,11 @@ final class HomeViewController: UIViewController {
         navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
     }
 
+    private func showChallengesCountOverAlert() {
+        let alertController = generateChallengesCountOverAlert()
+        present(alertController, animated: true)
+    }
+
     private func showTargetAchievementAlert(completedChallenge: Challenge, name: String) {
         let alertController = generateTargetAchievementAlert(completedChallenge: completedChallenge, name: name)
         present(alertController, animated: true)

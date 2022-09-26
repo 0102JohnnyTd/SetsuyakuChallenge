@@ -24,6 +24,10 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    @IBAction private func didTapShowCreateVCButton(_ sender: Any) {
+        showCreateChallengeVC()
+    }
+
     private var challenges: [Challenge] = []
     private var completedChallenges: [Challenge] = []
     private var filteredChallenges: [Challenge] {

@@ -18,8 +18,10 @@ final class HomeViewController: UIViewController {
 
     @IBAction private func segment(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
+            showCreateChallengeVCButton.isHidden = false
             challengeCollectionView.reloadData()
         } else {
+            showCreateChallengeVCButton.isHidden = true
             challengeCollectionView.reloadData()
         }
     }

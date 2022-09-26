@@ -156,6 +156,12 @@ final class HomeViewController: UIViewController {
         return alertController
     }
 
+    private func generateChallengesCountOverAlert() -> UIAlertController {
+        let alertController = UIAlertController(title: AlertTitle.countOverError, message: AlertMessage.countOverError, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
+        return alertController
+    }
+
     private func setUpCollectionView() {
         challengeCollectionView.delegate = self
         challengeCollectionView.dataSource = self
@@ -168,11 +174,6 @@ final class HomeViewController: UIViewController {
         segmentedControl.selectedSegmentTintColor = .mainColor()
         segmentedControl.backgroundColor = .systemGray4
     }
-//    private func setUpSegmentedControl() {
-//        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
-//        segmentedControl.selectedSegmentTintColor = .mainColor()
-//        segmentedControl.backgroundColor = .systemGray5
-//    }
 
     private func setUpShowCreateChallengeButton() {
         let width = UIScreen.main.bounds.width / 5

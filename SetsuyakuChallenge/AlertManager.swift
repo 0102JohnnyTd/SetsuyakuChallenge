@@ -14,6 +14,7 @@ enum AlertTitle {
     static let emailSendComplete = "メール送信完了"
     static let loginError = "ログインに失敗"
     static let signUpError = "アカウント作成に失敗"
+    static let countOverError = "チャレンジ数が上限に達しました"
 }
 
 enum AlertMessage {
@@ -26,6 +27,7 @@ enum AlertMessage {
     static let invalidEmail = "メールアドレスが無効な形式です"
     static let emailAlreadyInUse = "登録済みのメールアドレスです"
     static let someErrors = "エラーが発生しました。"
+    static let countOverError = "同時に登録できるチャレンジ数は2つまでです"
 }
 
 enum AlertAction {

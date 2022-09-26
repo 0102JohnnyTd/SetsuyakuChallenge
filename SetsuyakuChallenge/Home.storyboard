@@ -51,7 +51,7 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="eC3-10-tqE" kind="show" id="gIy-jN-hin"/>
+                                    <action selector="didTapShowCreateVCButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="WQE-F8-Ooh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -87,16 +87,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="955.07246376811599" y="37.5"/>
-        </scene>
-        <!--CreateChallenge-->
-        <scene sceneID="WaO-Uv-EdC">
-            <objects>
-                <viewControllerPlaceholder storyboardName="CreateChallenge" id="eC3-10-tqE" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Ll5-8q-HNk"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KF7-Au-KqP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1615" y="189"/>
         </scene>
         <!--MenuList-->
         <scene sceneID="uH5-rd-bGc">

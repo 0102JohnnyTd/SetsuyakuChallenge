@@ -24,6 +24,10 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    @IBAction private func didTapShowCreateVCButton(_ sender: Any) {
+        showCreateChallengeVC()
+    }
+
     private var challenges: [Challenge] = []
     private var completedChallenges: [Challenge] = []
     private var filteredChallenges: [Challenge] {
@@ -123,6 +127,15 @@ final class HomeViewController: UIViewController {
         saveMoneyReportListVC.challenge = filteredChallenges[row]
     }
 
+    private func showCreateChallengeVC() {
+        guard challenges.count < 2 else {
+            showChallengesCountOverAlert()
+            return
+        }
+        let createChallengeVC = UIStoryboard(name: CreateChallengeViewController.storyboardName, bundle: nil).instantiateViewController(withIdentifier: CreateChallengeViewController.identifier) as! CreateChallengeViewController
+        navigationController?.pushViewController(createChallengeVC, animated: true)
+    }
+
     private func showSignUpVC() {
         let navController = UIStoryboard(name: SignUpViewController.storyboardName, bundle: nil).instantiateInitialViewController() as! UINavigationController
         navController.modalPresentationStyle = .fullScreen
@@ -138,6 +151,11 @@ final class HomeViewController: UIViewController {
         let saveMoneyReportListVC = navController.topViewController as! SaveMoneyReportListViewController
         passDataToSaveMoneyReportListVC(saveMoneyReportListVC: saveMoneyReportListVC, row: row)
         navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
+    }
+
+    private func showChallengesCountOverAlert() {
+        let alertController = generateChallengesCountOverAlert()
+        present(alertController, animated: true)
     }
 
     private func showTargetAchievementAlert(completedChallenge: Challenge, name: String) {
@@ -156,6 +174,12 @@ final class HomeViewController: UIViewController {
         return alertController
     }
 
+    private func generateChallengesCountOverAlert() -> UIAlertController {
+        let alertController = UIAlertController(title: AlertTitle.countOverError, message: AlertMessage.countOverError, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
+        return alertController
+    }
+
     private func setUpCollectionView() {
         challengeCollectionView.delegate = self
         challengeCollectionView.dataSource = self
@@ -168,11 +192,6 @@ final class HomeViewController: UIViewController {
         segmentedControl.selectedSegmentTintColor = .mainColor()
         segmentedControl.backgroundColor = .systemGray4
     }
-//    private func setUpSegmentedControl() {
-//        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
-//        segmentedControl.selectedSegmentTintColor = .mainColor()
-//        segmentedControl.backgroundColor = .systemGray5
-//    }
 
     private func setUpShowCreateChallengeButton() {
         let width = UIScreen.main.bounds.width / 5

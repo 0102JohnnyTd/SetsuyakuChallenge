@@ -27,6 +27,9 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     private var textFields: [UITextField] { [nameTextField, goalAmountTextField] }
+
+    static let storyboardName = "CreateChallenge"
+    static let identifier = "CreateChallenge"
     
     override func viewDidLoad() {
         super.viewDidLoad()

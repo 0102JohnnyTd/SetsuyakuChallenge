@@ -123,6 +123,15 @@ final class HomeViewController: UIViewController {
         saveMoneyReportListVC.challenge = filteredChallenges[row]
     }
 
+    private func showCreateChallengeVC() {
+        guard challenges.count < 2 else {
+            showChallengesCountOverAlert()
+            return
+        }
+        let createChallengeVC = UIStoryboard(name: CreateChallengeViewController.storyboardName, bundle: nil).instantiateViewController(withIdentifier: CreateChallengeViewController.identifier) as! CreateChallengeViewController
+        navigationController?.pushViewController(createChallengeVC, animated: true)
+    }
+
     private func showSignUpVC() {
         let navController = UIStoryboard(name: SignUpViewController.storyboardName, bundle: nil).instantiateInitialViewController() as! UINavigationController
         navController.modalPresentationStyle = .fullScreen

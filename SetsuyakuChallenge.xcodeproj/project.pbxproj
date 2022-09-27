@@ -529,6 +529,7 @@
 				DEVELOPMENT_TEAM = WY23RUM8JH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SetsuyakuChallenge/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Uita;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;
@@ -559,6 +560,7 @@
 				DEVELOPMENT_TEAM = WY23RUM8JH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SetsuyakuChallenge/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Uita;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;

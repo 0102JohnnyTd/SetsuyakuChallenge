@@ -49,7 +49,7 @@
 		1CEB237A28BE5E1100D3FE15 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237928BE5E1100D3FE15 /* UIButton+.swift */; };
 		1CEB237C28BF45F500D3FE15 /* SaveMoneyReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237B28BF45F500D3FE15 /* SaveMoneyReport.swift */; };
 		1CEB237E28C0A1E600D3FE15 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237D28C0A1E600D3FE15 /* UITextField+.swift */; };
-		1CEB238228C1F11E00D3FE15 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB238128C1F11E00D3FE15 /* AlertManager.swift */; };
+		1CEB238228C1F11E00D3FE15 /* AlertValueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB238128C1F11E00D3FE15 /* AlertValueManager.swift */; };
 		1CEB238428C5A94100D3FE15 /* FirebaseValueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB238328C5A94100D3FE15 /* FirebaseValueManager.swift */; };
 		9DC38D5127426FCCFA123819 /* Pods_SetsuyakuChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9559AA5CFA7CEF13DE1E1D23 /* Pods_SetsuyakuChallenge.framework */; };
 /* End PBXBuildFile section */
@@ -99,7 +99,7 @@
 		1CEB237928BE5E1100D3FE15 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		1CEB237B28BF45F500D3FE15 /* SaveMoneyReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMoneyReport.swift; sourceTree = "<group>"; };
 		1CEB237D28C0A1E600D3FE15 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
-		1CEB238128C1F11E00D3FE15 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		1CEB238128C1F11E00D3FE15 /* AlertValueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertValueManager.swift; sourceTree = "<group>"; };
 		1CEB238328C5A94100D3FE15 /* FirebaseValueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseValueManager.swift; sourceTree = "<group>"; };
 		357490A01650221DBC3F0C39 /* Pods-SetsuyakuChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetsuyakuChallenge.debug.xcconfig"; path = "Target Support Files/Pods-SetsuyakuChallenge/Pods-SetsuyakuChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		9559AA5CFA7CEF13DE1E1D23 /* Pods_SetsuyakuChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SetsuyakuChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +118,129 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C07C80C28F6ACA8003CB630 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				1CD380EB28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift */,
+				1CD380E928AC8AD200B2AC80 /* ChallengeCollectionViewCell.xib */,
+				1CD380C328A8F53A00B2AC80 /* HomeViewController.swift */,
+				1CD380C128A8F51B00B2AC80 /* Home.storyboard */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		1C07C80E28F6AD1B003CB630 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				1CB7A41928A3A79E008E1262 /* SignUpViewController.swift */,
+				1CB7A41428A3643B008E1262 /* SignUp.storyboard */,
+			);
+			name = SignUp;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		1C07C80F28F6AD23003CB630 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				1CD380F128B3440600B2AC80 /* SignInViewController.swift */,
+				1CD380EF28B343E400B2AC80 /* SignIn.storyboard */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		1C07C81028F6AD2D003CB630 /* ResetPassWord */ = {
+			isa = PBXGroup;
+			children = (
+				1CACC76428D9AABB00A1F052 /* ResetPasswordViewController.swift */,
+				1CACC76228D9683000A1F052 /* ResetPassword.storyboard */,
+			);
+			path = ResetPassWord;
+			sourceTree = "<group>";
+		};
+		1C07C81128F6AD95003CB630 /* UserDetails */ = {
+			isa = PBXGroup;
+			children = (
+				1CD380AD28A5FC5D00B2AC80 /* UserDetailsViewController.swift */,
+				1CD380AB28A5FB9A00B2AC80 /* UserDetails.storyboard */,
+				1CD380B128A6033C00B2AC80 /* UserDetailsTableViewHeaderView.swift */,
+				1CD380AF28A602FF00B2AC80 /* UserDetailsTableViewHeaderView.xib */,
+				1CD380B528A62CC600B2AC80 /* UserDetailsTableViewCell.swift */,
+				1CD380B328A62CB000B2AC80 /* UserDetailsTableViewCell.xib */,
+			);
+			path = UserDetails;
+			sourceTree = "<group>";
+		};
+		1C07C81228F6ADC9003CB630 /* MenuList */ = {
+			isa = PBXGroup;
+			children = (
+				1CACC76E28DC72BC00A1F052 /* MenuListTableViewCell.swift */,
+				1CACC76F28DC72BC00A1F052 /* MenuListTableViewCell.xib */,
+				1CACC76828DC2F0C00A1F052 /* MenuListViewController.swift */,
+				1CACC76628DC2ADE00A1F052 /* MenuList.storyboard */,
+			);
+			path = MenuList;
+			sourceTree = "<group>";
+		};
+		1C07C81328F6ADE7003CB630 /* CreateChallenge */ = {
+			isa = PBXGroup;
+			children = (
+				1CA2DD2128B5E5CE00F401CC /* CreateChallengeViewController.swift */,
+				1CA2DD1F28B5E5B300F401CC /* CreateChallenge.storyboard */,
+			);
+			path = CreateChallenge;
+			sourceTree = "<group>";
+		};
+		1C07C81428F6AF53003CB630 /* SaveMoneyReportList */ = {
+			isa = PBXGroup;
+			children = (
+				1C6DF4A928BCE9D4002F52D0 /* SaveMoneyReportListTableViewCell.swift */,
+				1C6DF4A728BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib */,
+				1C6DF4A528BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift */,
+				1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */,
+			);
+			path = SaveMoneyReportList;
+			sourceTree = "<group>";
+		};
+		1C07C81528F6AF7D003CB630 /* CreateSaveMoenyReport */ = {
+			isa = PBXGroup;
+			children = (
+				1CEB237528BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift */,
+				1CEB237328BE030000D3FE15 /* CreateSaveMoenyReport.storyboard */,
+			);
+			path = CreateSaveMoenyReport;
+			sourceTree = "<group>";
+		};
+		1C07C81628F6AFEA003CB630 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1CD380ED28B06E2300B2AC80 /* UIColor+.swift */,
+				1CEB237928BE5E1100D3FE15 /* UIButton+.swift */,
+				1CEB237D28C0A1E600D3FE15 /* UITextField+.swift */,
+			);
+			name = Extension;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		1C07C81728F6B01B003CB630 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1CD3807F28A4F0C100B2AC80 /* User.swift */,
+				1CA2DD2328B8A0E900F401CC /* Challenge.swift */,
+				1CEB237B28BF45F500D3FE15 /* SaveMoneyReport.swift */,
+				1CD380B728A63C7000B2AC80 /* Option.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1C07C81828F6B254003CB630 /* ValueManager */ = {
+			isa = PBXGroup;
+			children = (
+				1CEB238128C1F11E00D3FE15 /* AlertValueManager.swift */,
+				1CEB238328C5A94100D3FE15 /* FirebaseValueManager.swift */,
+			);
+			path = ValueManager;
+			sourceTree = "<group>";
+		};
 		1CB7A3F228A36021008E1262 = {
 			isa = PBXGroup;
 			children = (
@@ -141,45 +264,20 @@
 			children = (
 				1CB7A3FE28A36021008E1262 /* AppDelegate.swift */,
 				1CB7A40028A36021008E1262 /* SceneDelegate.swift */,
-				1CD3807F28A4F0C100B2AC80 /* User.swift */,
-				1CD380B728A63C7000B2AC80 /* Option.swift */,
-				1CD380ED28B06E2300B2AC80 /* UIColor+.swift */,
-				1CEB237928BE5E1100D3FE15 /* UIButton+.swift */,
-				1CEB237D28C0A1E600D3FE15 /* UITextField+.swift */,
-				1CA2DD2328B8A0E900F401CC /* Challenge.swift */,
-				1CEB237B28BF45F500D3FE15 /* SaveMoneyReport.swift */,
-				1CEB238128C1F11E00D3FE15 /* AlertManager.swift */,
-				1CEB238328C5A94100D3FE15 /* FirebaseValueManager.swift */,
 				1CB7A40228A36021008E1262 /* ViewController.swift */,
 				1CB7A40428A36021008E1262 /* Main.storyboard */,
-				1CEB237528BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift */,
-				1CEB237328BE030000D3FE15 /* CreateSaveMoenyReport.storyboard */,
-				1C6DF4A928BCE9D4002F52D0 /* SaveMoneyReportListTableViewCell.swift */,
-				1C6DF4A728BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib */,
-				1C6DF4A528BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift */,
-				1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */,
-				1CA2DD2128B5E5CE00F401CC /* CreateChallengeViewController.swift */,
-				1CA2DD1F28B5E5B300F401CC /* CreateChallenge.storyboard */,
-				1CACC76E28DC72BC00A1F052 /* MenuListTableViewCell.swift */,
-				1CACC76F28DC72BC00A1F052 /* MenuListTableViewCell.xib */,
-				1CACC76828DC2F0C00A1F052 /* MenuListViewController.swift */,
-				1CACC76628DC2ADE00A1F052 /* MenuList.storyboard */,
-				1CACC76428D9AABB00A1F052 /* ResetPasswordViewController.swift */,
-				1CACC76228D9683000A1F052 /* ResetPassword.storyboard */,
-				1CD380F128B3440600B2AC80 /* SignInViewController.swift */,
-				1CD380EF28B343E400B2AC80 /* SignIn.storyboard */,
-				1CB7A41928A3A79E008E1262 /* SignUpViewController.swift */,
-				1CB7A41428A3643B008E1262 /* SignUp.storyboard */,
-				1CD380C328A8F53A00B2AC80 /* HomeViewController.swift */,
-				1CD380C128A8F51B00B2AC80 /* Home.storyboard */,
-				1CD380EB28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift */,
-				1CD380E928AC8AD200B2AC80 /* ChallengeCollectionViewCell.xib */,
-				1CD380AD28A5FC5D00B2AC80 /* UserDetailsViewController.swift */,
-				1CD380AB28A5FB9A00B2AC80 /* UserDetails.storyboard */,
-				1CD380B128A6033C00B2AC80 /* UserDetailsTableViewHeaderView.swift */,
-				1CD380AF28A602FF00B2AC80 /* UserDetailsTableViewHeaderView.xib */,
-				1CD380B528A62CC600B2AC80 /* UserDetailsTableViewCell.swift */,
-				1CD380B328A62CB000B2AC80 /* UserDetailsTableViewCell.xib */,
+				1C07C81828F6B254003CB630 /* ValueManager */,
+				1C07C81628F6AFEA003CB630 /* Extension */,
+				1C07C81728F6B01B003CB630 /* Model */,
+				1C07C81528F6AF7D003CB630 /* CreateSaveMoenyReport */,
+				1C07C81428F6AF53003CB630 /* SaveMoneyReportList */,
+				1C07C81328F6ADE7003CB630 /* CreateChallenge */,
+				1C07C81228F6ADC9003CB630 /* MenuList */,
+				1C07C81128F6AD95003CB630 /* UserDetails */,
+				1C07C81028F6AD2D003CB630 /* ResetPassWord */,
+				1C07C80F28F6AD23003CB630 /* SignIn */,
+				1C07C80E28F6AD1B003CB630 /* SignUp */,
+				1C07C80C28F6ACA8003CB630 /* Home */,
 				1CB7A40728A36026008E1262 /* Assets.xcassets */,
 				1CB7A40928A36026008E1262 /* LaunchScreen.storyboard */,
 				1CB7A40C28A36026008E1262 /* Info.plist */,
@@ -360,7 +458,7 @@
 				1CD380B628A62CC700B2AC80 /* UserDetailsTableViewCell.swift in Sources */,
 				1CD380B228A6033C00B2AC80 /* UserDetailsTableViewHeaderView.swift in Sources */,
 				1CA2DD2428B8A0EA00F401CC /* Challenge.swift in Sources */,
-				1CEB238228C1F11E00D3FE15 /* AlertManager.swift in Sources */,
+				1CEB238228C1F11E00D3FE15 /* AlertValueManager.swift in Sources */,
 				1CEB237A28BE5E1100D3FE15 /* UIButton+.swift in Sources */,
 				1CEB237628BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift in Sources */,
 				1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */,

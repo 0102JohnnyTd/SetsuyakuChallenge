@@ -16,6 +16,7 @@ final class HomeViewController: UIViewController {
 
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
 
+    // セグメントを切り替えたタイミングでcollectionViewを更新する
     @IBAction private func segment(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
             showCreateChallengeVCButton.isHidden = false
@@ -26,12 +27,16 @@ final class HomeViewController: UIViewController {
         }
     }
 
-    @IBAction private func didTapShowCreateVCButton(_ sender: Any) {
+    @IBAction private func didTapShowCreateChallengeVCButton(_ sender: Any) {
         showCreateChallengeVC()
     }
 
+    // 現在取り組んでいるチャレンジを格納する配列
     private var challenges: [Challenge] = []
+    // 目標を達成したチャレンジを格納する配列
     private var completedChallenges: [Challenge] = []
+    // CollectionViewに表示させるデータを格納する配列
+       //Segmentが0(チャレンジ中)なら配列challengesを返す 1(達成済み)ならcompletedChallengesを返す
     private var filteredChallenges: [Challenge] {
         if segmentedControl.selectedSegmentIndex == 0 {
             return challenges
@@ -53,6 +58,7 @@ final class HomeViewController: UIViewController {
         fetchChallengeData()
     }
 
+    // ログアウト状態の場合、SignUpViewControllerを表示するメソッドを実行する
     private func checkIsLogin() {
         if Auth.auth().currentUser == nil {
             showSignUpVC()
@@ -62,6 +68,7 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    // 合計節約金額が目標金額以上に到達した場合、チャレンジ達成のアラートを表示させ、アラートのボタンをタップすると
     private func compareValue() {
         challenges.enumerated().forEach {
             if $0.element.totalSavingAmount >= $0.element.goalAmount {
@@ -75,6 +82,7 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    // Firestoreに保存されたチャレンジデータを取得
     private func fetchChallengeData() {
         challenges.removeAll()
         completedChallenges.removeAll()
@@ -111,6 +119,7 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    // FireStoreに保存された値を更新
     private func updateDataForFireStore(challenge: Challenge) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let challengeID = challenge.docID else { return }
@@ -125,10 +134,12 @@ final class HomeViewController: UIViewController {
         }
     }
 
+    // SaveMoneyReportListViewControllerのchallengeプロパティにCollectionViewに表示しているデータを渡す
     private func passDataToSaveMoneyReportListVC(saveMoneyReportListVC: SaveMoneyReportListViewController, row: Int) {
         saveMoneyReportListVC.challenge = filteredChallenges[row]
     }
 
+    // CreateChallengeViewControllerに遷移 ただし、challengesの要素が2つ以上あるとアラートを表示
     private func showCreateChallengeVC() {
         guard challenges.count < 2 else {
             showChallengesCountOverAlert()
@@ -138,6 +149,7 @@ final class HomeViewController: UIViewController {
         navigationController?.pushViewController(createChallengeVC, animated: true)
     }
 
+    // SignUpViewControllerに遷移
     private func showSignUpVC() {
         let navController = UIStoryboard(name: SignUpViewController.storyboardName, bundle: nil).instantiateInitialViewController() as! UINavigationController
         navController.modalPresentationStyle = .fullScreen
@@ -148,6 +160,7 @@ final class HomeViewController: UIViewController {
         present(navController, animated: true)
     }
 
+    // SaveMoneyReportListViewControllerに遷移
     private func showSaveMoneyReportListVC(row: Int) {
         let navController = UIStoryboard(name: SaveMoneyReportListViewController.storyboardName, bundle: nil).instantiateInitialViewController() as! UINavigationController
         let saveMoneyReportListVC = navController.topViewController as! SaveMoneyReportListViewController
@@ -155,16 +168,19 @@ final class HomeViewController: UIViewController {
         navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
     }
 
+    // challengesの個数オーバーを伝えるアラートを表示
     private func showChallengesCountOverAlert() {
         let alertController = generateChallengesCountOverAlert()
         present(alertController, animated: true)
     }
 
+    // チャレンジ達成を伝えるアラートを表示
     private func showTargetAchievementAlert(completedChallenge: Challenge, name: String) {
         let alertController = generateTargetAchievementAlert(completedChallenge: completedChallenge, name: name)
         present(alertController, animated: true)
     }
 
+    // チャレンジ達成を伝えるアラートを生成
     private func generateTargetAchievementAlert(completedChallenge: Challenge, name: String) -> UIAlertController {
         let alertController = UIAlertController(title: AlertTitle.targetaAchievement, message: "目標『\(name)』" + AlertMessage.targetaAchievement, preferredStyle: .alert)
 
@@ -176,12 +192,14 @@ final class HomeViewController: UIViewController {
         return alertController
     }
 
+    // challengesの個数オーバーを伝えるアラートを生成
     private func generateChallengesCountOverAlert() -> UIAlertController {
         let alertController = UIAlertController(title: AlertTitle.countOverError, message: AlertMessage.countOverError, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
         return alertController
     }
 
+    // CollectionViewにCellを表示させるための処理
     private func setUpCollectionView() {
         challengeCollectionView.delegate = self
         challengeCollectionView.dataSource = self
@@ -189,12 +207,14 @@ final class HomeViewController: UIViewController {
         setUpCellLayout()
     }
 
+    // SegmentedControlのアピアランスを調整
     private func setUpSegmentedControl() {
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         segmentedControl.selectedSegmentTintColor = .mainColor()
         segmentedControl.backgroundColor = .systemGray4
     }
 
+    // 画面右下のボタンのアピアランスを調整
     private func setUpShowCreateChallengeButton() {
         let width = UIScreen.main.bounds.width / 5
         setUpButtonSize(width: width)
@@ -212,6 +232,7 @@ final class HomeViewController: UIViewController {
         showCreateChallengeVCButton.layer.cornerRadius = width / 2
     }
 
+    // CollectionViewCellのアピアランスを調整
     private func setUpCellLayout() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 30
@@ -244,7 +265,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
+// dismissが実行された時に実行される処理
 extension HomeViewController: UIAdaptivePresentationControllerDelegate {
+    // サインイン完了時に以前サインインしていたアカウントの情報が残っていた場合は削除する
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         challenges.removeAll()
         completedChallenges.removeAll()

@@ -1,5 +1,5 @@
 //
-//  AlertManager.swift
+//  AlertValueManager.swift
 //  SetsuyakuChallenge
 //
 //  Created by Johnny Toda on 2022/09/02.

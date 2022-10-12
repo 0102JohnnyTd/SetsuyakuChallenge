@@ -22,8 +22,6 @@
 		1CACC77128DC72BC00A1F052 /* MenuListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CACC76F28DC72BC00A1F052 /* MenuListTableViewCell.xib */; };
 		1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A3FE28A36021008E1262 /* AppDelegate.swift */; };
 		1CB7A40128A36021008E1262 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A40028A36021008E1262 /* SceneDelegate.swift */; };
-		1CB7A40328A36021008E1262 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A40228A36021008E1262 /* ViewController.swift */; };
-		1CB7A40628A36021008E1262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7A40428A36021008E1262 /* Main.storyboard */; };
 		1CB7A40828A36026008E1262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7A40728A36026008E1262 /* Assets.xcassets */; };
 		1CB7A40B28A36026008E1262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7A40928A36026008E1262 /* LaunchScreen.storyboard */; };
 		1CB7A41528A3643B008E1262 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7A41428A3643B008E1262 /* SignUp.storyboard */; };
@@ -71,8 +69,6 @@
 		1CB7A3FB28A36021008E1262 /* SetsuyakuChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetsuyakuChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CB7A3FE28A36021008E1262 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CB7A40028A36021008E1262 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1CB7A40228A36021008E1262 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1CB7A40528A36021008E1262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1CB7A40728A36026008E1262 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1CB7A40A28A36026008E1262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1CB7A40C28A36026008E1262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -264,8 +260,6 @@
 			children = (
 				1CB7A3FE28A36021008E1262 /* AppDelegate.swift */,
 				1CB7A40028A36021008E1262 /* SceneDelegate.swift */,
-				1CB7A40228A36021008E1262 /* ViewController.swift */,
-				1CB7A40428A36021008E1262 /* Main.storyboard */,
 				1C07C81828F6B254003CB630 /* ValueManager */,
 				1C07C81628F6AFEA003CB630 /* Extension */,
 				1C07C81728F6B01B003CB630 /* Model */,
@@ -375,7 +369,6 @@
 				1CD380B028A602FF00B2AC80 /* UserDetailsTableViewHeaderView.xib in Resources */,
 				1C6DF4A828BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib in Resources */,
 				1CD380F028B343E500B2AC80 /* SignIn.storyboard in Resources */,
-				1CB7A40628A36021008E1262 /* Main.storyboard in Resources */,
 				1CACC77128DC72BC00A1F052 /* MenuListTableViewCell.xib in Resources */,
 				1CD380B428A62CB000B2AC80 /* UserDetailsTableViewCell.xib in Resources */,
 				1CEB237428BE030000D3FE15 /* CreateSaveMoenyReport.storyboard in Resources */,
@@ -452,7 +445,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C6DF4A628BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift in Sources */,
-				1CB7A40328A36021008E1262 /* ViewController.swift in Sources */,
 				1CD380EC28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift in Sources */,
 				1CACC76528D9AABB00A1F052 /* ResetPasswordViewController.swift in Sources */,
 				1CD380B628A62CC700B2AC80 /* UserDetailsTableViewCell.swift in Sources */,
@@ -483,14 +475,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1CB7A40428A36021008E1262 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1CB7A40528A36021008E1262 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1CB7A40928A36026008E1262 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

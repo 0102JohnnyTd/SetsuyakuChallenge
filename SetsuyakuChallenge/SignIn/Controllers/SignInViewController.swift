@@ -16,6 +16,7 @@ final class SignInViewController: UIViewController {
         login()
     }
 
+    // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [emailTextField, passwordTextField] }
 
     override func viewDidLoad() {
@@ -24,6 +25,7 @@ final class SignInViewController: UIViewController {
         setUpButton()
     }
 
+    // ログインを実行
     private func login() {
         let email = emailTextField.text!
         let password = passwordTextField.text!
@@ -38,9 +40,11 @@ final class SignInViewController: UIViewController {
         }
     }
 
+    // ログイン失敗をユーザーに伝えるアラートを表示
     private func showLoginErrorAlert(err: NSError) {
         if let errCode = AuthErrorCode(rawValue: err.code) {
             var message: String
+            // ケースに応じてエラーメッセージを切り替える
             switch errCode {
             case .userNotFound:  message = AlertMessage.userNotFound
             case .wrongPassword: message = AlertMessage.wrongPassword
@@ -52,6 +56,7 @@ final class SignInViewController: UIViewController {
         }
     }
 
+    // ログイン失敗をユーザーに伝えるアラートを生成
     private func generateLoginErrorAlert(title: String, message: String?) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
@@ -63,11 +68,13 @@ final class SignInViewController: UIViewController {
         textFields.forEach { $0.delegate = self }
     }
 
+    // ボタンに丸みを加えアプリのテーマカラーを設定する
     private func setUpButton() {
         signInButton.mainButton()
     }
 }
 
+// SignInViewController上の全てのtextFieldに値が存在する場合のみ、アカウント作成を実行するボタンをタップできる
 extension SignInViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }

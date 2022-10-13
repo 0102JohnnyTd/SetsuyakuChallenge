@@ -23,7 +23,7 @@ final class SignUpViewController: UIViewController {
     static let storyboardName = "SignUp"
     static let identifier = "SignUp"
 
-    // 処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
+    // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [emailTextField, passwordTextField, userNameTextField] }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -83,8 +83,9 @@ final class SignUpViewController: UIViewController {
         }
     }
 
-    // アカウント登録に失敗した場合に表示するエラーを複数パターン用意
+    // アカウント登録失敗をユーザーに伝えるアラートを表示
     private func showSignUpErrorAlert(err: NSError) {
+        // ケースに応じてエラーメッセージを切り替える
         if let errCode = AuthErrorCode(rawValue: err.code) {
             var message: String
             switch errCode {
@@ -98,7 +99,7 @@ final class SignUpViewController: UIViewController {
         }
     }
 
-
+    // アカウント登録失敗をユーザーに伝えるアラートを生成
     private func generateSignUpErrorAlert(title: String, message: String?) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
@@ -113,7 +114,7 @@ final class SignUpViewController: UIViewController {
         signUpButton.mainButton()
     }
 }
-// SignUpViewController上の全てのtextFieldに値が存在する場合飲み、アカウント作成を実行するボタンをタップできる
+// SignUpViewController上の全てのtextFieldに値が存在する場合のみ、アカウント作成を実行するボタンをタップできる
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }

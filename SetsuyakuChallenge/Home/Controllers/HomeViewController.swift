@@ -36,7 +36,7 @@ final class HomeViewController: UIViewController {
     // 目標を達成したチャレンジを格納する配列
     private var completedChallenges: [Challenge] = []
     // CollectionViewに表示させるデータを格納する配列
-       //Segmentが0(チャレンジ中)なら配列challengesを返す 1(達成済み)ならcompletedChallengesを返す
+       // Segmentが0(チャレンジ中)なら配列challengesを返す 1(達成済み)ならcompletedChallengesを返す
     private var filteredChallenges: [Challenge] {
         if segmentedControl.selectedSegmentIndex == 0 {
             return challenges

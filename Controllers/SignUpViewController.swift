@@ -110,6 +110,8 @@ final class SignUpViewController: UIViewController {
     private func setUpTextFileds() {
         textFields.forEach { $0.delegate = self }
     }
+
+    // ボタンに丸みを加えアプリのテーマカラーを設定する
     private func setUpButton() {
         signUpButton.mainButton()
     }

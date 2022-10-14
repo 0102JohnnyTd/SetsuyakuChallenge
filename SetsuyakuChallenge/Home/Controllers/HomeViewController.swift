@@ -24,6 +24,7 @@ final class HomeViewController: UIViewController {
             challengeCollectionView.reloadData()
         }
     }
+    
     @IBAction private func didTapShowCreateChallengeVCButton(_ sender: Any) {
         showCreateChallengeVC()
     }

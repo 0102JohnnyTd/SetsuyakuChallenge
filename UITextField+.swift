@@ -8,6 +8,7 @@
 import UIKit
 
 extension UITextField {
+    // textFieldへの入力値をInt型に変換
     var textToInt: Int? {
         text.flatMap { Int($0) }
     }

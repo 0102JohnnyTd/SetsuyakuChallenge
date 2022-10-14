@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIButton {
+    // ボタンに丸みを加え、アプリのテーマカラーを設定
     func mainButton() {
         self.backgroundColor = .mainColor()
         self.layer.cornerRadius = 5

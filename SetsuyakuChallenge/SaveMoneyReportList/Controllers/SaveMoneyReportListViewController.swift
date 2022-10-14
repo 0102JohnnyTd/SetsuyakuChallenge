@@ -20,7 +20,6 @@ final class SaveMoneyReportListViewController: UIViewController {
 
     // Firestoreから取得した値を保存するプロパティ
     var challenge: Challenge?
-//    private var challenges: [Challenge] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +42,10 @@ final class SaveMoneyReportListViewController: UIViewController {
 
     // Firestoreに保存されているChallengeのreportデータを取得
     private func fetchChallengeData() {
-//        challenges.removeAll()
-
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let challengeDocID = challenge?.docID else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
 
-//        print("challengesをremoveAllした： \(self.challenges)")
         challengeRef.getDocument { snapshot, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -59,7 +55,6 @@ final class SaveMoneyReportListViewController: UIViewController {
                 let challenge = try snapshot?.data(as: Challenge.self)
                 if let challenge = challenge {
                     self.challenge?.reports = challenge.reports
-//                    self.challenges.append(challenge)
                     self.saveMoneyReportListTableView.reloadData()
                 }
             } catch {

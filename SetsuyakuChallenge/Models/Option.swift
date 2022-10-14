@@ -7,8 +7,11 @@
 
 import Foundation
 
+// ユーザーの詳細画面でセルに表示するオプションのモデル
 struct Option {
+    // メニュー名
     var item: String
+    // 文字のカラー
     var textColorType: TextColorType
 }
 

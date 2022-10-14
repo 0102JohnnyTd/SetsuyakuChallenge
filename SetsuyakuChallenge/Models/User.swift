@@ -6,16 +6,11 @@
 //
 
 import Foundation
-import FirebaseFirestore
 
+// ユーザーのモデル
 struct User: Codable {
+    // メールアドレス
     let email: String
-    let createdAt: Timestamp
+    // ユーザー名
     let name: String
-
-//    init(dic: [String: Any]) {
-//        self.email = dic[UsersDocDataKey.email] as! String
-//        self.name = dic[UsersDocDataKey.name] as! String
-//        self.createdAt = dic[UsersDocDataKey.createdAt] as! Timestamp
-//    }
 }

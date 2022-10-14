@@ -33,7 +33,7 @@ final class ResetPasswordViewController: UIViewController {
         }
     }
 
-    //  パスワードリセットを案内するメール送信完了をユーザーに伝えるアラートを表示
+    // パスワードリセットを案内するメール送信完了をユーザーに伝えるアラートを表示
     private func showEmailSendCompleteAlert(email: String) {
         let alertController = generateEmailSendCompleteAlert(email: email)
         present(alertController, animated: true)

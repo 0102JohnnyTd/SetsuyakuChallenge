@@ -28,7 +28,7 @@ final class SaveMoneyReportListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchChallengeData()
+        fetchReportsData()
     }
 
     // CreateSaveMoneyReportViewControllerに遷移時、challengeプロパティの値を渡す
@@ -41,7 +41,7 @@ final class SaveMoneyReportListViewController: UIViewController {
     }
 
     // Firestoreに保存されているChallengeのreportデータを取得
-    private func fetchChallengeData() {
+    private func fetchReportsData() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let challengeDocID = challenge?.docID else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)

@@ -11,6 +11,7 @@ import FirebaseAuth
 final class ResetPasswordViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var sendEmailButton: UIButton!
+    
     @IBAction private func didTapButton(_ sender: Any) {
         sendResetPasswordEmail()
     }

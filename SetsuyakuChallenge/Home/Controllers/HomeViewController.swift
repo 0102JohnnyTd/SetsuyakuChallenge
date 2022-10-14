@@ -11,9 +11,7 @@ import FirebaseFirestore
 
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var challengeCollectionView: UICollectionView!
-
     @IBOutlet private weak var showCreateChallengeVCButton: UIButton!
-
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
 
     // セグメントを切り替えたタイミングでcollectionViewを更新する
@@ -26,7 +24,6 @@ final class HomeViewController: UIViewController {
             challengeCollectionView.reloadData()
         }
     }
-
     @IBAction private func didTapShowCreateChallengeVCButton(_ sender: Any) {
         showCreateChallengeVC()
     }

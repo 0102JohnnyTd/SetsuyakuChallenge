@@ -12,6 +12,7 @@ final class SignInViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var signInButton: UIButton!
+    
     @IBAction private func didTapSignInButton(_ sender: Any) {
         login()
     }

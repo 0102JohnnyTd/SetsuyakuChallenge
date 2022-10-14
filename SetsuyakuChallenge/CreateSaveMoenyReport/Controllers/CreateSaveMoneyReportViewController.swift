@@ -12,13 +12,10 @@ import FirebaseFirestoreSwift
 
 final class CreateSaveMoneyReportViewController: UIViewController {
     @IBOutlet private weak var priceSwicth: UISwitch!
-
     @IBOutlet private weak var priceTextField: UITextField!
-
     @IBOutlet private weak var memoTextView: UITextView!
-
     @IBOutlet private weak var createReportButton: UIButton!
-
+    
     @IBAction private func didTapButton(_ sender: Any) {
         saveReportData()
         navigationController?.popViewController(animated: true)

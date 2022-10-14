@@ -11,6 +11,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class CreateSaveMoneyReportViewController: UIViewController {
+    // ⛏priceではなく、amountで統一したほうが良いかも。
     @IBOutlet private weak var priceSwicth: UISwitch!
     @IBOutlet private weak var priceTextField: UITextField!
     @IBOutlet private weak var memoTextView: UITextView!
@@ -21,6 +22,7 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    // SaveMoneyReportListで取得したchallengeデータを受け取るためのプロパティ
     var challenge: Challenge?
 
     override func viewDidLoad() {
@@ -30,6 +32,7 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         setUpTextFiled()
     }
 
+    // 作成した節約メモをFireStoreに保存
     private func saveReportData() {
         let inputPrice = priceTextField.textToInt
         let memo = memoTextView.text ?? ""
@@ -37,6 +40,8 @@ final class CreateSaveMoneyReportViewController: UIViewController {
             showAlert()
             return
         }
+
+        // switchがオンの場合は+符号の値を返し、オフの場合は-符号の値を返す
         let signPrice = priceSwicth.isOn ? price : -price
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -44,6 +49,7 @@ final class CreateSaveMoneyReportViewController: UIViewController {
 
         let saveMoneyReport = SaveMoneyReport(savingAmount: signPrice, memo: memo)
 
+        // Firestore上のchallengeのフィールドである配列reportsにメモを要素として追加
         challenge?.reports.append(saveMoneyReport)
 
         let challegenRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
@@ -54,10 +60,13 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         }
     }
 
+    // ユーザーが金額を入力する箇所に数値型以外の値を入力した場合にエラーを伝えるアラートを表示
     private func showAlert() {
         let alertController = generateInputErrorAlert()
         present(alertController, animated: true)
     }
+
+    // ユーザーが金額を入力する箇所に数値型以外の値を入力した場合にエラーを伝えるアラートを生成
     private func generateInputErrorAlert() -> UIAlertController {
         let alertController =  UIAlertController(title: AlertTitle.inputError, message: AlertMessage.inputError, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
@@ -65,6 +74,7 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         return alertController
     }
 
+    // ボタンに丸みを加えアプリのテーマカラーを設定
     private func setUpButton() {
         createReportButton.mainButton()
     }
@@ -72,14 +82,19 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         priceTextField.delegate = self
         setUpNumberPad()
     }
+
+    // priceTextFieldのキーボードタイプを数値入力型に変換
     private func setUpNumberPad() {
         priceTextField.keyboardType = .numberPad
     }
+
+    // TextViewに丸みを加える
     private func setUpTextView() {
         memoTextView.layer.cornerRadius = 5
     }
 }
 
+// priceTextFieldに値が入力されている時のみ、レポート作成ボタンをタップすることができる
 extension CreateSaveMoneyReportViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if priceTextField.text?.isEmpty ?? true {

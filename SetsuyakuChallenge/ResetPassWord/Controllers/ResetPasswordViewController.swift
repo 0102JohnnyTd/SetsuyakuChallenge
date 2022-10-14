@@ -55,7 +55,7 @@ final class ResetPasswordViewController: UIViewController {
         emailTextField.delegate = self
     }
 
-    // ボタンに丸みを加えアプリのテーマカラーを設定する
+    // ボタンに丸みを加えアプリのテーマカラーを設定
     private func setUpButton() {
         sendEmailButton.mainButton()
     }

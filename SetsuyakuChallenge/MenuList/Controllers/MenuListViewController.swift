@@ -8,22 +8,27 @@
 import UIKit
 import SafariServices
 
+// セクションを列挙したenum
 private enum Section: Int, CaseIterable {
     case supportSection
     case generalSection
 }
 
+//　SupportSectionに表示するCellを列挙したenum
 private enum SupportSectionCell: Int, CaseIterable {
     case formCell
 }
 
+//　GeneralSectionに表示するCellを列挙したenum
 private enum GeneralSectionCell: Int, CaseIterable {
     case termsOfServiceCell
     case privacyPolicyCell
     case appVersionCell
 }
 
+// URLを管理するenum
 private enum URLManager {
+    // ❓サーバーの不具合が起きた時、強制アンラップをしているが故にクラッシュなどが起きないかテストする必要あり
     static let form = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSflWh3XRQS74ocT8WfpWCAMq1vlU35ZsPhdCLTmupQ5GyjAdA/viewform")!
     static let termsOfService = URL(string: "https://sites.google.com/view/uita-termsofservice/%E3%83%9B%E3%83%BC%E3%83%A0")!
     static let privacyPolicy = URL(string: "https://sites.google.com/view/uita-privacypolicy/%E3%83%9B%E3%83%BC%E3%83%A0")!
@@ -32,41 +37,45 @@ private enum URLManager {
 final class MenuListViewController: UIViewController {
     @IBOutlet private weak var menuListTableView: UITableView!
 
-    private let sampleArray = ["A", "B", "C"]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
     }
 
+    // SafariViewControllerを表示
     private func showSafariVC(url: URL) {
         let safariVC = generateSafariVC(url: url)
         present(safariVC, animated: true)
     }
 
+    // SafariViewControllerを生成
     private func generateSafariVC(url: URL) -> SFSafariViewController {
         let safariVC = SFSafariViewController(url: url)
         return safariVC
     }
 
+    // セクションを生成
     private func generateHeaderView() -> UIView {
         let headerView = UIView()
         headerView.backgroundColor = .mainColor()
         return headerView
     }
 
+    // セクションのTitleを表示するUILabelを生成
     private func generateTitleLabel() -> UILabel {
         let titleLabel = UILabel()
         titleLabel.textColor = .white
         return titleLabel
     }
 
+    // TableViewにセクション、セルを表示するための処理
     private func setUpTableView() {
         menuListTableView.delegate = self
         menuListTableView.dataSource = self
         menuListTableView.register(MenuListTableViewCell.nib, forCellReuseIdentifier: MenuListTableViewCell.identifier)
     }
 
+    // セクションのアピアランスを設定
     private func setUpSection(section: Int) -> UIView {
         let headerView = generateHeaderView()
         let titleLabel = generateTitleLabel()
@@ -75,6 +84,7 @@ final class MenuListViewController: UIViewController {
         return headerView
     }
 
+    // セクションのTitleに制約を追加
     private func setUpTitleLabelConstraint(title: UILabel, headerView: UIView) {
         headerView.addSubview(title)
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -84,6 +94,7 @@ final class MenuListViewController: UIViewController {
 }
 
 extension MenuListViewController: UITableViewDelegate, UITableViewDataSource {
+    // enum Sectionのcaseの数だけセクションを生成する
     func numberOfSections(in tableView: UITableView) -> Int {
         Section.allCases.count
     }
@@ -93,6 +104,7 @@ extension MenuListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // セクションごとに表示するCellの数を切り分ける
         let sectionType = Section(rawValue: section)
 
         switch sectionType {
@@ -105,6 +117,7 @@ extension MenuListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = menuListTableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier, for: indexPath) as! MenuListTableViewCell
 
+        // セクションごとにセルに表示するコンテンツを切り分ける
         let sectionType = Section(rawValue: indexPath.section)
         switch sectionType {
         case .supportSection:
@@ -128,6 +141,7 @@ extension MenuListViewController: UITableViewDelegate, UITableViewDataSource {
 
         let sectionType = Section(rawValue: indexPath.section)
 
+        // セクションごとに表示するセルを切り分けた上で、セルごとにタップ時に実行する処理を切り分ける
         switch sectionType {
         case .supportSection: let supportSectionCell = SupportSectionCell(rawValue: indexPath.row)
             switch supportSectionCell {

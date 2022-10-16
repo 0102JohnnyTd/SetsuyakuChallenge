@@ -11,6 +11,7 @@ import FirebaseAuth
 final class ResetPasswordViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var sendEmailButton: UIButton!
+    
     @IBAction private func didTapButton(_ sender: Any) {
         sendResetPasswordEmail()
     }
@@ -21,6 +22,7 @@ final class ResetPasswordViewController: UIViewController {
         setUpButton()
     }
 
+    // パスワードリセットを案内するメールを送信
     private func sendResetPasswordEmail() {
         guard let email = emailTextField.text else { return }
         Auth.auth().sendPasswordReset(withEmail: email) { error in
@@ -32,11 +34,13 @@ final class ResetPasswordViewController: UIViewController {
         }
     }
 
+    // パスワードリセットを案内するメール送信完了をユーザーに伝えるアラートを表示
     private func showEmailSendCompleteAlert(email: String) {
         let alertController = generateEmailSendCompleteAlert(email: email)
         present(alertController, animated: true)
     }
 
+    //  パスワードリセットを案内するメール送信完了をユーザーに伝えるアラートを生成
     private func generateEmailSendCompleteAlert(email: String) -> UIAlertController {
         let alertController = UIAlertController(title: AlertTitle.emailSendComplete, message: email + AlertMessage.emailSendComplete, preferredStyle: .alert)
 
@@ -51,11 +55,13 @@ final class ResetPasswordViewController: UIViewController {
         emailTextField.delegate = self
     }
 
+    // ボタンに丸みを加えアプリのテーマカラーを設定
     private func setUpButton() {
         sendEmailButton.mainButton()
     }
 }
 
+// SignUpViewController上の全てのtextFieldに値が存在する場合のみ、アカウント作成を実行するボタンをタップできる
 extension ResetPasswordViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let email = emailTextField.text else { return }

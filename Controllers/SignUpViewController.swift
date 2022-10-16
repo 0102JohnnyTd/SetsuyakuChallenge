@@ -19,9 +19,11 @@ final class SignUpViewController: UIViewController {
         signUp()
     }
 
+    // ハードコーディング対策
     static let storyboardName = "SignUp"
     static let identifier = "SignUp"
 
+    // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [emailTextField, passwordTextField, userNameTextField] }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +37,11 @@ final class SignUpViewController: UIViewController {
         setUpButton()
     }
 
+
+    // アカウントを登録
     private func signUp() {
+        // textFieldに値が存在することで実行できるメソッドである為、強制アンラップ
+           // それでもguard letを使うべきか悩んだが、コードを簡潔にする書き方を選択
         let email = emailTextField.text!
         let password = passwordTextField.text!
         let userName = userNameTextField.text!
@@ -51,6 +57,7 @@ final class SignUpViewController: UIViewController {
         }
     }
 
+    // Firestore上にデータの保存を行う
     private func saveData(email: String, name: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
@@ -67,6 +74,7 @@ final class SignUpViewController: UIViewController {
         }
     }
 
+    // ログイン状態の場合、SignUpViewControllerをdismissで終了する
     private func checkIsLogin() {
         if Auth.auth().currentUser != nil {
             dismiss(animated: true)
@@ -75,7 +83,9 @@ final class SignUpViewController: UIViewController {
         }
     }
 
+    // アカウント登録失敗をユーザーに伝えるアラートを表示
     private func showSignUpErrorAlert(err: NSError) {
+        // ケースに応じてエラーメッセージを切り替える
         if let errCode = AuthErrorCode(rawValue: err.code) {
             var message: String
             switch errCode {
@@ -89,6 +99,7 @@ final class SignUpViewController: UIViewController {
         }
     }
 
+    // アカウント登録失敗をユーザーに伝えるアラートを生成
     private func generateSignUpErrorAlert(title: String, message: String?) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
@@ -99,11 +110,13 @@ final class SignUpViewController: UIViewController {
     private func setUpTextFileds() {
         textFields.forEach { $0.delegate = self }
     }
+
+    // ボタンに丸みを加えアプリのテーマカラーを設定
     private func setUpButton() {
         signUpButton.mainButton()
     }
 }
-
+// SignUpViewController上の全てのtextFieldに値が存在する場合のみ、アカウント作成を実行するボタンをタップできる
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let textsIsEmpty = textFields.map { $0.text?.isEmpty ?? true }
@@ -116,6 +129,7 @@ extension SignUpViewController: UITextFieldDelegate {
     }
 }
 
+// delegateメソッドの実行を通知先(HomeViewController)に伝える
 extension SignUpViewController {
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         super.dismiss(animated: flag, completion: completion)

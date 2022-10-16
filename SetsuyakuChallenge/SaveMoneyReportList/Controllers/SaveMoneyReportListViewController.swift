@@ -12,13 +12,14 @@ import FirebaseFirestore
 final class SaveMoneyReportListViewController: UIViewController {
     @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
 
+    // ハードコーディング対策
     static let storyboardName = "SaveMoneyReportList"
     static let identifier = "SaveMoneyReportList"
 
     private let segueID = "ShowCreateReportVCSegue"
 
+    // Firestoreから取得した値を保存するプロパティ
     var challenge: Challenge?
-    private var challenges: [Challenge] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +28,11 @@ final class SaveMoneyReportListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchChallengeData()
+        fetchReportsData()
     }
 
+    // CreateSaveMoneyReportViewControllerに遷移時、challengeプロパティの値を渡す
+       // 📖reportを保存する際、challengesコレクションのどのchallengeにreportを保存するかを識別させる為
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueID {
             let createSaveMoneyReportVC = segue.destination as! CreateSaveMoneyReportViewController
@@ -37,14 +40,12 @@ final class SaveMoneyReportListViewController: UIViewController {
         }
     }
 
-    private func fetchChallengeData() {
-        challenges.removeAll()
-
+    // Firestoreに保存されているChallengeのreportデータを取得
+    private func fetchReportsData() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let challengeDocID = challenge?.docID else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
 
-        print("challengesをremoveAllした： \(self.challenges)")
         challengeRef.getDocument { snapshot, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -54,7 +55,6 @@ final class SaveMoneyReportListViewController: UIViewController {
                 let challenge = try snapshot?.data(as: Challenge.self)
                 if let challenge = challenge {
                     self.challenge?.reports = challenge.reports
-                    self.challenges.append(challenge)
                     self.saveMoneyReportListTableView.reloadData()
                 }
             } catch {
@@ -63,12 +63,13 @@ final class SaveMoneyReportListViewController: UIViewController {
         }
     }
 
+    // TableViewにセルを表示する為の処理
     private func setUpTableView() {
         saveMoneyReportListTableView.delegate = self
         saveMoneyReportListTableView.dataSource = self
         registerTableViewCell()
     }
-
+    // XIBファイルのセルをViewControllerに登録
     private func registerTableViewCell() {
         saveMoneyReportListTableView.register(SaveMoneyReportListTableViewCell.nib, forCellReuseIdentifier: SaveMoneyReportListTableViewCell.identifier)
     }

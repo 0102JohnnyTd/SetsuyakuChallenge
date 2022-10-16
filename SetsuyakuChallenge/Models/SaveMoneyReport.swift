@@ -7,7 +7,10 @@
 
 import Foundation
 
+// 節約メモのモデル
 struct SaveMoneyReport: Codable {
+    // 節約できた金額
     var savingAmount: Int
+    // 節約の詳細メモ
     var memo: String
 }

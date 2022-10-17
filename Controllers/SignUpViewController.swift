@@ -61,7 +61,7 @@ final class SignUpViewController: UIViewController {
     private func saveData(email: String, name: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        let user = User(email: email, createdAt: Timestamp(), name: name)
+        let user = User(email: email, name: name)
 
         let userRef = Firestore.firestore().collection(CollectionName.users).document(uid)
 

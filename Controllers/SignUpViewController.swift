@@ -46,14 +46,14 @@ final class SignUpViewController: UIViewController {
         let password = passwordTextField.text!
         let userName = userNameTextField.text!
 
-        Auth.auth().createUser(withEmail: email, password: password) { [self] (res, err) in
+        Auth.auth().createUser(withEmail: email, password: password) { _, err in
             if let err = err as NSError? {
                 print("認証情報の保存に失敗しました: \(err)")
                 self.showSignUpErrorAlert(err: err)
                 return
             }
             print("認証情報の保存に成功しました")
-            saveData(email: email, name: userName)
+            self.saveData(email: email, name: userName)
         }
     }
 

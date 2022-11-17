@@ -22,6 +22,7 @@ final class CreateChallengeViewController: UIViewController {
     @IBAction private func didTapUploadImageButton(_ sender: Any) {
         showPickerController()
     }
+
     @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
         checkIsTextField()
     }
@@ -80,38 +81,43 @@ final class CreateChallengeViewController: UIViewController {
         let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
 
         saveImageData(storageRef: storageRef)
-        // 先にUIImageの保存を完了させないと画像URLが取得できない為、時間差をつけてfetchImageURLメソッドを実行
-        // ⛏escapingクロージャを使った処理なら時間差をつけなくても順を守って動いてくれそうなので要修正
+        // 先にUIImageの保存を完了させないと画像URLが取得できない為、時間差をつけてsaveChallengeDataメソッドを実行
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.fetchImageURL(storageRef: storageRef)
+            self.saveChallengeData(storageRef: storageRef)
+//            self.fetchImageURL(storageRef: storageRef)
+        }
+    }
+
+    // ユーザーが入力したチャレンジ内容をFirestoreに保存
+    private func saveChallengeData(storageRef: StorageReference) {
+        fetchImageURL(storageRef: storageRef) { imageURL in
+            let name = self.nameTextField.text!
+            let goalAmount = self.goalAmountTextField.textToInt!
+
+            let challenge = Challenge(imageURL: imageURL, name: name, goalAmount: goalAmount, reports: [], totalSavingAmount: 0, isChallenge: true)
+
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
+
+            do {
+                try challengeRef.document().setData(from: challenge)
+            } catch {
+                print("error: \(error.localizedDescription)")
+            }
         }
     }
 
     // Firebaseのstorageに保存された画像のurlを取得してsaveChallengeDataの引数に当てる
-    private func fetchImageURL(storageRef: StorageReference) {
-        storageRef.downloadURL { (url, err) in
+    private func fetchImageURL(storageRef: StorageReference, completion: @escaping (String) -> Void) {
+        storageRef.downloadURL { url, err in
             if let err = err {
                 print("Firestorageのデータの取得に失敗しました \(err)")
                 return
             }
             print("Firestorageのデータの取得に成功しました")
             guard let itemImageURL = url?.absoluteString else { return }
-            self.saveChallengeData(imageURL: itemImageURL)
-        }
-    }
-
-    // ユーザーが入力したチャレンジ内容をFirestoreに保存
-    private func saveChallengeData(imageURL: String) {
-        let name = nameTextField.text!
-        let goalAmount = goalAmountTextField.textToInt!
-
-        let challenge = Challenge(imageURL: imageURL, name: name, goalAmount: goalAmount, reports: [], totalSavingAmount: 0, isChallenge: true)
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
-        do {
-            try challengeRef.document().setData(from: challenge)
-        } catch {
-            print("error: \(error.localizedDescription)")
+            completion(itemImageURL)
+//            self.saveChallengeData(imageURL: itemImageURL)
         }
     }
 
@@ -120,11 +126,13 @@ final class CreateChallengeViewController: UIViewController {
         let image = imageView.image!
         guard let uploadImage = image.jpegData(compressionQuality: 0.3) else { return }
 
-        storageRef.putData(uploadImage, metadata: nil) { storageMetadata, err in
+
+        storageRef.putData(uploadImage, metadata: nil) { _, err in
             if let err = err {
                 print("Firestorageへの情報の保存に失敗しました \(err)")
                 return
             }
+            // この下に成功した場合の処理を書けば良い
             print("Firestorageへの情報の保存に成功しました")
         }
     }
@@ -194,7 +202,7 @@ extension CreateChallengeViewController: UITextFieldDelegate {
 
 extension CreateChallengeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     // UIImagePickerControllerのライブラリから画像を選択後、CreαteChallengeViewController上のUIImageViewに選択した画像を表示
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             self.imageView.image = image
         }

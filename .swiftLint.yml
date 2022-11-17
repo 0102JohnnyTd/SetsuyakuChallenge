@@ -17,3 +17,8 @@ disabled_rules:
   - type_name
   - large_tuple
   - file_length
+
+excluded:
+  - Pods
+  - SetsuyakuChallenge/AppDelegate.swift
+  - SetsuyakuChallenge/SceneDelegate.swift

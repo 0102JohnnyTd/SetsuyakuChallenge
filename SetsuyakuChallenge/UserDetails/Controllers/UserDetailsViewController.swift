@@ -47,9 +47,9 @@ final class UserDetailsViewController: UIViewController {
     private func getData() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        Firestore.firestore().collection(CollectionName.users).document(uid).getDocument { (snapshot, err) in
-            if let err = err {
-                print("ユーザー情報の取得に失敗しました: \(err)")
+        Firestore.firestore().collection(CollectionName.users).document(uid).getDocument { snapshot, error in
+            if let error = error {
+                print("ユーザー情報の取得に失敗しました: \(error)")
             }
             do {
                 let user = try snapshot?.data(as: User.self)
@@ -104,7 +104,7 @@ final class UserDetailsViewController: UIViewController {
 
     // アカウント削除を実行
     private func deleteAccount() {
-        Auth.auth().currentUser?.delete() { (error) in
+        Auth.auth().currentUser?.delete() { error in
             if error == nil {
                 self.navigationController?.popViewController(animated: true)
             } else {

@@ -24,6 +24,24 @@ final class FirebaseFirestoreManager {
     private var challengeData: Challenge?
     private var challengesData: [Challenge] = []
     private var completedChallengesData: [Challenge] = []
+
+    // MARK: - アカウント情報保存
+    // Firestore上にデータの保存を行う
+    func saveUserData(email: String, name: String, completion: (Result<User, Error>) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        let user = User(email: email, name: name)
+
+        let userRef = Firestore.firestore().collection(CollectionName.users).document(uid)
+
+        do {
+            try userRef.setData(from: user)
+            completion(.success(user))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
     // MARK: - チャレンジの保存
     // Firestoreへの保存処理を実行
     func executeSaveData(image: UIImage, name: String, goalAmount: Int) {

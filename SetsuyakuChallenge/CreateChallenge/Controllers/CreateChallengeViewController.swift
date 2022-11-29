@@ -6,11 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
-import FirebaseStorage
-import FirebaseFirestoreSwift
-
 
 final class CreateChallengeViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
@@ -24,12 +19,13 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
-        checkIsTextField()
+        saveData()
     }
-
     // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [nameTextField, goalAmountTextField] }
-
+    // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
+    private let firebaseFirestoreManager = FirebaseFirestoreManager()
+    
     // ハードコーディング対策
     static let storyboardName = "CreateChallenge"
     static let identifier = "CreateChallenge"
@@ -38,11 +34,12 @@ final class CreateChallengeViewController: UIViewController {
         super.viewDidLoad()
         setUpButton()
         setUpTextFiled()
+        setUpFirebaseFirestoreManager()
         indicator.isHidden = true
     }
 
     // チャレンジの作成を実行
-    private func checkIsTextField() {
+    private func saveData() {
         // goalAmountTextFieldの入力値をInt型に変換
         let inputPrice = goalAmountTextField.textToInt
 
@@ -51,15 +48,10 @@ final class CreateChallengeViewController: UIViewController {
             showAlert()
             return
         }
-        saveData()
         startIndicator()
-        // ⛏escapingクロージャを使った処理なら時間差をつけなくても順を守って動いてくれそうなので要修正
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            self.stopIndicator()
-            self.navigationController?.popViewController(animated: true)
-        }
+        firebaseFirestoreManager.executeSaveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!)
     }
-
+    
     // ユーザーが金額を入力する箇所に数値型以外の値を入力した場合にエラーを伝えるアラートを表示
     private func showAlert() {
         let alertController = generateInputErrorAlert()
@@ -71,70 +63,6 @@ final class CreateChallengeViewController: UIViewController {
         let pickerController = generatePickerController()
         setUpPickerController(pickerController: pickerController)
         present(pickerController, animated: true)
-    }
-
-
-    // Firebaseへの保存処理をまとめて実行する
-    private func saveData() {
-        // ❓本当にUUIDを生成する必要があるのか要調査
-        let fileName = NSUUID().uuidString
-        let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
-
-        saveImageData(storageRef: storageRef)
-        // 先にUIImageの保存を完了させないと画像URLが取得できない為、時間差をつけてsaveChallengeDataメソッドを実行
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.saveChallengeData(storageRef: storageRef)
-//            self.fetchImageURL(storageRef: storageRef)
-        }
-    }
-
-    // ユーザーが入力したチャレンジ内容をFirestoreに保存
-    private func saveChallengeData(storageRef: StorageReference) {
-        fetchImageURL(storageRef: storageRef) { imageURL in
-            let name = self.nameTextField.text!
-            let goalAmount = self.goalAmountTextField.textToInt!
-
-            let challenge = Challenge(imageURL: imageURL, name: name, goalAmount: goalAmount, reports: [], totalSavingAmount: 0, isChallenge: true)
-
-            guard let uid = Auth.auth().currentUser?.uid else { return }
-            let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
-
-            do {
-                try challengeRef.document().setData(from: challenge)
-            } catch {
-                print("error: \(error.localizedDescription)")
-            }
-        }
-    }
-
-    // Firebaseのstorageに保存された画像のurlを取得してsaveChallengeDataの引数に当てる
-    private func fetchImageURL(storageRef: StorageReference, completion: @escaping (String) -> Void) {
-        storageRef.downloadURL { url, err in
-            if let err = err {
-                print("Firestorageのデータの取得に失敗しました \(err)")
-                return
-            }
-            print("Firestorageのデータの取得に成功しました")
-            guard let itemImageURL = url?.absoluteString else { return }
-            completion(itemImageURL)
-//            self.saveChallengeData(imageURL: itemImageURL)
-        }
-    }
-
-    // Firebaseのstorageにユーザーが選択した画像もしくはデフォルトの画像を保存
-    private func saveImageData(storageRef: StorageReference) {
-        let image = imageView.image!
-        guard let uploadImage = image.jpegData(compressionQuality: 0.3) else { return }
-
-
-        storageRef.putData(uploadImage, metadata: nil) { _, err in
-            if let err = err {
-                print("Firestorageへの情報の保存に失敗しました \(err)")
-                return
-            }
-            // この下に成功した場合の処理を書けば良い
-            print("Firestorageへの情報の保存に成功しました")
-        }
     }
 
     // インジケーターを開始
@@ -184,6 +112,18 @@ final class CreateChallengeViewController: UIViewController {
     // goalAmountTextFieldのキーボードタイプを数値入力型に変換
     private func setUpNumberPad() {
         goalAmountTextField.keyboardType = .numberPad
+    }
+
+    private func setUpFirebaseFirestoreManager() {
+        firebaseFirestoreManager.delegate = self
+    }
+}
+
+extension CreateChallengeViewController: FirebaseFirestoreManagerDelegate {
+    func didSaveData() {
+        print(#function)
+        stopIndicator()
+        navigationController?.popViewController(animated: true)
     }
 }
 

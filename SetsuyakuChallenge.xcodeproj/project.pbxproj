@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C1C3698292F6A5B003C8095 /* FirebaseFirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1C3697292F6A5B003C8095 /* FirebaseFirestoreManager.swift */; };
 		1C6DF4A428BCE54B002F52D0 /* SaveMoneyReportList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */; };
 		1C6DF4A628BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A528BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift */; };
 		1C6DF4A828BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A728BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib */; };
@@ -42,6 +43,7 @@
 		1CD380EE28B06E2300B2AC80 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD380ED28B06E2300B2AC80 /* UIColor+.swift */; };
 		1CD380F028B343E500B2AC80 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD380EF28B343E400B2AC80 /* SignIn.storyboard */; };
 		1CD380F228B3440600B2AC80 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD380F128B3440600B2AC80 /* SignInViewController.swift */; };
+		1CD56A6F2927445D00B9548E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD56A6E2927445D00B9548E /* Calculator.swift */; };
 		1CEB237428BE030000D3FE15 /* CreateSaveMoenyReport.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CEB237328BE030000D3FE15 /* CreateSaveMoenyReport.storyboard */; };
 		1CEB237628BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237528BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift */; };
 		1CEB237A28BE5E1100D3FE15 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237928BE5E1100D3FE15 /* UIButton+.swift */; };
@@ -53,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C1C3697292F6A5B003C8095 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
 		1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaveMoneyReportList.storyboard; sourceTree = "<group>"; };
 		1C6DF4A528BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMoneyReportListViewController.swift; sourceTree = "<group>"; };
 		1C6DF4A728BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveMoneyReportListTableViewCell.xib; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 		1CD380ED28B06E2300B2AC80 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		1CD380EF28B343E400B2AC80 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		1CD380F128B3440600B2AC80 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		1CD56A6E2927445D00B9548E /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		1CEB237328BE030000D3FE15 /* CreateSaveMoenyReport.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateSaveMoenyReport.storyboard; sourceTree = "<group>"; };
 		1CEB237528BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSaveMoneyReportViewController.swift; sourceTree = "<group>"; };
 		1CEB237928BE5E1100D3FE15 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -214,6 +218,8 @@
 				1CA2DD2328B8A0E900F401CC /* Challenge.swift */,
 				1CEB237B28BF45F500D3FE15 /* SaveMoneyReport.swift */,
 				1CD380B728A63C7000B2AC80 /* Option.swift */,
+				1CD56A6E2927445D00B9548E /* Calculator.swift */,
+				1C1C3697292F6A5B003C8095 /* FirebaseFirestoreManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -631,8 +637,10 @@
 				1C6DF4A628BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift in Sources */,
 				1CD380EC28AC8B1C00B2AC80 /* ChallengeCollectionViewCell.swift in Sources */,
 				1CACC76528D9AABB00A1F052 /* ResetPasswordViewController.swift in Sources */,
+				1C1C3698292F6A5B003C8095 /* FirebaseFirestoreManager.swift in Sources */,
 				1CD380B628A62CC700B2AC80 /* UserDetailsTableViewCell.swift in Sources */,
 				1CD380B228A6033C00B2AC80 /* UserDetailsTableViewHeaderView.swift in Sources */,
+				1CD56A6F2927445D00B9548E /* Calculator.swift in Sources */,
 				1CA2DD2428B8A0EA00F401CC /* Challenge.swift in Sources */,
 				1CEB238228C1F11E00D3FE15 /* AlertValueManager.swift in Sources */,
 				1CEB237A28BE5E1100D3FE15 /* UIButton+.swift in Sources */,

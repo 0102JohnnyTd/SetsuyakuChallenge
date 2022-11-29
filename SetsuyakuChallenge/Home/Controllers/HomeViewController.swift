@@ -7,7 +7,6 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
 
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var challengeCollectionView: UICollectionView!
@@ -28,6 +27,9 @@ final class HomeViewController: UIViewController {
     @IBAction private func didTapShowCreateChallengeVCButton(_ sender: Any) {
         showCreateChallengeVC()
     }
+
+    // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
+    private let firebaseFirestoreManager = FirebaseFirestoreManager()
 
     // 現在取り組んでいるチャレンジを格納する配列
     private var challenges: [Challenge] = []
@@ -62,21 +64,6 @@ final class HomeViewController: UIViewController {
             showSignUpVC()
         } else {
             print(Auth.auth().currentUser)
-            print("現在ログイン状態です")
-        }
-    }
-
-    // 合計節約金額が目標金額以上に到達した場合、チャレンジ達成のアラートを表示させ、アラートのボタンをタップすると
-    private func compareValue() {
-        challenges.enumerated().forEach {
-            if $0.element.totalSavingAmount >= $0.element.goalAmount {
-                // Firestoreで保存した値をHomeで表示させるのでこのtoggleはなくても良い気がするのだが、万が一にも保存が失敗した時のことを考えると不安なので一応残しておく。
-                let index = $0.offset
-                challenges[index].isChallenge.toggle()
-                updateDataForFireStore(challenge: $0.element)
-                showTargetAchievementAlert(completedChallenge: $0.element, name: $0.element.name)
-            }
-            print("どの値も目標達成してないぜ")
         }
     }
 
@@ -85,49 +72,23 @@ final class HomeViewController: UIViewController {
         challenges.removeAll()
         completedChallenges.removeAll()
 
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
-
-        challengeRef.getDocuments { snapshots, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            snapshots?.documents.forEach { snapshot in
-                do {
-                    var challenge = try snapshot.data(as: Challenge.self)
-                    challenge?.docID = snapshot.documentID
-                    challenge?.totalSavingAmount = 0
-                    challenge?.reports.forEach {
-                        challenge?.totalSavingAmount += $0.savingAmount
+        firebaseFirestoreManager.fetchChallengeData() { [self] result in
+            switch result {
+            case .success(let challenge):
+                if let challenge = challenge {
+                    if challenge.isChallenge {
+                        challenges.append(challenge)
+                    } else {
+                        completedChallenges.append(challenge)
                     }
-                    if let challenge = challenge {
-                        if challenge.isChallenge {
-                            self.challenges.append(challenge)
-                        } else {
-                            self.completedChallenges.append(challenge)
-                        }
-                        self.challengeCollectionView.reloadData()
-                        self.compareValue()
-                    }
-                } catch {
-                    print(error)
                 }
-            }
-        }
-    }
-
-    // FireStoreに保存された値を更新
-    private func updateDataForFireStore(challenge: Challenge) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let challengeID = challenge.docID else { return }
-        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeID)
-
-        challengeRef.updateData([FieldValue.isChallenge: false]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
+                self.challengeCollectionView.reloadData()
+                firebaseFirestoreManager.compareValue(challenges: challenges) { completedChallenge in
+                    showTargetAchievementAlert(completedChallenge: completedChallenge.element, name: completedChallenge.element.name)
+                }
+            case .failure:
+                // 後ほどエラー処理追加
+                break
             }
         }
     }
@@ -183,9 +144,7 @@ final class HomeViewController: UIViewController {
         let alertController = UIAlertController(title: AlertTitle.targetaAchievement, message: "目標『\(name)』" + AlertMessage.targetaAchievement, preferredStyle: .alert)
 
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default) { [weak self] _ in
-            self?.completedChallenges.append(completedChallenge)
-            self?.challenges.removeAll { $0.isChallenge == false }
-            self?.challengeCollectionView.reloadData()
+            self?.fetchChallengeData()
         })
         return alertController
     }

@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
+//import FirebaseAuth
+//import FirebaseFirestore
 
 final class SaveMoneyReportListViewController: UIViewController {
     @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
@@ -21,6 +21,8 @@ final class SaveMoneyReportListViewController: UIViewController {
     // Firestoreから取得した値を保存するプロパティ
     var challenge: Challenge?
 
+    private let firebaseFirestoreManager = FirebaseFirestoreManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
@@ -28,7 +30,17 @@ final class SaveMoneyReportListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchReportsData()
+        firebaseFirestoreManager.fetchReportsData(challenge: challenge) { result in
+            switch result {
+            case .success(let challenge):
+                if let challenge = challenge {
+                    self.challenge?.reports = challenge.reports
+                    self.saveMoneyReportListTableView.reloadData()
+                }
+            case .failure(_):
+                break
+            }
+        }
     }
 
     // CreateSaveMoneyReportViewControllerに遷移時、challengeプロパティの値を渡す
@@ -41,27 +53,27 @@ final class SaveMoneyReportListViewController: UIViewController {
     }
 
     // Firestoreに保存されているChallengeのreportデータを取得
-    private func fetchReportsData() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let challengeDocID = challenge?.docID else { return }
-        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
-
-        challengeRef.getDocument { snapshot, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            do {
-                let challenge = try snapshot?.data(as: Challenge.self)
-                if let challenge = challenge {
-                    self.challenge?.reports = challenge.reports
-                    self.saveMoneyReportListTableView.reloadData()
-                }
-            } catch {
-                print(error)
-            }
-        }
-    }
+//    private func fetchReportsData() {
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        guard let challengeDocID = challenge?.docID else { return }
+//        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
+//
+//        challengeRef.getDocument { snapshot, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            }
+//            do {
+//                let challenge = try snapshot?.data(as: Challenge.self)
+//                if let challenge = challenge {
+//                    self.challenge?.reports = challenge.reports
+//                    self.saveMoneyReportListTableView.reloadData()
+//                }
+//            } catch {
+//                print(error)
+//            }
+//        }
+//    }
 
     // TableViewにセルを表示する為の処理
     private func setUpTableView() {

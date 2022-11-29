@@ -189,7 +189,23 @@ final class FirebaseFirestoreManager {
         }
     }
 
+    // MARK: - ユーザー情報の取得
+    // Firestoreに保存されているUserデータを取得
+    func fetchUserData(completion: @escaping (Result<User?, Error>) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
 
+        Firestore.firestore().collection(CollectionName.users).document(uid).getDocument { snapshot, error in
+            if let error = error {
+                print("ユーザー情報の取得に失敗しました: \(error)")
+            }
+            do {
+                let user = try snapshot?.data(as: User.self)
+                completion(.success(user))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
     // MARK: - Firestoreに保存されているデータの更新
     // FireStoreに保存された値を更新
     private func updateData(challenge: Challenge) {

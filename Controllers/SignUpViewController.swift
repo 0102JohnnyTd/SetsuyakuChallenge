@@ -7,7 +7,6 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
 
 final class SignUpViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
@@ -25,6 +24,9 @@ final class SignUpViewController: UIViewController {
 
     // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [emailTextField, passwordTextField, userNameTextField] }
+
+    // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
+    private let firebaseFirestoreManager = FirebaseFirestoreManager()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,25 +54,16 @@ final class SignUpViewController: UIViewController {
                 self.showSignUpErrorAlert(err: err)
                 return
             }
+            // ユーザー作成が完了したらFirestoreにユーザーデータを保存
             print("認証情報の保存に成功しました")
-            self.saveData(email: email, name: userName)
-        }
-    }
-
-    // Firestore上にデータの保存を行う
-    private func saveData(email: String, name: String) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-
-        let user = User(email: email, name: name)
-
-        let userRef = Firestore.firestore().collection(CollectionName.users).document(uid)
-
-        do {
-            try userRef.setData(from: user)
-            print("FireStoreへの保存に成功しました")
-            self.dismiss(animated: true)
-        } catch {
-            print("FireStroreへの保存に失敗しました: \(error.localizedDescription)")
+            self.firebaseFirestoreManager.saveUserData(email: email, name: userName, completion: { result in
+                switch result {
+                case .success:
+                    self.dismiss(animated: true)
+                case .failure:
+                    break
+                }
+            })
         }
     }
 

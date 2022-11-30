@@ -7,7 +7,6 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
 
 private enum Cell: Int, CaseIterable {
     case logoutCell
@@ -20,7 +19,7 @@ final class UserDetailsViewController: UIViewController {
     // Cellに表示させる文字列
     private let options = [Option(item: "ログアウト", textColorType: .normal), Option(item: "アカウントを削除する", textColorType: .warning)]
 
-    // 取得処理を管理するモデルのインスタンスを生成
+    // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
     private let firebaseFirestoreManager = FirebaseFirestoreManager()
 
     // 本画面遷移後、Firestoreから取得したUser型の値を受け取るプロパティ
@@ -88,7 +87,8 @@ final class UserDetailsViewController: UIViewController {
         let alert = UIAlertController(title: "アカウントを削除しますか？", message: "この操作は取り消せません", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { [weak self] _ in
-            self?.deleteAccountData()
+            // 後々エラー処理を追加
+            self?.firebaseFirestoreManager.deleteAccountData(completion: { _ in  } )
             self?.deleteAccount()
         }))
         present(alert, animated: true)
@@ -102,16 +102,6 @@ final class UserDetailsViewController: UIViewController {
             } else {
                 // ⛏エラーをユーザーに伝えるアラートを表示するようにしたい
                 print("エラー:\(String(describing: error?.localizedDescription))")
-            }
-        }
-    }
-
-    // FireStoreに保存されているUserデータの削除を実行
-    private func deleteAccountData() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection(CollectionName.users).document(uid).delete() { err in
-            if let err = err {
-                print("エラー:\(String(describing: err.localizedDescription))")
             }
         }
     }

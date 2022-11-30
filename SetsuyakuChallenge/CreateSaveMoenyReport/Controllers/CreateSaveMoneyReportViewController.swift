@@ -22,6 +22,7 @@ final class CreateSaveMoneyReportViewController: UIViewController {
     var challenge: Challenge?
 
     private let calculator = Calculator()
+
     // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
     private let firebaseFirestoreManager = FirebaseFirestoreManager()
 

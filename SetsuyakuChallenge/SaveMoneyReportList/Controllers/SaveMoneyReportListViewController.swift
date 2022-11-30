@@ -6,8 +6,6 @@
 //
 
 import UIKit
-//import FirebaseAuth
-//import FirebaseFirestore
 
 final class SaveMoneyReportListViewController: UIViewController {
     @IBOutlet private weak var saveMoneyReportListTableView: UITableView!
@@ -21,6 +19,7 @@ final class SaveMoneyReportListViewController: UIViewController {
     // Firestoreから取得した値を保存するプロパティ
     var challenge: Challenge?
 
+    // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
     private let firebaseFirestoreManager = FirebaseFirestoreManager()
 
     override func viewDidLoad() {
@@ -51,30 +50,7 @@ final class SaveMoneyReportListViewController: UIViewController {
             createSaveMoneyReportVC.challenge = challenge
         }
     }
-
-    // Firestoreに保存されているChallengeのreportデータを取得
-//    private func fetchReportsData() {
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        guard let challengeDocID = challenge?.docID else { return }
-//        let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
-//
-//        challengeRef.getDocument { snapshot, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//            do {
-//                let challenge = try snapshot?.data(as: Challenge.self)
-//                if let challenge = challenge {
-//                    self.challenge?.reports = challenge.reports
-//                    self.saveMoneyReportListTableView.reloadData()
-//                }
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
-
+    
     // TableViewにセルを表示する為の処理
     private func setUpTableView() {
         saveMoneyReportListTableView.delegate = self

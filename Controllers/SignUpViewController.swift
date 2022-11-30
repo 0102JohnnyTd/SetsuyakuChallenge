@@ -8,7 +8,6 @@
 import UIKit
 import FirebaseAuth
 
-
 final class SignUpViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
@@ -26,6 +25,7 @@ final class SignUpViewController: UIViewController {
     // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [emailTextField, passwordTextField, userNameTextField] }
 
+    // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
     private let firebaseFirestoreManager = FirebaseFirestoreManager()
 
     override func viewWillAppear(_ animated: Bool) {

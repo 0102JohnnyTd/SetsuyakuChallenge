@@ -221,6 +221,16 @@ final class FirebaseFirestoreManager {
             }
         }
     }
+    // MARK: - アカウント情報の削除を実行
+    // FireStoreに保存されているUserデータの削除を実行
+    func deleteAccountData(completion: @escaping (Error) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection(CollectionName.users).document(uid).delete() { error in
+            if let error = error {
+                completion(error)
+            }
+        }
+    }
     // MARK: - 合計節約金額が目標節約金額に届いているかの判断を行う処理
     // 合計節約金額が目標金額以上に到達した場合、チャレンジ達成のアラートを表示させる
     func compareValue(challenges: [Challenge], completion: (EnumeratedSequence<[Challenge]>.Element) -> Void) {

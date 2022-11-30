@@ -23,6 +23,7 @@ final class CreateChallengeViewController: UIViewController {
     }
     // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [nameTextField, goalAmountTextField] }
+    
     // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
     private let firebaseFirestoreManager = FirebaseFirestoreManager()
     

@@ -30,6 +30,8 @@ final class HomeViewController: UIViewController {
 
     // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
     private let firebaseFirestoreManager = FirebaseFirestoreManager()
+    // FirebaseAuthentication周り(アカウントの作成など)の処理を管理するモデルにインスタンスを生成して格納
+    private let firebaseAuthManager = FirebaseAuthManager()
 
     // 現在取り組んでいるチャレンジを格納する配列
     private var challenges: [Challenge] = []
@@ -54,17 +56,10 @@ final class HomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkIsLogin()
-        fetchChallengeData()
-    }
-
-    // ログアウト状態の場合、SignUpViewControllerを表示するメソッドを実行する
-    private func checkIsLogin() {
-        if Auth.auth().currentUser == nil {
+        firebaseAuthManager.checkIsLogout {
             showSignUpVC()
-        } else {
-            print(Auth.auth().currentUser)
         }
+        fetchChallengeData()
     }
 
     // Firestoreに保存されたチャレンジデータを取得

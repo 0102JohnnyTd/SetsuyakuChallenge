@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class SignUpViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
@@ -33,7 +32,9 @@ final class SignUpViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkIsLogin()
+        firebaseAuthManager.checkIsLogin {
+            dismiss(animated: true)
+        }
     }
 
     override func viewDidLoad() {
@@ -41,7 +42,6 @@ final class SignUpViewController: UIViewController {
         setUpTextFileds()
         setUpButton()
     }
-
 
     // アカウントを登録
     private func signUp() {
@@ -69,15 +69,6 @@ final class SignUpViewController: UIViewController {
                 self.showSignUpErrorAlert(message: message)
             }
         })
-    }
-
-    // ログイン状態の場合、SignUpViewControllerをdismissで終了する
-    private func checkIsLogin() {
-        if Auth.auth().currentUser != nil {
-            dismiss(animated: true)
-        } else {
-            print("現在ログアウト状態です")
-        }
     }
 
     // アカウント登録失敗をユーザーに伝えるアラートを表示

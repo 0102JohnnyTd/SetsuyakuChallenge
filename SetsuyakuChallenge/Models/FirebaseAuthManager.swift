@@ -15,29 +15,30 @@ final class FirebaseAuthManager {
     func createUser(email: String, password: String, completion: @escaping (Result<(), NSError>) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { _, error in
             if let error = error as NSError? {
-//                self.getSignUpErrorMessage(error: error)
                 completion(.failure(error))
-//                print("認証情報の保存に失敗しました: \(err)")
-//                self.showSignUpErrorAlert(err: err)
-//                return
             }
             completion(.success(()))
-            // ユーザー作成が完了したらFirestoreにユーザーデータを保存
-//            print("認証情報の保存に成功しました")
-//            self.firebaseFirestoreManager.saveUserData(email: email, name: userName, completion: { result in
-//                switch result {
-//                case .success:
-//                    self.dismiss(animated: true)
-//                case .failure:
-//                    break
-//                }
-//            })
         }
     }
     // MARK: - アカウント削除
     // MARK: - ログイン機能
     // MARK: - ログアウト機能
     // MARK: - パスワード再設定案内のメール送信
+    // MARK: - ログイン状態をチェック
+    // ログイン状態の場合、SignUpViewControllerをdismissで終了する
+    func checkIsLogin(completion: () -> Void) {
+        if Auth.auth().currentUser != nil {
+            completion()
+        }
+    }
+    // MARK: - ログアウト状態をチェック
+    // ログアウト状態の場合、SignUpViewControllerを表示するメソッドを実行する
+    func checkIsLogout(completion: () -> Void) {
+        if Auth.auth().currentUser == nil {
+            completion()
+        }
+    }
+
     // MARK: - エラーを返す処理
     func getSignUpErrorMessage(error: NSError) -> String {
         if let errCode = AuthErrorCode(rawValue: error.code) {
@@ -52,4 +53,3 @@ final class FirebaseAuthManager {
         return ""
     }
 }
-

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 private enum Cell: Int, CaseIterable {
     case logoutCell
@@ -15,7 +14,7 @@ private enum Cell: Int, CaseIterable {
 
 final class UserDetailsViewController: UIViewController {
     @IBOutlet private weak var userDetailsTableView: UITableView!
-
+    
     // Cellに表示させる文字列
     private let options = [Option(item: "ログアウト", textColorType: .normal), Option(item: "アカウントを削除する", textColorType: .warning)]
 
@@ -61,7 +60,7 @@ final class UserDetailsViewController: UIViewController {
         let logoutAlert = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
         logoutAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { [self] _ in
-            firebaseAuthManager.logout(completion:  { result in
+            firebaseAuthManager.logout(completion: { result in
                 switch result {
                 case .success:
                     self.showDidFinishLogoutAlert()
@@ -73,16 +72,6 @@ final class UserDetailsViewController: UIViewController {
         }))
         present(logoutAlert, animated: true)
     }
-
-    // ログアウトを実行
-//    private func logout() {
-//        do {
-//            try Auth.auth().signOut()
-//            showDidFinishLogoutAlert()
-//        } catch {
-//            print(error)
-//        }
-//    }
 
     // ログアウトの完了をユーザーに伝えるアラートを表示
     private func showDidFinishLogoutAlert() {
@@ -100,21 +89,17 @@ final class UserDetailsViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { [weak self] _ in
             // 後々エラー処理を追加
             self?.firebaseFirestoreManager.deleteAccountData(completion: { _ in  } )
-            self?.deleteAccount()
+            self?.firebaseAuthManager.deleteAccount(completion: { result in
+                switch result {
+                case .success:
+                    self?.navigationController?.popViewController(animated: true)
+                case .failure(let error):
+                    // ⛏後ほどエラーをユーザーに伝えるアラートを表示するように改善
+                    print(error)
+                }
+            })
         }))
         present(alert, animated: true)
-    }
-
-    // アカウント削除を実行
-    private func deleteAccount() {
-        Auth.auth().currentUser?.delete() { error in
-            if error == nil {
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                // ⛏エラーをユーザーに伝えるアラートを表示するようにしたい
-                print("エラー:\(String(describing: error?.localizedDescription))")
-            }
-        }
     }
 }
 

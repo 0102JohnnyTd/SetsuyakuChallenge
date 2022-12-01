@@ -33,7 +33,7 @@ final class SignInViewController: UIViewController {
         let email = emailTextField.text!
         let password = passwordTextField.text!
 
-        firebaseAuthManager.signIn(email: email, password: password, commpletion: { result in
+        firebaseAuthManager.signIn(email: email, password: password, completion: { result in
             switch  result {
             case .success:
                 self.navigationController?.popViewController(animated: true)

@@ -9,8 +9,8 @@ import Foundation
 import FirebaseAuth
 
 final class FirebaseAuthManager {
-    // MARK: - アカウント作成
-    // アカウントを登録
+    // MARK: - アカウント作成機能
+    // アカウント登録を実行
     // ❓SuccessパターンにVoidを指定するのはOKなのだろうか。
     func createUser(email: String, password: String, completion: @escaping (Result<(), NSError>) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { _, error in
@@ -20,15 +20,24 @@ final class FirebaseAuthManager {
             completion(.success(()))
         }
     }
-    // MARK: - アカウント削除
+    // MARK: - アカウント削除機能
+    // アカウント削除を実行
+    func deleteAccount(completion: @escaping (Result<(), Error>) -> Void) {
+        Auth.auth().currentUser?.delete() { error in
+            if let error = error {
+                completion(.failure(error))
+            }
+            completion(.success(()))
+        }
+    }
     // MARK: - ログイン機能
     // ログインを実行　
-    func signIn(email: String, password: String, commpletion: @escaping (Result<(), NSError>) -> Void) {
+    func signIn(email: String, password: String, completion: @escaping (Result<(), NSError>) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { _, error in
             if let error = error as NSError? {
-                commpletion(.failure(error))
+                completion(.failure(error))
             }
-            commpletion(.success(()))
+            completion(.success(()))
         }
     }
     // MARK: - ログアウト機能
@@ -42,6 +51,7 @@ final class FirebaseAuthManager {
         }
     }
     // MARK: - パスワード再設定案内のメール送信
+    
     // MARK: - ログイン状態をチェック
     // ログイン状態の場合、SignUpViewControllerをdismissで終了する
     func checkIsLogin(completion: () -> Void) {

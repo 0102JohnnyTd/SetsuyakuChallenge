@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class SignUpViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
@@ -28,9 +27,14 @@ final class SignUpViewController: UIViewController {
     // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
     private let firebaseFirestoreManager = FirebaseFirestoreManager()
 
+    // FirebaseAuthentication周り(アカウントの作成など)の処理を管理するモデルにインスタンスを生成して格納
+    private let firebaseAuthManager = FirebaseAuthManager()
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkIsLogin()
+        firebaseAuthManager.checkIsLogin {
+            dismiss(animated: true)
+        }
     }
 
     override func viewDidLoad() {
@@ -38,7 +42,6 @@ final class SignUpViewController: UIViewController {
         setUpTextFileds()
         setUpButton()
     }
-
 
     // アカウントを登録
     private func signUp() {
@@ -48,48 +51,30 @@ final class SignUpViewController: UIViewController {
         let password = passwordTextField.text!
         let userName = userNameTextField.text!
 
-        Auth.auth().createUser(withEmail: email, password: password) { _, err in
-            if let err = err as NSError? {
-                print("認証情報の保存に失敗しました: \(err)")
-                self.showSignUpErrorAlert(err: err)
-                return
+        firebaseAuthManager.createUser(email: email, password: password, completion: { result in
+            switch result {
+            case .success:
+                self.firebaseFirestoreManager.saveUserData(email: email, name: userName, completion: { result in
+                    switch result {
+                    case .success:
+                        self.dismiss(animated: true)
+                    case .failure:
+                        // 後ほどエラー処理追加
+                        break
+                    }
+                })
+            case .failure(let error):
+                print("認証情報の保存に失敗しました: \(error)")
+                let message = self.firebaseAuthManager.getSignUpErrorMessage(error: error)
+                self.showSignUpErrorAlert(message: message)
             }
-            // ユーザー作成が完了したらFirestoreにユーザーデータを保存
-            print("認証情報の保存に成功しました")
-            self.firebaseFirestoreManager.saveUserData(email: email, name: userName, completion: { result in
-                switch result {
-                case .success:
-                    self.dismiss(animated: true)
-                case .failure:
-                    break
-                }
-            })
-        }
-    }
-
-    // ログイン状態の場合、SignUpViewControllerをdismissで終了する
-    private func checkIsLogin() {
-        if Auth.auth().currentUser != nil {
-            dismiss(animated: true)
-        } else {
-            print("現在ログアウト状態です")
-        }
+        })
     }
 
     // アカウント登録失敗をユーザーに伝えるアラートを表示
-    private func showSignUpErrorAlert(err: NSError) {
-        // ケースに応じてエラーメッセージを切り替える
-        if let errCode = AuthErrorCode(rawValue: err.code) {
-            var message: String
-            switch errCode {
-            case .invalidEmail:      message = AlertMessage.invalidEmail
-            case .emailAlreadyInUse: message = AlertMessage.emailAlreadyInUse
-            case .weakPassword:      message = AlertMessage.weakPassword
-            default:                 message = AlertMessage.someErrors
-            }
-            let alertController = generateSignUpErrorAlert(title: AlertTitle.signUpError, message: message)
-            self.present(alertController, animated: true)
-        }
+    private func showSignUpErrorAlert(message: String) {
+        let alertController = generateSignUpErrorAlert(title: AlertTitle.signUpError, message: message)
+        self.present(alertController, animated: true)
     }
 
     // アカウント登録失敗をユーザーに伝えるアラートを生成

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class SignInViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
@@ -16,6 +15,9 @@ final class SignInViewController: UIViewController {
     @IBAction private func didTapSignInButton(_ sender: Any) {
         login()
     }
+
+    // FirebaseAuthentication周り(アカウントの作成など)の処理を管理するモデルにインスタンスを生成して格納
+    private let firebaseAuthManager = FirebaseAuthManager()
 
     // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [emailTextField, passwordTextField] }
@@ -30,31 +32,22 @@ final class SignInViewController: UIViewController {
     private func login() {
         let email = emailTextField.text!
         let password = passwordTextField.text!
-        Auth.auth().signIn(withEmail: email, password: password) { _, err in
-            if let err = err as NSError? {
-                print("ログイン情報の取得に失敗しました")
-                self.showLoginErrorAlert(err: err)
-                return
+
+        firebaseAuthManager.signIn(email: email, password: password, commpletion: { result in
+            switch  result {
+            case .success:
+                self.navigationController?.popViewController(animated: true)
+            case .failure(let error):
+                self.showLoginErrorAlert(error: error)
             }
-            print("ログイン情報の取得に成功しました")
-            self.navigationController?.popViewController(animated: true)
-        }
+        })
     }
 
     // ログイン失敗をユーザーに伝えるアラートを表示
-    private func showLoginErrorAlert(err: NSError) {
-        if let errCode = AuthErrorCode(rawValue: err.code) {
-            var message: String
-            // ケースに応じてエラーメッセージを切り替える
-            switch errCode {
-            case .userNotFound:  message = AlertMessage.userNotFound
-            case .wrongPassword: message = AlertMessage.wrongPassword
-            case .invalidEmail:  message = AlertMessage.invalidEmail
-            default:             message = AlertMessage.someErrors
-            }
-            let alertController = generateLoginErrorAlert(title: AlertTitle.loginError, message: message)
-            self.present(alertController, animated: true, completion: nil)
-        }
+    private func showLoginErrorAlert(error: NSError) {
+        let message = firebaseAuthManager.getSignInErrorMessage(error: error)
+        let alertController = generateLoginErrorAlert(title: AlertTitle.loginError, message: message)
+        self.present(alertController, animated: true, completion: nil)
     }
 
     // ログイン失敗をユーザーに伝えるアラートを生成

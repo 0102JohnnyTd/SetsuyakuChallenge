@@ -22,6 +22,18 @@ final class FirebaseAuthManager {
     }
     // MARK: - アカウント削除
     // MARK: - ログイン機能
+    // ログインを実行　
+    func signIn(email: String, password: String, commpletion: @escaping (Result<(), NSError>) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { _, error in
+            if let error = error as NSError? {
+                commpletion(.failure(error))
+//                self.showLoginErrorAlert(err: err)
+//                return
+            }
+            commpletion(.success(()))
+//            self.navigationController?.popViewController(animated: true)
+        }
+    }
     // MARK: - ログアウト機能
     // MARK: - パスワード再設定案内のメール送信
     // MARK: - ログイン状態をチェック
@@ -40,6 +52,7 @@ final class FirebaseAuthManager {
     }
 
     // MARK: - エラーを返す処理
+    // アカウント作成時にエラーが発生した場合、状況に適したエラーメッセージを取得する
     func getSignUpErrorMessage(error: NSError) -> String {
         if let errCode = AuthErrorCode(rawValue: error.code) {
             switch errCode {
@@ -49,7 +62,22 @@ final class FirebaseAuthManager {
             default:                 return AlertMessage.someErrors
             }
         }
-        // この書き方違和感なんだけどこれ書かないとエラーが出る。switchで網羅してるわけだから絶対ここに辿り着くことないはず。
+        // ❓この書き方違和感なんだけどこれ書かないとエラーが出る。switchで網羅してるわけだから絶対ここに辿り着くことないはず。
+        return ""
+    }
+
+    // ログイン時にエラーが発生した場合、状況に適したエラーメッセージを取得する
+    func getSignInErrorMessage(error: NSError) -> String {
+        if let errCode = AuthErrorCode(rawValue: error.code) {
+            // ケースに応じてエラーメッセージを切り替える
+            switch errCode {
+            case .userNotFound:  return AlertMessage.userNotFound
+            case .wrongPassword: return AlertMessage.wrongPassword
+            case .invalidEmail:  return AlertMessage.invalidEmail
+            default:             return AlertMessage.someErrors
+            }
+        }
+        // ❓この書き方違和感なんだけどこれ書かないとエラーが出る。switchで網羅してるわけだから絶対ここに辿り着くことないはず。
         return ""
     }
 }

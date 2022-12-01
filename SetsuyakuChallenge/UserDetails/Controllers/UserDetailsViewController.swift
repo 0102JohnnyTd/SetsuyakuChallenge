@@ -22,6 +22,9 @@ final class UserDetailsViewController: UIViewController {
     // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
     private let firebaseFirestoreManager = FirebaseFirestoreManager()
 
+    // FirebaseAuthentication周り(アカウントの作成など)の処理を管理するモデルにインスタンスを生成して格納
+    private let firebaseAuthManager = FirebaseAuthManager()
+
     // 本画面遷移後、Firestoreから取得したUser型の値を受け取るプロパティ
     private var user: User?
 
@@ -58,20 +61,28 @@ final class UserDetailsViewController: UIViewController {
         let logoutAlert = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
         logoutAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { [self] _ in
-            logout()
+            firebaseAuthManager.logout(completion:  { result in
+                switch result {
+                case .success:
+                    self.showDidFinishLogoutAlert()
+                case .failure(let error):
+                    // 後ほどAlertControllerを表示するなどエラー処理を追加
+                    print(error)
+                }
+            })
         }))
         present(logoutAlert, animated: true)
     }
 
     // ログアウトを実行
-    private func logout() {
-        do {
-            try Auth.auth().signOut()
-            showDidFinishLogoutAlert()
-        } catch {
-            print(error)
-        }
-    }
+//    private func logout() {
+//        do {
+//            try Auth.auth().signOut()
+//            showDidFinishLogoutAlert()
+//        } catch {
+//            print(error)
+//        }
+//    }
 
     // ログアウトの完了をユーザーに伝えるアラートを表示
     private func showDidFinishLogoutAlert() {

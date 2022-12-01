@@ -27,14 +27,20 @@ final class FirebaseAuthManager {
         Auth.auth().signIn(withEmail: email, password: password) { _, error in
             if let error = error as NSError? {
                 commpletion(.failure(error))
-//                self.showLoginErrorAlert(err: err)
-//                return
             }
             commpletion(.success(()))
-//            self.navigationController?.popViewController(animated: true)
         }
     }
     // MARK: - ログアウト機能
+    // ログアウトを実行
+    func logout(completion: @escaping (Result<(), Error>) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            completion(.success(()))
+        } catch {
+            completion(.failure(error))
+        }
+    }
     // MARK: - パスワード再設定案内のメール送信
     // MARK: - ログイン状態をチェック
     // ログイン状態の場合、SignUpViewControllerをdismissで終了する
@@ -50,8 +56,7 @@ final class FirebaseAuthManager {
             completion()
         }
     }
-
-    // MARK: - エラーを返す処理
+    // MARK: - エラーメッセージを取得する処理
     // アカウント作成時にエラーが発生した場合、状況に適したエラーメッセージを取得する
     func getSignUpErrorMessage(error: NSError) -> String {
         if let errCode = AuthErrorCode(rawValue: error.code) {

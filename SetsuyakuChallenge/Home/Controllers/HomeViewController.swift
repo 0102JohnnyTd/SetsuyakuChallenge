@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var challengeCollectionView: UICollectionView!

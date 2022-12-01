@@ -51,7 +51,16 @@ final class FirebaseAuthManager {
         }
     }
     // MARK: - パスワード再設定案内のメール送信
-    
+    // パスワードリセットを案内するメールを送信
+    func sendPasswordReset(email: String, completion: @escaping (Result<(), Error>) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
     // MARK: - ログイン状態をチェック
     // ログイン状態の場合、SignUpViewControllerをdismissで終了する
     func checkIsLogin(completion: () -> Void) {

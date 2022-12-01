@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class ResetPasswordViewController: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
@@ -15,6 +14,9 @@ final class ResetPasswordViewController: UIViewController {
     @IBAction private func didTapButton(_ sender: Any) {
         sendResetPasswordEmail()
     }
+
+    // FirebaseAuthentication周り(アカウントの作成など)の処理を管理するモデルにインスタンスを生成して格納
+    private let firebaseAuthManager = FirebaseAuthManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +27,15 @@ final class ResetPasswordViewController: UIViewController {
     // パスワードリセットを案内するメールを送信
     private func sendResetPasswordEmail() {
         guard let email = emailTextField.text else { return }
-        Auth.auth().sendPasswordReset(withEmail: email) { error in
-            if let error = error {
-                print("送信エラーです： \(error.localizedDescription)")
-            } else {
+        firebaseAuthManager.sendPasswordReset(email: email, completion: { result in
+            switch result {
+            case .success:
                 self.showEmailSendCompleteAlert(email: email)
+            case .failure(let error):
+                // ⛏後ほど修正
+                print("送信エラーです： \(error.localizedDescription)")
             }
-        }
+        })
     }
 
     // パスワードリセットを案内するメール送信完了をユーザーに伝えるアラートを表示

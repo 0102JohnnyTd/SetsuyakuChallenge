@@ -8,7 +8,7 @@
 import UIKit
 
 final class CreateSaveMoneyReportViewController: UIViewController {
-    // ⛏priceではなく、amountで統一したほうが良いかも。
+    // ⛏priceではなく、amountで統一したほうが良いかも?
     @IBOutlet private weak var priceSwicth: UISwitch!
     @IBOutlet private weak var priceTextField: UITextField!
     @IBOutlet private weak var memoTextView: UITextView!
@@ -21,8 +21,6 @@ final class CreateSaveMoneyReportViewController: UIViewController {
     // SaveMoneyReportListで取得したchallengeデータを受け取るためのプロパティ
     var challenge: Challenge?
 
-    private let calculator = Calculator()
-
     // FirebaseFirestore(データの保存/取得など)を管理するモデルのインスタンスを生成して格納
     private let firebaseFirestoreManager = FirebaseFirestoreManager()
 
@@ -31,35 +29,47 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         setUpButton()
         setUpTextView()
         setUpTextFiled()
-        setUpFirebaseFirestoreManager()
     }
 
     // 作成した節約メモをFireStoreに保存
     private func saveReportData() {
         let inputPrice = priceTextField.textToInt
         guard let price = inputPrice else {
-            showAlert()
+            showInputErrorAlert()
             return
         }
         let memo = memoTextView.text ?? ""
         // switchがオンの場合は+符号の値を返し、オフの場合は-符号の値を返す
         let signPrice = priceSwicth.isOn ? price : -price
 
-        firebaseFirestoreManager.saveReportData(challenge: challenge, memo: memo, price: signPrice)
+        firebaseFirestoreManager.saveReportData(challenge: challenge, memo: memo, price: signPrice, completion: { [weak self] result in
+            switch result {
+            case .success:
+                self?.navigationController?.popViewController(animated: true)
+            case .failure(let error):
+                showSaveDataErrorAlert(error: error)
+            }
+        })
     }
 
-    // ユーザーが金額を入力する箇所に数値型以外の値を入力した場合にエラーを伝えるアラートを表示
-    private func showAlert() {
-        let alertController = generateInputErrorAlert()
+    // データの保存失敗時に表示するアラートを表示
+    private func showSaveDataErrorAlert(error: NSError) {
+        let errorMessage = firebaseFirestoreManager.getSaveDataErrorMessage(error: error)
+        let alertController = UIAlertController(title: AlertTitle.saveDataError, message: errorMessage, preferredStyle: .alert)
+
+        // ボタンをタップすると再度保存を実行する
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            self?.saveReportData() }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .default))
         present(alertController, animated: true)
     }
 
-    // ユーザーが金額を入力する箇所に数値型以外の値を入力した場合にエラーを伝えるアラートを生成
-    private func generateInputErrorAlert() -> UIAlertController {
+    // ユーザーが金額を入力する箇所に数値型以外の値を入力した場合にエラーを伝えるアラートを表示
+    private func showInputErrorAlert() {
         let alertController =  UIAlertController(title: AlertTitle.inputError, message: AlertMessage.inputError, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
 
-        return alertController
+        present(alertController, animated: true)
     }
 
     // ボタンに丸みを加えアプリのテーマカラーを設定
@@ -80,17 +90,8 @@ final class CreateSaveMoneyReportViewController: UIViewController {
     private func setUpTextView() {
         memoTextView.layer.cornerRadius = 5
     }
-
-    private func setUpFirebaseFirestoreManager() {
-        firebaseFirestoreManager.delegate = self
-    }
 }
 
-extension CreateSaveMoneyReportViewController: FirebaseFirestoreManagerDelegate {
-    func didSaveData() {
-        navigationController?.popViewController(animated: true)
-    }
-}
 // priceTextFieldに値が入力されている時のみ、レポート作成ボタンをタップすることができる
 extension CreateSaveMoneyReportViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {

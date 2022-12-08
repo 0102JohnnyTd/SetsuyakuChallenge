@@ -12,14 +12,7 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 import FirebaseAuth
 
-protocol FirebaseFirestoreManagerDelegate: AnyObject {
-    func didSaveData()
-}
-
 final class FirebaseFirestoreManager {
-    // ModelからControllerへ通知を送るためdelegateを定義
-    weak var delegate: FirebaseFirestoreManagerDelegate?
-
     // Controllerからデータを受け取るためのプロパティ
     private var challengeData: Challenge?
     private var challengesData: [Challenge] = []
@@ -122,7 +115,7 @@ final class FirebaseFirestoreManager {
         }
     }
     // MARK: - 節約メモの保存
-    func saveReportData(challenge: Challenge?, memo: String, price: Int) {
+    func saveReportData(challenge: Challenge?, memo: String, price: Int, completion: (Result<(), NSError>) -> Void) {
         challengeData = challenge
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let  challengeDocID = challengeData?.docID else { return }
@@ -135,9 +128,10 @@ final class FirebaseFirestoreManager {
         
         do {
             try challegenRef.setData(from: challengeData)
-            delegate?.didSaveData()
+            completion(.success(()))
         } catch {
             print("error: \(error.localizedDescription)")
+            completion(.failure(error as NSError))
         }
     }
     // MARK: - チャレンジの取得

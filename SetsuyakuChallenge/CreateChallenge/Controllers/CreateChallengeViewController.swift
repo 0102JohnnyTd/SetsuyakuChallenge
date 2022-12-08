@@ -35,7 +35,6 @@ final class CreateChallengeViewController: UIViewController {
         super.viewDidLoad()
         setUpButton()
         setUpTextFiled()
-        setUpFirebaseFirestoreManager()
         indicator.isHidden = true
     }
 
@@ -46,18 +45,21 @@ final class CreateChallengeViewController: UIViewController {
 
         // 文字列を入力した場合はInt型に変換ができずnilが返る為、Alertを表示させる
         guard inputPrice != nil else {
-            showAlert()
+            showInputErrorAlert()
             return
         }
         startIndicator()
-        firebaseFirestoreManager.executeSaveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!)
+        firebaseFirestoreManager.executeSaveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!, completion: { [weak self] result in
+            self?.stopIndicator()
+            switch result {
+            case .success:
+                self?.navigationController?.popViewController(animated: true)
+            case .failure(let error):
+                self?.showSaveDataErrorAlert(error: error)
+            }
+        })
     }
-    
-    // ユーザーが金額を入力する箇所に数値型以外の値を入力した場合にエラーを伝えるアラートを表示
-    private func showAlert() {
-        let alertController = generateInputErrorAlert()
-        present(alertController, animated: true)
-    }
+
 
     // 写真のライブラリを表示する画面を表示
     private func showPickerController() {
@@ -80,12 +82,24 @@ final class CreateChallengeViewController: UIViewController {
         view.alpha = 1.0
     }
 
-    // ユーザーが金額を入力する箇所に数値型以外の値を入力した場合にエラーを伝えるアラートを生成
-    private func generateInputErrorAlert() -> UIAlertController {
+    // データの保存失敗時に表示するアラートを表示
+    private func showSaveDataErrorAlert(error: NSError) {
+        let errorMessage = firebaseFirestoreManager.getSaveDataErrorMessage(error: error)
+        let alertController = UIAlertController(title: AlertTitle.saveDataError, message: errorMessage, preferredStyle: .alert)
+
+        // ボタンをタップすると再度保存を実行する
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            self?.saveData() }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .default))
+        present(alertController, animated: true)
+    }
+
+    // ユーザーが金額を入力する箇所に数値型以外の値を入力した場合にエラーを伝えるアラートを表示
+    private func showInputErrorAlert() {
         let alertController = UIAlertController(title: AlertTitle.inputError, message: AlertMessage.inputError, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
 
-        return alertController
+        present(alertController, animated: true)
     }
 
     // 写真のライブラリを表示する画面を生成
@@ -113,18 +127,6 @@ final class CreateChallengeViewController: UIViewController {
     // goalAmountTextFieldのキーボードタイプを数値入力型に変換
     private func setUpNumberPad() {
         goalAmountTextField.keyboardType = .numberPad
-    }
-
-    private func setUpFirebaseFirestoreManager() {
-        firebaseFirestoreManager.delegate = self
-    }
-}
-
-extension CreateChallengeViewController: FirebaseFirestoreManagerDelegate {
-    func didSaveData() {
-        print(#function)
-        stopIndicator()
-        navigationController?.popViewController(animated: true)
     }
 }
 

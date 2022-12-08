@@ -15,6 +15,7 @@ enum AlertTitle {
     static let loginError = "ログインに失敗"
     static let signUpError = "アカウント作成に失敗"
     static let countOverError = "チャレンジ数が上限に達しました"
+    static let saveDataError = "データの保存に失敗// Firestorageへ画像の保存が失敗した場合、クロージャにNSError型の値を渡して実行"
 }
 
 enum AlertMessage {
@@ -28,8 +29,11 @@ enum AlertMessage {
     static let emailAlreadyInUse = "登録済みのメールアドレスです"
     static let someErrors = "エラーが発生しました。"
     static let countOverError = "同時に登録できるチャレンジ数は2つまでです"
+    static let alreadyExists = "作成しようとしたドキュメントがすでに存在しています"
 }
 
 enum AlertAction {
     static let ok = "OK"
+    static let cancel = "閉じる"
+    static let retry = "もう一度試す"
 }

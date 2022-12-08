@@ -44,26 +44,26 @@ final class FirebaseFirestoreManager {
     
     // MARK: - チャレンジの保存
     // Firestoreへの保存処理を実行
-    func executeSaveData(image: UIImage, name: String, goalAmount: Int) {
+    func executeSaveData(image: UIImage, name: String, goalAmount: Int, completion: @escaping (Result<(), NSError>) -> Void) {
         let fileName = NSUUID().uuidString
         let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
 
-        // ❓switch文が入れ子になってネスト深くなっているのが少し気になる。良い書き方はあったりするんかしら。
-        saveImageData(storageRef: storageRef, image: image) {[weak self] result in
+        // ⛏switch文が入れ子になって可読性が微妙。async awaitを使うとスッキリ書ける。
+        saveImageData(storageRef: storageRef, image: image) { [weak self] result in
             switch result {
             case .success:
-                self?.saveChallengeData(storageRef: storageRef, name: name, goalAmount: goalAmount) { [weak self] result in
+                self?.saveChallengeData(storageRef: storageRef, name: name, goalAmount: goalAmount) { result in
                     switch result {
                     case .success:
-                        self?.delegate?.didSaveData()
-                    case .failure:
-                        // 後にエラー処理を実装
-                        break
+                        completion(.success(()))
+                    // Firestoreへチャレンジ内容の保存が失敗した場合、クロージャにNSError型の値を渡して実行
+                    case .failure(let error as NSError):
+                        completion(.failure(error))
                     }
                 }
-            case .failure:
-                // 後にエラー処理を実装
-                break
+            // Firestorageへ画像の保存が失敗した場合、クロージャにNSError型の値を渡して実行
+            case .failure(let error as NSError):
+                completion(.failure(error))
             }
         }
     }

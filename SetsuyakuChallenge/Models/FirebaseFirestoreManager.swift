@@ -48,6 +48,7 @@ final class FirebaseFirestoreManager {
         let fileName = NSUUID().uuidString
         let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
 
+        // ❓switch文が入れ子になってネスト深くなっているのが少し気になる。良い書き方はあったりするんかしら。
         saveImageData(storageRef: storageRef, image: image) {[weak self] result in
             switch result {
             case .success:
@@ -56,7 +57,7 @@ final class FirebaseFirestoreManager {
                     case .success:
                         self?.delegate?.didSaveData()
                     case .failure:
-                        // 絶対この書き方違う。
+                        // 後にエラー処理を実装
                         break
                     }
                 }
@@ -121,7 +122,6 @@ final class FirebaseFirestoreManager {
         }
     }
     // MARK: - 節約メモの保存
-    // 作成した節約メモをFireStoreに保存
     func saveReportData(challenge: Challenge?, memo: String, price: Int) {
         challengeData = challenge
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -244,5 +244,18 @@ final class FirebaseFirestoreManager {
             }
             print("どの値も目標達成してないぜ")
         }
+    }
+
+    // MARK: - データの保存や取得失敗時に表示するエラーメッセージを取得する処理
+
+    // データの保存失敗時に表示するエラーメッセージを取得
+    func getSaveDataErrorMessage(error: NSError) -> String {
+        if let errCode = FirestoreErrorCode(rawValue: error.code) {
+            switch errCode {
+            case .alreadyExists: return AlertMessage.alreadyExists
+            default: return AlertMessage.someErrors
+            }
+        }
+        return ""
     }
 }

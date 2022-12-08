@@ -163,7 +163,7 @@ final class FirebaseFirestoreManager {
     }
     // MARK: - 節約メモの取得
     // Firestoreに保存されているChallengeのreportデータを取得
-    func fetchReportsData(challenge: Challenge?, completion: @escaping (Result<Challenge?, Error>) -> Void) {
+    func fetchReportsData(challenge: Challenge?, completion: @escaping (Result<Challenge?, NSError>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let challengeDocID = challenge?.docID else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
@@ -177,7 +177,7 @@ final class FirebaseFirestoreManager {
                 let challenge = try snapshot?.data(as: Challenge.self)
                 completion(.success(challenge))
             } catch {
-                completion(.failure(error))
+                completion(.failure(error as NSError))
             }
         }
     }

@@ -20,7 +20,7 @@ final class FirebaseFirestoreManager {
 
     // MARK: - アカウント情報保存
     // Firestore上にデータの保存を行う
-    func saveUserData(email: String, name: String, completion: (Result<User, Error>) -> Void) {
+    func saveUserData(email: String, name: String, completion: (Result<User, NSError>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
         let user = User(email: email, name: name)
@@ -31,7 +31,7 @@ final class FirebaseFirestoreManager {
             try userRef.setData(from: user)
             completion(.success(user))
         } catch {
-            completion(.failure(error))
+            completion(.failure(error as NSError))
         }
     }
     

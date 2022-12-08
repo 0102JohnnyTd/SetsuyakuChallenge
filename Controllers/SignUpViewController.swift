@@ -51,38 +51,55 @@ final class SignUpViewController: UIViewController {
         let password = passwordTextField.text!
         let userName = userNameTextField.text!
 
-        firebaseAuthManager.createUser(email: email, password: password, completion: { result in
+        firebaseAuthManager.createUser(email: email, password: password, completion: { [ weak self ] result in
             switch result {
             case .success:
-                self.firebaseFirestoreManager.saveUserData(email: email, name: userName, completion: { result in
+                self?.firebaseFirestoreManager.saveUserData(email: email, name: userName, completion: { result in
                     switch result {
                     case .success:
-                        self.dismiss(animated: true)
-                    case .failure:
+                        self?.dismiss(animated: true)
+                    case .failure(let error):
                         // 後ほどエラー処理追加
-                        break
+                        guard let errorMessage = self?.firebaseFirestoreManager.getSaveDataErrorMessage(error: error) else { return }
+                        self?.showSaveDataErrorAlert(errorMessage: errorMessage, email: email, userName: userName)
                     }
                 })
             case .failure(let error):
-                print("認証情報の保存に失敗しました: \(error)")
-                let message = self.firebaseAuthManager.getSignUpErrorMessage(error: error)
-                self.showSignUpErrorAlert(message: message)
+                guard let errorMessage = self?.firebaseAuthManager.getSignUpErrorMessage(error: error) else { return }
+                self?.showSignUpErrorAlert(errorMessage: errorMessage)
             }
         })
     }
 
-    // アカウント登録失敗をユーザーに伝えるアラートを表示
-    private func showSignUpErrorAlert(message: String) {
-        let alertController = generateSignUpErrorAlert(title: AlertTitle.signUpError, message: message)
-        self.present(alertController, animated: true)
+    // データの保存失敗時に表示するアラートを表示
+    private func showSaveDataErrorAlert(errorMessage: String, email: String, userName: String) {
+        let alertController = UIAlertController(title: AlertTitle.saveDataError, message: errorMessage, preferredStyle: .alert)
+
+        // ボタンをタップすると再度保存処理を実行する
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            self?.firebaseFirestoreManager.saveUserData(email: email, name: userName, completion: { result in
+                switch result {
+                case .success:
+                    self?.dismiss(animated: true)
+                case .failure(let error):
+                    // 後ほどエラー処理追加
+                    guard let errorMessage = self?.firebaseFirestoreManager.getSaveDataErrorMessage(error: error) else { return }
+                    self?.showSaveDataErrorAlert(errorMessage: errorMessage, email: email, userName: userName)
+                }
+            })
+        }))
+
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .default))
+        present(alertController, animated: true)
     }
 
+
     // アカウント登録失敗をユーザーに伝えるアラートを生成
-    private func generateSignUpErrorAlert(title: String, message: String?) -> UIAlertController {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    private func showSignUpErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.signUpError, message: errorMessage, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
 
-        return alertController
+        self.present(alertController, animated: true)
     }
 
     private func setUpTextFileds() {

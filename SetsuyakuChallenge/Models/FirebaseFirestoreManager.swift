@@ -250,6 +250,19 @@ final class FirebaseFirestoreManager {
             default: return AlertMessage.someErrors
             }
         }
+        // ❓これ消したいなあ
+        return ""
+    }
+
+    // データの取得失敗時に表示するエラーメッセージを取得
+    func getFetchDataErrorMessage(error: NSError) -> String {
+        if let errCode = FirestoreErrorCode(rawValue: error.code) {
+            switch errCode {
+            case .notFound: return AlertMessage.dataNotFound
+            default: return AlertMessage.someErrors
+            }
+        }
+        // ❓これ消したいなあ
         return ""
     }
 }

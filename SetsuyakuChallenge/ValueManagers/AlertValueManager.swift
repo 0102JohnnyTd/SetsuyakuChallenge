@@ -30,6 +30,7 @@ enum AlertMessage {
     static let someErrors = "エラーが発生しました。"
     static let countOverError = "同時に登録できるチャレンジ数は2つまでです"
     static let alreadyExists = "作成しようとしたドキュメントがすでに存在しています"
+    static let dataNotFound = "データが見つかりませんでした"
 }
 
 enum AlertAction {

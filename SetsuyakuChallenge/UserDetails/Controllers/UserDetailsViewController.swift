@@ -35,13 +35,14 @@ final class UserDetailsViewController: UIViewController {
     // ❓viewDidLoadでfetchUserDataを呼ぶとログアウトして再度ログインしたケースに対処できない。でももっと良い方法もあるような。
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        firebaseFirestoreManager.fetchUserData(completion: { result in
+        firebaseFirestoreManager.fetchUserData(completion: { [weak self] result in
             switch result {
             case .success(let user):
-                self.user = user
-                self.userDetailsTableView.reloadData()
-            case .failure:
-                break
+                self?.user = user
+                self?.userDetailsTableView.reloadData()
+            case .failure(let error):
+                guard let errorMessage = self?.firebaseFirestoreManager.getFetchDataErrorMessage(error: error) else { return }
+                self?.showFetchDataErrorAlert(errorMessage: errorMessage)
             }
         })
     }
@@ -53,6 +54,27 @@ final class UserDetailsViewController: UIViewController {
         // XIBファイルのCellを登録
         userDetailsTableView.register(UserDetailsTableViewCell.nib, forCellReuseIdentifier: UserDetailsTableViewCell.identifier)
         userDetailsTableView.register(UserDetailsTableViewHeaderView.nib, forHeaderFooterViewReuseIdentifier: UserDetailsTableViewHeaderView.identifier)
+    }
+
+    // データの取得失敗を伝えるアラートを表示
+    private func showFetchDataErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.fetchDataError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self]_ in
+            self?.firebaseFirestoreManager.fetchUserData(completion: { [weak self] result in
+                switch result {
+                case .success(let user):
+                    self?.user = user
+                    self?.userDetailsTableView.reloadData()
+                case .failure(let error):
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFetchDataErrorMessage(error: error) else { return }
+                    self?.showFetchDataErrorAlert(errorMessage: errorMessage)
+                }
+            })
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
+        present(alertController, animated: true)
     }
 
     // 本当にログアウトを実行するかユーザーに確認するアラートを表示

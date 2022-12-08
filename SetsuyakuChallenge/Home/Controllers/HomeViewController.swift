@@ -78,7 +78,7 @@ final class HomeViewController: UIViewController {
                 }
                 self?.challengeCollectionView.reloadData()
                 guard let challenges = self?.challenges else { return }
-                self?.firebaseFirestoreManager.compareValue(challenges:challenges) { completedChallenge in
+                self?.firebaseFirestoreManager.compareValue(challenges: challenges) { completedChallenge in
                     self?.showTargetAchievementAlert(completedChallenge: completedChallenge.element, name: completedChallenge.element.name)
                 }
             case .failure(let error):

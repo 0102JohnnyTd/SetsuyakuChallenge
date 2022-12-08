@@ -170,7 +170,7 @@ final class FirebaseFirestoreManager {
 
         challengeRef.getDocument { snapshot, error in
             if let error = error {
-                print(error.localizedDescription)
+                completion(.failure(error as NSError))
                 return
             }
             do {
@@ -184,18 +184,18 @@ final class FirebaseFirestoreManager {
 
     // MARK: - ユーザー情報の取得
     // Firestoreに保存されているUserデータを取得
-    func fetchUserData(completion: @escaping (Result<User?, Error>) -> Void) {
+    func fetchUserData(completion: @escaping (Result<User?, NSError>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
         Firestore.firestore().collection(CollectionName.users).document(uid).getDocument { snapshot, error in
             if let error = error {
-                print("ユーザー情報の取得に失敗しました: \(error)")
+                completion(.failure(error as NSError))
             }
             do {
                 let user = try snapshot?.data(as: User.self)
                 completion(.success(user))
             } catch {
-                completion(.failure(error))
+                completion(.failure(error as NSError))
             }
         }
     }

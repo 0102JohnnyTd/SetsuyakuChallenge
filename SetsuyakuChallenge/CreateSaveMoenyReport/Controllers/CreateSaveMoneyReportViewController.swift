@@ -60,7 +60,7 @@ final class CreateSaveMoneyReportViewController: UIViewController {
         // ボタンをタップすると再度保存を実行する
         alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
             self?.saveReportData() }))
-        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .default))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
         present(alertController, animated: true)
     }
 

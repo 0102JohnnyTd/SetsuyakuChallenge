@@ -28,7 +28,7 @@ private enum GeneralSectionCell: Int, CaseIterable {
 
 // URLを管理するenum
 private enum URLManager {
-    // ❓サーバーの不具合が起きた時、強制アンラップをしているが故にクラッシュなどが起きないかテストする必要あり
+    // ⛏サーバーの不具合が起きた時、強制アンラップをしているが故にクラッシュなどが起きないかテストする必要あり
     static let form = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSflWh3XRQS74ocT8WfpWCAMq1vlU35ZsPhdCLTmupQ5GyjAdA/viewform")!
     static let termsOfService = URL(string: "https://sites.google.com/view/uita-termsofservice/%E3%83%9B%E3%83%BC%E3%83%A0")!
     static let privacyPolicy = URL(string: "https://sites.google.com/view/uita-privacypolicy/%E3%83%9B%E3%83%BC%E3%83%A0")!

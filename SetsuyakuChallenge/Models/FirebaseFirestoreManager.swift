@@ -136,7 +136,7 @@ final class FirebaseFirestoreManager {
     }
     // MARK: - チャレンジの取得
     // Firestoreに保存されたチャレンジデータを取得
-    func fetchChallengeData(completion: @escaping (Result<Challenge?, Error>) -> Void) {
+    func fetchChallengeData(completion: @escaping (Result<Challenge?, NSError>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
 
@@ -156,8 +156,7 @@ final class FirebaseFirestoreManager {
 
                     completion(.success(challenge))
                 } catch {
-                    // エラー処理は後ほど学習して修正する
-                    completion(.failure(error))
+                    completion(.failure(error as NSError))
                 }
             }
         }
@@ -241,7 +240,6 @@ final class FirebaseFirestoreManager {
     }
 
     // MARK: - データの保存や取得失敗時に表示するエラーメッセージを取得する処理
-
     // データの保存失敗時に表示するエラーメッセージを取得
     func getSaveDataErrorMessage(error: NSError) -> String {
         if let errCode = FirestoreErrorCode(rawValue: error.code) {

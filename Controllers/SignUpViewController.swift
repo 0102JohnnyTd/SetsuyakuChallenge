@@ -89,7 +89,7 @@ final class SignUpViewController: UIViewController {
             })
         }))
 
-        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .default))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
         present(alertController, animated: true)
     }
 

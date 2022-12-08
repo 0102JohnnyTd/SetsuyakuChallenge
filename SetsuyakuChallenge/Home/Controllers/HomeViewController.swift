@@ -66,23 +66,24 @@ final class HomeViewController: UIViewController {
         challenges.removeAll()
         completedChallenges.removeAll()
 
-        firebaseFirestoreManager.fetchChallengeData() { [self] result in
+        firebaseFirestoreManager.fetchChallengeData() { [weak self] result in
             switch result {
             case .success(let challenge):
                 if let challenge = challenge {
                     if challenge.isChallenge {
-                        challenges.append(challenge)
+                        self?.challenges.append(challenge)
                     } else {
-                        completedChallenges.append(challenge)
+                        self?.completedChallenges.append(challenge)
                     }
                 }
-                self.challengeCollectionView.reloadData()
-                firebaseFirestoreManager.compareValue(challenges: challenges) { completedChallenge in
-                    showTargetAchievementAlert(completedChallenge: completedChallenge.element, name: completedChallenge.element.name)
+                self?.challengeCollectionView.reloadData()
+                guard let challenges = self?.challenges else { return }
+                self?.firebaseFirestoreManager.compareValue(challenges:challenges) { completedChallenge in
+                    self?.showTargetAchievementAlert(completedChallenge: completedChallenge.element, name: completedChallenge.element.name)
                 }
-            case .failure:
-                // 後ほどエラー処理追加
-                break
+            case .failure(let error):
+                guard let errorMessage = self?.firebaseFirestoreManager.getFetchDataErrorMessage(error: error) else { return }
+                self?.showFetchDataErrorAlert(errorMessage: errorMessage)
             }
         }
     }
@@ -121,33 +122,57 @@ final class HomeViewController: UIViewController {
         navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
     }
 
-    // challengesの個数オーバーを伝えるアラートを表示
-    private func showChallengesCountOverAlert() {
-        let alertController = generateChallengesCountOverAlert()
+    // データの取得失敗を伝えるアラートを表示
+    private func showFetchDataErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.fetchDataError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self]_ in
+            self?.fetchChallengeData()
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
+        present(alertController, animated: true)
+    }
+
+    // データの保存失敗時に表示するアラートを表示
+    private func showSaveDataErrorAlert(errorMessage: String, email: String, userName: String) {
+        let alertController = UIAlertController(title: AlertTitle.saveDataError, message: errorMessage, preferredStyle: .alert)
+
+        // ボタンをタップすると再度保存処理を実行する
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            self?.firebaseFirestoreManager.saveUserData(email: email, name: userName, completion: { result in
+                switch result {
+                case .success:
+                    self?.dismiss(animated: true)
+                case .failure(let error):
+                    // 後ほどエラー処理追加
+                    guard let errorMessage = self?.firebaseFirestoreManager.getSaveDataErrorMessage(error: error) else { return }
+                    self?.showSaveDataErrorAlert(errorMessage: errorMessage, email: email, userName: userName)
+                }
+            })
+        }))
+
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
         present(alertController, animated: true)
     }
 
     // チャレンジ達成を伝えるアラートを表示
     private func showTargetAchievementAlert(completedChallenge: Challenge, name: String) {
-        let alertController = generateTargetAchievementAlert(completedChallenge: completedChallenge, name: name)
-        present(alertController, animated: true)
-    }
-
-    // チャレンジ達成を伝えるアラートを生成
-    private func generateTargetAchievementAlert(completedChallenge: Challenge, name: String) -> UIAlertController {
         let alertController = UIAlertController(title: AlertTitle.targetaAchievement, message: "目標『\(name)』" + AlertMessage.targetaAchievement, preferredStyle: .alert)
 
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default) { [weak self] _ in
             self?.fetchChallengeData()
         })
-        return alertController
+
+        present(alertController, animated: true)
     }
 
-    // challengesの個数オーバーを伝えるアラートを生成
-    private func generateChallengesCountOverAlert() -> UIAlertController {
+    // challengesの個数オーバーを伝えるアラートを表示
+    private func showChallengesCountOverAlert() {
         let alertController = UIAlertController(title: AlertTitle.countOverError, message: AlertMessage.countOverError, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default))
-        return alertController
+
+        present(alertController, animated: true)
     }
 
     // CollectionViewにCellを表示させるための処理

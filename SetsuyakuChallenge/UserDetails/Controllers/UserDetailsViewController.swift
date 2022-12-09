@@ -41,7 +41,7 @@ final class UserDetailsViewController: UIViewController {
                 self?.user = user
                 self?.userDetailsTableView.reloadData()
             case .failure(let error):
-                guard let errorMessage = self?.firebaseFirestoreManager.getFetchDataErrorMessage(error: error) else { return }
+                guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
                 self?.showFetchDataErrorAlert(errorMessage: errorMessage)
             }
         })
@@ -67,7 +67,7 @@ final class UserDetailsViewController: UIViewController {
                     self?.user = user
                     self?.userDetailsTableView.reloadData()
                 case .failure(let error):
-                    guard let errorMessage = self?.firebaseFirestoreManager.getFetchDataErrorMessage(error: error) else { return }
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
                     self?.showFetchDataErrorAlert(errorMessage: errorMessage)
                 }
             })

@@ -201,14 +201,14 @@ final class FirebaseFirestoreManager {
     }
     // MARK: - Firestoreに保存されているデータの更新
     // FireStoreに保存された値を更新
-    private func updateData(challenge: Challenge) {
+    func updateData(challenge: Challenge, completion: @escaping (NSError) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let challengeID = challenge.docID else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeID)
 
         challengeRef.updateData([FieldValue.isChallenge: false]) { err in
             if let err = err {
-                print("Error updating document: \(err)")
+                completion(err as NSError)
             } else {
                 print("Document successfully updated")
             }
@@ -226,14 +226,16 @@ final class FirebaseFirestoreManager {
     }
     // MARK: - 合計節約金額が目標節約金額に届いているかの判断を行う処理
     // 合計節約金額が目標金額以上に到達した場合、チャレンジ達成のアラートを表示させる
-    func compareValue(challenges: [Challenge], completion: (EnumeratedSequence<[Challenge]>.Element) -> Void) {
+    func compareValue(challenges: [Challenge], completion: @escaping (Result<EnumeratedSequence<[Challenge]>.Element, NSError>) -> Void) {
         challengesData = challenges
         challengesData.enumerated().forEach {
             if $0.element.totalSavingAmount >= $0.element.goalAmount {
                 let index = $0.offset
                 challengesData[index].isChallenge.toggle()
-                updateData(challenge: $0.element)
-                completion($0)
+                updateData(challenge: $0.element, completion: { error in
+                    completion(.failure(error))
+                })
+                completion(.success($0))
             }
             print("どの値も目標達成してないぜ")
         }
@@ -241,21 +243,10 @@ final class FirebaseFirestoreManager {
 
     // MARK: - データの保存や取得失敗時に表示するエラーメッセージを取得する処理
     // データの保存失敗時に表示するエラーメッセージを取得
-    func getSaveDataErrorMessage(error: NSError) -> String {
+    func getFirestoreErrorMessage(error: NSError) -> String {
         if let errCode = FirestoreErrorCode(rawValue: error.code) {
             switch errCode {
             case .alreadyExists: return AlertMessage.alreadyExists
-            default: return AlertMessage.someErrors
-            }
-        }
-        // ❓これ消したいなあ
-        return ""
-    }
-
-    // データの取得失敗時に表示するエラーメッセージを取得
-    func getFetchDataErrorMessage(error: NSError) -> String {
-        if let errCode = FirestoreErrorCode(rawValue: error.code) {
-            switch errCode {
             case .notFound: return AlertMessage.dataNotFound
             default: return AlertMessage.someErrors
             }

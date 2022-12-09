@@ -17,6 +17,7 @@ enum AlertTitle {
     static let countOverError = "チャレンジ数が上限に達しました"
     static let saveDataError = "データの保存に失敗"
     static let fetchDataError = "データの取得に失敗"
+    static let updateDataError = "データの更新に失敗"
 }
 
 enum AlertMessage {

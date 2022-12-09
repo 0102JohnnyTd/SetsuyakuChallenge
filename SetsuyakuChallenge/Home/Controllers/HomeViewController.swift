@@ -78,11 +78,18 @@ final class HomeViewController: UIViewController {
                 }
                 self?.challengeCollectionView.reloadData()
                 guard let challenges = self?.challenges else { return }
-                self?.firebaseFirestoreManager.compareValue(challenges: challenges) { completedChallenge in
-                    self?.showTargetAchievementAlert(completedChallenge: completedChallenge.element, name: completedChallenge.element.name)
+                self?.firebaseFirestoreManager.compareValue(challenges: challenges) { [weak self] result in
+                    switch result {
+                    case .success(let completedChallenge):
+                        self?.showTargetAchievementAlert(completedChallenge: completedChallenge.element, name: completedChallenge.element.name)
+                    case .failure(let error):
+                        // アラート出す
+                        guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                        self?.showUpdateDataErrorAlert(errorMessage: errorMessage)
+                    }
                 }
             case .failure(let error):
-                guard let errorMessage = self?.firebaseFirestoreManager.getFetchDataErrorMessage(error: error) else { return }
+                guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
                 self?.showFetchDataErrorAlert(errorMessage: errorMessage)
             }
         }
@@ -122,6 +129,25 @@ final class HomeViewController: UIViewController {
         navigationController?.pushViewController(saveMoneyReportListVC, animated: true)
     }
 
+    // データの更新失敗を伝えるアラートを表示
+    private func showUpdateDataErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.updateDataError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            guard let challenges = self?.challenges else { return }
+            self?.firebaseFirestoreManager.compareValue(challenges: challenges) { [weak self] result in
+                switch result {
+                case .success(let completedChallenge):
+                    self?.showTargetAchievementAlert(completedChallenge: completedChallenge.element, name: completedChallenge.element.name)
+                case .failure(let error):
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    self?.showUpdateDataErrorAlert(errorMessage: errorMessage)
+                }
+            }
+        }))
+    }
+
+
     // データの取得失敗を伝えるアラートを表示
     private func showFetchDataErrorAlert(errorMessage: String) {
         let alertController = UIAlertController(title: AlertTitle.fetchDataError, message: errorMessage, preferredStyle: .alert)
@@ -146,7 +172,7 @@ final class HomeViewController: UIViewController {
                     self?.dismiss(animated: true)
                 case .failure(let error):
                     // 後ほどエラー処理追加
-                    guard let errorMessage = self?.firebaseFirestoreManager.getSaveDataErrorMessage(error: error) else { return }
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
                     self?.showSaveDataErrorAlert(errorMessage: errorMessage, email: email, userName: userName)
                 }
             })

@@ -60,7 +60,7 @@ final class SignUpViewController: UIViewController {
                         self?.dismiss(animated: true)
                     case .failure(let error):
                         // 後ほどエラー処理追加
-                        guard let errorMessage = self?.firebaseFirestoreManager.getSaveDataErrorMessage(error: error) else { return }
+                        guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
                         self?.showSaveDataErrorAlert(errorMessage: errorMessage, email: email, userName: userName)
                     }
                 })
@@ -83,7 +83,7 @@ final class SignUpViewController: UIViewController {
                     self?.dismiss(animated: true)
                 case .failure(let error):
                     // 後ほどエラー処理追加
-                    guard let errorMessage = self?.firebaseFirestoreManager.getSaveDataErrorMessage(error: error) else { return }
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
                     self?.showSaveDataErrorAlert(errorMessage: errorMessage, email: email, userName: userName)
                 }
             })

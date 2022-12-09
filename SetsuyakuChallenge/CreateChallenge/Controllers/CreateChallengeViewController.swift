@@ -84,7 +84,7 @@ final class CreateChallengeViewController: UIViewController {
 
     // データの保存失敗時に表示するアラートを表示
     private func showSaveDataErrorAlert(error: NSError) {
-        let errorMessage = firebaseFirestoreManager.getSaveDataErrorMessage(error: error)
+        let errorMessage = firebaseFirestoreManager.getFirestoreErrorMessage(error: error)
         let alertController = UIAlertController(title: AlertTitle.saveDataError, message: errorMessage, preferredStyle: .alert)
 
         // ボタンをタップすると再度保存を実行する

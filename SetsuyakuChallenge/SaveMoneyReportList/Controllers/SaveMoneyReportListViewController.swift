@@ -37,7 +37,7 @@ final class SaveMoneyReportListViewController: UIViewController {
                     self?.saveMoneyReportListTableView.reloadData()
                 }
             case .failure(let error):
-                guard let errorMessage = self?.firebaseFirestoreManager.getFetchDataErrorMessage(error: error) else { return }
+                guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
                 self?.showFetchDataErrorAlert(errorMessage: errorMessage)
             }
         }
@@ -77,7 +77,7 @@ final class SaveMoneyReportListViewController: UIViewController {
                         self?.saveMoneyReportListTableView.reloadData()
                     }
                 case .failure(let error):
-                    guard let errorMessage = self?.firebaseFirestoreManager.getFetchDataErrorMessage(error: error) else { return }
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
                     self?.showFetchDataErrorAlert(errorMessage: errorMessage)
                 }
             }

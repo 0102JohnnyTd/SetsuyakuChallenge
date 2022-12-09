@@ -22,10 +22,11 @@ final class FirebaseAuthManager {
     }
     // MARK: - アカウント削除機能
     // アカウント削除を実行
-    func deleteAccount(completion: @escaping (Result<(), Error>) -> Void) {
+    // 🍏
+    func deleteAccount(completion: @escaping (Result<(), NSError>) -> Void) {
         Auth.auth().currentUser?.delete() { error in
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(error as NSError))
             }
             completion(.success(()))
         }
@@ -42,16 +43,18 @@ final class FirebaseAuthManager {
     }
     // MARK: - ログアウト機能
     // ログアウトを実行
-    func logout(completion: @escaping (Result<(), Error>) -> Void) {
+    // 🍏
+    func logout(completion: @escaping (Result<(), NSError>) -> Void) {
         do {
             try Auth.auth().signOut()
             completion(.success(()))
         } catch {
-            completion(.failure(error))
+            completion(.failure(error as NSError))
         }
     }
     // MARK: - パスワード再設定案内のメール送信
     // パスワードリセットを案内するメールを送信
+    // 🍏
     func sendPasswordReset(email: String, completion: @escaping (Result<(), Error>) -> Void) {
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             if let error = error {

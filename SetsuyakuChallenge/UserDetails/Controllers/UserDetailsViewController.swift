@@ -97,13 +97,13 @@ final class UserDetailsViewController: UIViewController {
         let logoutAlert = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
         logoutAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { [self] _ in
-            firebaseAuthManager.logout(completion: { result in
+            firebaseAuthManager.logout(completion: { [weak self] result in
                 switch result {
                 case .success:
-                    self.showDidFinishLogoutAlert()
+                    self?.showDidFinishLogoutAlert()
                 case .failure(let error):
-                    // 後ほどAlertControllerを表示するなどエラー処理を追加
-                    print(error)
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    self?.showDeleteDataErrorAlert(errorMessage: errorMessage)
                 }
             })
         }))
@@ -135,7 +135,6 @@ final class UserDetailsViewController: UIViewController {
                     self?.navigationController?.popViewController(animated: true)
                 case .failure(let error):
                     // ⛏後ほどエラーをユーザーに伝えるアラートを表示するように改善
-                    print(error)
                 }
             })
         }))

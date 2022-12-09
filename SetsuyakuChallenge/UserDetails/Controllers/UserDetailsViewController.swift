@@ -35,13 +35,14 @@ final class UserDetailsViewController: UIViewController {
     // ❓viewDidLoadでfetchUserDataを呼ぶとログアウトして再度ログインしたケースに対処できない。でももっと良い方法もあるような。
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        firebaseFirestoreManager.fetchUserData(completion: { result in
+        firebaseFirestoreManager.fetchUserData(completion: { [weak self] result in
             switch result {
             case .success(let user):
-                self.user = user
-                self.userDetailsTableView.reloadData()
-            case .failure:
-                break
+                self?.user = user
+                self?.userDetailsTableView.reloadData()
+            case .failure(let error):
+                guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                self?.showFetchDataErrorAlert(errorMessage: errorMessage)
             }
         })
     }
@@ -55,18 +56,95 @@ final class UserDetailsViewController: UIViewController {
         userDetailsTableView.register(UserDetailsTableViewHeaderView.nib, forHeaderFooterViewReuseIdentifier: UserDetailsTableViewHeaderView.identifier)
     }
 
+    // データの取得失敗を伝えるアラートを表示
+    private func showFetchDataErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.fetchDataError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self]_ in
+            self?.firebaseFirestoreManager.fetchUserData(completion: { [weak self] result in
+                switch result {
+                case .success(let user):
+                    self?.user = user
+                    self?.userDetailsTableView.reloadData()
+                case .failure(let error):
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    self?.showFetchDataErrorAlert(errorMessage: errorMessage)
+                }
+            })
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
+        present(alertController, animated: true)
+    }
+
+    // データの削除失敗を伝えるアラートを表示
+    private func showDeleteDataErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.deleteDataError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self]_ in
+            self?.firebaseFirestoreManager.deleteAccountData(completion: { [weak self] error in
+                guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                self?.showDeleteDataErrorAlert(errorMessage: errorMessage)
+            })
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
+        present(alertController, animated: true)
+    }
+
+    // ログアウト失敗を伝えるアラートを表示
+    private func showLogoutErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.logoutError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            self?.firebaseAuthManager.logout(completion: { [weak self] result in
+                switch result {
+                case .success:
+                    self?.showDidFinishLogoutAlert()
+                case .failure(let error):
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    self?.showLogoutErrorAlert(errorMessage: errorMessage)
+                }
+            })
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
+        present(alertController, animated: true)
+    }
+
+    // アカウント削除失敗を伝えるアラートを表示
+    private func showDeleteAccountErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.deleteAccountError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            self?.firebaseAuthManager.deleteAccount(completion: { result in
+                switch result {
+                case .success:
+                    self?.navigationController?.popViewController(animated: true)
+                case .failure(let error):
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    // アカウント削除失敗を伝えるアラートを表示
+                    self?.showDeleteDataErrorAlert(errorMessage: errorMessage)
+                }
+            })
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
+        present(alertController, animated: true)
+    }
+
     // 本当にログアウトを実行するかユーザーに確認するアラートを表示
     private func showLogoutAlert() {
         let logoutAlert = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
         logoutAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { [self] _ in
-            firebaseAuthManager.logout(completion: { result in
+            firebaseAuthManager.logout(completion: { [weak self] result in
                 switch result {
                 case .success:
-                    self.showDidFinishLogoutAlert()
+                    self?.showDidFinishLogoutAlert()
                 case .failure(let error):
-                    // 後ほどAlertControllerを表示するなどエラー処理を追加
-                    print(error)
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    self?.showLogoutErrorAlert(errorMessage: errorMessage)
                 }
             })
         }))
@@ -87,15 +165,19 @@ final class UserDetailsViewController: UIViewController {
         let alert = UIAlertController(title: "アカウントを削除しますか？", message: "この操作は取り消せません", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { [weak self] _ in
-            // 後々エラー処理を追加
-            self?.firebaseFirestoreManager.deleteAccountData(completion: { _ in  } )
+
+            self?.firebaseFirestoreManager.deleteAccountData(completion: { [weak self] error in
+                guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                self?.showDeleteDataErrorAlert(errorMessage: errorMessage)
+            })
             self?.firebaseAuthManager.deleteAccount(completion: { result in
                 switch result {
                 case .success:
                     self?.navigationController?.popViewController(animated: true)
                 case .failure(let error):
-                    // ⛏後ほどエラーをユーザーに伝えるアラートを表示するように改善
-                    print(error)
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    // アカウント削除失敗を伝えるアラートを表示
+                    self?.showDeleteDataErrorAlert(errorMessage: errorMessage)
                 }
             })
         }))

@@ -29,15 +29,16 @@ final class SaveMoneyReportListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        firebaseFirestoreManager.fetchReportsData(challenge: challenge) { result in
+        firebaseFirestoreManager.fetchReportsData(challenge: challenge) { [ weak self ] result in
             switch result {
             case .success(let challenge):
                 if let challenge = challenge {
-                    self.challenge?.reports = challenge.reports
-                    self.saveMoneyReportListTableView.reloadData()
+                    self?.challenge?.reports = challenge.reports
+                    self?.saveMoneyReportListTableView.reloadData()
                 }
-            case .failure(_):
-                break
+            case .failure(let error):
+                guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                self?.showFetchDataErrorAlert(errorMessage: errorMessage)
             }
         }
     }
@@ -60,6 +61,30 @@ final class SaveMoneyReportListViewController: UIViewController {
     // XIBファイルのセルをViewControllerに登録
     private func registerTableViewCell() {
         saveMoneyReportListTableView.register(SaveMoneyReportListTableViewCell.nib, forCellReuseIdentifier: SaveMoneyReportListTableViewCell.identifier)
+    }
+
+    // データの取得失敗を伝えるアラートを表示
+    private func showFetchDataErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.fetchDataError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            guard let challenge = self?.challenge else { return }
+            self?.firebaseFirestoreManager.fetchReportsData(challenge: challenge) { result in
+                switch result {
+                case .success(let challenge):
+                    if let challenge = challenge {
+                        self?.challenge?.reports = challenge.reports
+                        self?.saveMoneyReportListTableView.reloadData()
+                    }
+                case .failure(let error):
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    self?.showFetchDataErrorAlert(errorMessage: errorMessage)
+                }
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
+        present(alertController, animated: true)
     }
 }
 

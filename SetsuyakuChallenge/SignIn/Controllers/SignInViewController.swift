@@ -45,7 +45,7 @@ final class SignInViewController: UIViewController {
 
     // ログイン失敗をユーザーに伝えるアラートを表示
     private func showLoginErrorAlert(error: NSError) {
-        let message = firebaseAuthManager.getSignInErrorMessage(error: error)
+        let message = firebaseAuthManager.getAuthErrorMessage(error: error)
         let alertController = generateLoginErrorAlert(title: AlertTitle.loginError, message: message)
         self.present(alertController, animated: true, completion: nil)
     }

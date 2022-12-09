@@ -12,14 +12,7 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 import FirebaseAuth
 
-protocol FirebaseFirestoreManagerDelegate: AnyObject {
-    func didSaveData()
-}
-
 final class FirebaseFirestoreManager {
-    // ModelからControllerへ通知を送るためdelegateを定義
-    weak var delegate: FirebaseFirestoreManagerDelegate?
-
     // Controllerからデータを受け取るためのプロパティ
     private var challengeData: Challenge?
     private var challengesData: [Challenge] = []
@@ -27,7 +20,7 @@ final class FirebaseFirestoreManager {
 
     // MARK: - アカウント情報保存
     // Firestore上にデータの保存を行う
-    func saveUserData(email: String, name: String, completion: (Result<User, Error>) -> Void) {
+    func saveUserData(email: String, name: String, completion: (Result<User, NSError>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
         let user = User(email: email, name: name)
@@ -38,65 +31,69 @@ final class FirebaseFirestoreManager {
             try userRef.setData(from: user)
             completion(.success(user))
         } catch {
-            completion(.failure(error))
+            completion(.failure(error as NSError))
         }
     }
     
     // MARK: - チャレンジの保存
     // Firestoreへの保存処理を実行
-    func executeSaveData(image: UIImage, name: String, goalAmount: Int) {
+    func executeSaveData(image: UIImage, name: String, goalAmount: Int, completion: @escaping (Result<(), NSError>) -> Void) {
         let fileName = NSUUID().uuidString
         let storageRef = Storage.storage().reference().child(StorageFileName.itemImage).child(fileName)
 
-        saveImageData(storageRef: storageRef, image: image) {[weak self] result in
+        // ⛏switch文が入れ子になって可読性が微妙。async awaitを使うとスッキリ書ける。
+        saveImageData(storageRef: storageRef, image: image) { [weak self] result in
             switch result {
             case .success:
-                self?.saveChallengeData(storageRef: storageRef, name: name, goalAmount: goalAmount) { [weak self] result in
+                self?.saveChallengeData(storageRef: storageRef, name: name, goalAmount: goalAmount) { result in
                     switch result {
                     case .success:
-                        self?.delegate?.didSaveData()
-                    case .failure:
-                        // 絶対この書き方違う。
-                        break
+                        completion(.success(()))
+                    // Firestoreへチャレンジ内容の保存が失敗した場合、クロージャにNSError型の値を渡して実行
+                    case .failure(let error):
+                        completion(.failure(error))
                     }
                 }
-            case .failure:
-                // 後にエラー処理を実装
-                break
-            }
-        }
-    }
-
-    // ユーザーが入力したチャレンジ内容をFirestoreに保存
-    private func saveChallengeData(storageRef: StorageReference, name: String, goalAmount: Int, completion: @escaping (Result<CollectionReference, Error>) -> Void) {
-        print(#function)
-        fetchImageURL(storageRef: storageRef) { imageURL in
-            let challenge = Challenge(imageURL: imageURL, name: name, goalAmount: goalAmount, reports: [], totalSavingAmount: 0, isChallenge: true)
-
-            guard let uid = Auth.auth().currentUser?.uid else { return }
-            let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
-            do {
-                try challengeRef.document().setData(from: challenge)
-                completion(.success(challengeRef))
-            } catch {
-                print("error: \(error.localizedDescription)")
+            // Firestorageへ画像の保存が失敗した場合、クロージャにNSError型の値を渡して実行
+            case .failure(let error as NSError):
                 completion(.failure(error))
             }
         }
     }
 
-    // Firebaseのstorageに保存された画像のurlを取得してsaveChallengeDataの引数に当てる
-    private func fetchImageURL(storageRef: StorageReference, completion: @escaping (String) -> Void) {
+    // ユーザーが入力したチャレンジ内容をFirestoreに保存
+    private func saveChallengeData(storageRef: StorageReference, name: String, goalAmount: Int, completion: @escaping (Result<CollectionReference, NSError>) -> Void) {
         print(#function)
+        fetchImageURL(storageRef: storageRef) { result in
+            switch result {
+            case .success(let imageURL):
+                let challenge = Challenge(imageURL: imageURL, name: name, goalAmount: goalAmount, reports: [], totalSavingAmount: 0, isChallenge: true)
+                guard let uid = Auth.auth().currentUser?.uid else { return }
+                let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
+                do {
+                    try challengeRef.document().setData(from: challenge)
+                    completion(.success(challengeRef))
+                } catch {
+                    print("error: \(error.localizedDescription)")
+                    completion(.failure(error as NSError))
+                }
+            case .failure(let error):
+                // アラートを表示
+                completion(.failure(error as NSError))
+            }
+        }
+    }
+
+    // Firebaseのstorageに保存された画像のurlを取得してsaveChallengeDataの引数に当てる
+    private func fetchImageURL(storageRef: StorageReference, completion: @escaping (Result<String, NSError>) -> Void) {
         storageRef.downloadURL { url, err in
             if let err = err {
-                print("Firestorageのデータの取得に失敗しました \(err)")
+                completion(.failure(err as NSError))
                 return
             }
             print("Firestorageのデータの取得に成功しました")
             guard let itemImageURL = url?.absoluteString else { return }
-            completion(itemImageURL)
-//            self.saveChallengeData(imageURL: itemImageURL)
+            completion(.success(itemImageURL))
         }
     }
 
@@ -121,8 +118,7 @@ final class FirebaseFirestoreManager {
         }
     }
     // MARK: - 節約メモの保存
-    // 作成した節約メモをFireStoreに保存
-    func saveReportData(challenge: Challenge?, memo: String, price: Int) {
+    func saveReportData(challenge: Challenge?, memo: String, price: Int, completion: (Result<(), NSError>) -> Void) {
         challengeData = challenge
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let  challengeDocID = challengeData?.docID else { return }
@@ -135,14 +131,15 @@ final class FirebaseFirestoreManager {
         
         do {
             try challegenRef.setData(from: challengeData)
-            delegate?.didSaveData()
+            completion(.success(()))
         } catch {
             print("error: \(error.localizedDescription)")
+            completion(.failure(error as NSError))
         }
     }
     // MARK: - チャレンジの取得
     // Firestoreに保存されたチャレンジデータを取得
-    func fetchChallengeData(completion: @escaping (Result<Challenge?, Error>) -> Void) {
+    func fetchChallengeData(completion: @escaping (Result<Challenge?, NSError>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges)
 
@@ -162,60 +159,59 @@ final class FirebaseFirestoreManager {
 
                     completion(.success(challenge))
                 } catch {
-                    // エラー処理は後ほど学習して修正する
-                    completion(.failure(error))
+                    completion(.failure(error as NSError))
                 }
             }
         }
     }
     // MARK: - 節約メモの取得
     // Firestoreに保存されているChallengeのreportデータを取得
-    func fetchReportsData(challenge: Challenge?, completion: @escaping (Result<Challenge?, Error>) -> Void) {
+    func fetchReportsData(challenge: Challenge?, completion: @escaping (Result<Challenge?, NSError>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let challengeDocID = challenge?.docID else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeDocID)
 
         challengeRef.getDocument { snapshot, error in
             if let error = error {
-                print(error.localizedDescription)
+                completion(.failure(error as NSError))
                 return
             }
             do {
                 let challenge = try snapshot?.data(as: Challenge.self)
                 completion(.success(challenge))
             } catch {
-                completion(.failure(error))
+                completion(.failure(error as NSError))
             }
         }
     }
 
     // MARK: - ユーザー情報の取得
     // Firestoreに保存されているUserデータを取得
-    func fetchUserData(completion: @escaping (Result<User?, Error>) -> Void) {
+    func fetchUserData(completion: @escaping (Result<User?, NSError>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
         Firestore.firestore().collection(CollectionName.users).document(uid).getDocument { snapshot, error in
             if let error = error {
-                print("ユーザー情報の取得に失敗しました: \(error)")
+                completion(.failure(error as NSError))
             }
             do {
                 let user = try snapshot?.data(as: User.self)
                 completion(.success(user))
             } catch {
-                completion(.failure(error))
+                completion(.failure(error as NSError))
             }
         }
     }
     // MARK: - Firestoreに保存されているデータの更新
     // FireStoreに保存された値を更新
-    private func updateData(challenge: Challenge) {
+    func updateData(challenge: Challenge, completion: @escaping (NSError) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let challengeID = challenge.docID else { return }
         let challengeRef = Firestore.firestore().collection(CollectionName.users).document(uid).collection(CollectionName.challenges).document(challengeID)
 
         challengeRef.updateData([FieldValue.isChallenge: false]) { err in
             if let err = err {
-                print("Error updating document: \(err)")
+                completion(err as NSError)
             } else {
                 print("Document successfully updated")
             }
@@ -223,26 +219,42 @@ final class FirebaseFirestoreManager {
     }
     // MARK: - アカウント情報の削除を実行
     // FireStoreに保存されているUserデータの削除を実行
-    func deleteAccountData(completion: @escaping (Error) -> Void) {
+    func deleteAccountData(completion: @escaping (NSError) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection(CollectionName.users).document(uid).delete() { error in
             if let error = error {
-                completion(error)
+                completion(error as NSError)
             }
         }
     }
     // MARK: - 合計節約金額が目標節約金額に届いているかの判断を行う処理
     // 合計節約金額が目標金額以上に到達した場合、チャレンジ達成のアラートを表示させる
-    func compareValue(challenges: [Challenge], completion: (EnumeratedSequence<[Challenge]>.Element) -> Void) {
+    func compareValue(challenges: [Challenge], completion: @escaping (Result<EnumeratedSequence<[Challenge]>.Element, NSError>) -> Void) {
         challengesData = challenges
         challengesData.enumerated().forEach {
             if $0.element.totalSavingAmount >= $0.element.goalAmount {
                 let index = $0.offset
                 challengesData[index].isChallenge.toggle()
-                updateData(challenge: $0.element)
-                completion($0)
+                updateData(challenge: $0.element, completion: { error in
+                    completion(.failure(error))
+                })
+                completion(.success($0))
             }
             print("どの値も目標達成してないぜ")
         }
+    }
+
+    // MARK: - データの保存や取得失敗時に表示するエラーメッセージを取得する処理
+    // データの保存失敗時に表示するエラーメッセージを取得
+    func getFirestoreErrorMessage(error: NSError) -> String {
+        if let errCode = FirestoreErrorCode(rawValue: error.code) {
+            switch errCode {
+            case .alreadyExists: return AlertMessage.alreadyExists
+            case .notFound: return AlertMessage.dataNotFound
+            default: return AlertMessage.someErrors
+            }
+        }
+        // ❓これ消したいなあ
+        return ""
     }
 }

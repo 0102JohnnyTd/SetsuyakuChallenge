@@ -21,6 +21,7 @@ enum AlertTitle {
     static let updateDataError = "データの更新に失敗"
     static let deleteDataError = "データの削除に失敗"
     static let deleteAccountError = "アカウントの削除に失敗"
+    static let sendEmailError = "メールの送信に失敗"
 }
 
 enum AlertMessage {

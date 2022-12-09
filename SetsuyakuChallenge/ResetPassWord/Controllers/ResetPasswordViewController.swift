@@ -27,32 +27,37 @@ final class ResetPasswordViewController: UIViewController {
     // パスワードリセットを案内するメールを送信
     private func sendResetPasswordEmail() {
         guard let email = emailTextField.text else { return }
-        firebaseAuthManager.sendPasswordReset(email: email, completion: { result in
+        firebaseAuthManager.sendPasswordReset(email: email, completion: { [weak self] result in
             switch result {
             case .success:
-                self.showEmailSendCompleteAlert(email: email)
+                self?.showEmailSendCompleteAlert(email: email)
             case .failure(let error):
-                // ⛏後ほど修正
-                print("送信エラーです： \(error.localizedDescription)")
+                guard let errorMessage = self?.firebaseAuthManager.getAuthErrorMessage(error: error) else { return }
+                self?.showSendEmailErrorAlert(errorMessage: errorMessage)
             }
         })
     }
 
-    // パスワードリセットを案内するメール送信完了をユーザーに伝えるアラートを表示
-    private func showEmailSendCompleteAlert(email: String) {
-        let alertController = generateEmailSendCompleteAlert(email: email)
+    // メール送信失敗を伝えるアラートを表示
+    private func showSendEmailErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.sendEmailError, message: errorMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            self?.sendResetPasswordEmail()
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
         present(alertController, animated: true)
     }
 
     //  パスワードリセットを案内するメール送信完了をユーザーに伝えるアラートを生成
-    private func generateEmailSendCompleteAlert(email: String) -> UIAlertController {
+    private func showEmailSendCompleteAlert(email: String) {
         let alertController = UIAlertController(title: AlertTitle.emailSendComplete, message: email + AlertMessage.emailSendComplete, preferredStyle: .alert)
 
         alertController.addAction(UIAlertAction(title: AlertAction.ok, style: .default) { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         })
 
-        return alertController
+        present(alertController, animated: true)
     }
 
     private func setUpTextField() {

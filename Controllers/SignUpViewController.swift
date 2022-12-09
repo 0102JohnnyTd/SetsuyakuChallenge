@@ -65,7 +65,7 @@ final class SignUpViewController: UIViewController {
                     }
                 })
             case .failure(let error):
-                guard let errorMessage = self?.firebaseAuthManager.getSignUpErrorMessage(error: error) else { return }
+                guard let errorMessage = self?.firebaseAuthManager.getAuthErrorMessage(error: error) else { return }
                 self?.showSignUpErrorAlert(errorMessage: errorMessage)
             }
         })

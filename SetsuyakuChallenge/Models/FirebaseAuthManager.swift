@@ -22,7 +22,6 @@ final class FirebaseAuthManager {
     }
     // MARK: - アカウント削除機能
     // アカウント削除を実行
-    // 🍏
     func deleteAccount(completion: @escaping (Result<(), NSError>) -> Void) {
         Auth.auth().currentUser?.delete() { error in
             if let error = error {

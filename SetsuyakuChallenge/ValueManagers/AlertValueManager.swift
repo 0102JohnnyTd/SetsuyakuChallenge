@@ -13,11 +13,14 @@ enum AlertTitle {
     static let targetaAchievement = "🎉おめでとう🎉"
     static let emailSendComplete = "メール送信完了"
     static let loginError = "ログインに失敗"
+    static let logoutError = "ログアウトに失敗"
     static let signUpError = "アカウント作成に失敗"
     static let countOverError = "チャレンジ数が上限に達しました"
     static let saveDataError = "データの保存に失敗"
     static let fetchDataError = "データの取得に失敗"
     static let updateDataError = "データの更新に失敗"
+    static let deleteDataError = "データの削除に失敗"
+    static let deleteAccountError = "アカウントの削除に失敗"
 }
 
 enum AlertMessage {

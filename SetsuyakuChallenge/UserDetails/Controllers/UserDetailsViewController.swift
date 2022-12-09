@@ -77,6 +77,21 @@ final class UserDetailsViewController: UIViewController {
         present(alertController, animated: true)
     }
 
+    // データの削除失敗を伝えるアラートを表示
+    private func showDeleteDataErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.fetchDataError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self]_ in
+            self?.firebaseFirestoreManager.deleteAccountData(completion: { [weak self] error in
+                guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                self?.showDeleteDataErrorAlert(errorMessage: errorMessage)
+            })
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
+        present(alertController, animated: true)
+    }
+
     // 本当にログアウトを実行するかユーザーに確認するアラートを表示
     private func showLogoutAlert() {
         let logoutAlert = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
@@ -109,8 +124,11 @@ final class UserDetailsViewController: UIViewController {
         let alert = UIAlertController(title: "アカウントを削除しますか？", message: "この操作は取り消せません", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { [weak self] _ in
-            // 後々エラー処理を追加
-            self?.firebaseFirestoreManager.deleteAccountData(completion: { _ in  } )
+
+            self?.firebaseFirestoreManager.deleteAccountData(completion: { [weak self] error in
+                guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                self?.showDeleteDataErrorAlert(errorMessage: errorMessage)
+            })
             self?.firebaseAuthManager.deleteAccount(completion: { result in
                 switch result {
                 case .success:

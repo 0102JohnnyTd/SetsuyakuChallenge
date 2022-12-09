@@ -80,6 +80,7 @@ final class FirebaseFirestoreManager {
     }
 
     // Firebaseのstorageに保存された画像のurlを取得してsaveChallengeDataの引数に当てる
+    // 🍏
     private func fetchImageURL(storageRef: StorageReference, completion: @escaping (String) -> Void) {
         print(#function)
         storageRef.downloadURL { url, err in
@@ -215,12 +216,13 @@ final class FirebaseFirestoreManager {
         }
     }
     // MARK: - アカウント情報の削除を実行
+    // 🍏
     // FireStoreに保存されているUserデータの削除を実行
-    func deleteAccountData(completion: @escaping (Error) -> Void) {
+    func deleteAccountData(completion: @escaping (NSError) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection(CollectionName.users).document(uid).delete() { error in
             if let error = error {
-                completion(error)
+                completion(error as NSError)
             }
         }
     }

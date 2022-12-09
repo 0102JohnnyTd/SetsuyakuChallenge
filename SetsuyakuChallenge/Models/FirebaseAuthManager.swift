@@ -43,7 +43,6 @@ final class FirebaseAuthManager {
     }
     // MARK: - ログアウト機能
     // ログアウトを実行
-    // 🍏
     func logout(completion: @escaping (Result<(), NSError>) -> Void) {
         do {
             try Auth.auth().signOut()

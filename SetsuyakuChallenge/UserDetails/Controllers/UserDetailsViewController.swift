@@ -92,6 +92,26 @@ final class UserDetailsViewController: UIViewController {
         present(alertController, animated: true)
     }
 
+    // ログアウト失敗を伝えるアラートを表示
+    private func showLogoutErrorAlert(errorMessage: String) {
+        let alertController = UIAlertController(title: AlertTitle.fetchDataError, message: errorMessage, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            self?.firebaseAuthManager.logout(completion: { [weak self] result in
+                switch result {
+                case .success:
+                    self?.showDidFinishLogoutAlert()
+                case .failure(let error):
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    self?.showLogoutErrorAlert(errorMessage: errorMessage)
+                }
+            })
+        }))
+        alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
+
+        present(alertController, animated: true)
+    }
+
     // 本当にログアウトを実行するかユーザーに確認するアラートを表示
     private func showLogoutAlert() {
         let logoutAlert = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
@@ -103,7 +123,7 @@ final class UserDetailsViewController: UIViewController {
                     self?.showDidFinishLogoutAlert()
                 case .failure(let error):
                     guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
-                    self?.showDeleteDataErrorAlert(errorMessage: errorMessage)
+                    self?.showLogoutErrorAlert(errorMessage: errorMessage)
                 }
             })
         }))
@@ -134,7 +154,9 @@ final class UserDetailsViewController: UIViewController {
                 case .success:
                     self?.navigationController?.popViewController(animated: true)
                 case .failure(let error):
-                    // ⛏後ほどエラーをユーザーに伝えるアラートを表示するように改善
+                    guard let errorMessage = self?.firebaseFirestoreManager.getFirestoreErrorMessage(error: error) else { return }
+                    // アカウント削除失敗を伝えるアラートを表示
+
                 }
             })
         }))

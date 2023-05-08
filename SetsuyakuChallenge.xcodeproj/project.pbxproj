@@ -214,12 +214,12 @@
 		1C07C81728F6B01B003CB630 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1C1C3697292F6A5B003C8095 /* FirebaseFirestoreManager.swift */,
+				1CFC88912937906B003A18C6 /* FirebaseAuthManager.swift */,
 				1CD3807F28A4F0C100B2AC80 /* User.swift */,
 				1CA2DD2328B8A0E900F401CC /* Challenge.swift */,
 				1CEB237B28BF45F500D3FE15 /* SaveMoneyReport.swift */,
 				1CD380B728A63C7000B2AC80 /* Option.swift */,
-				1C1C3697292F6A5B003C8095 /* FirebaseFirestoreManager.swift */,
-				1CFC88912937906B003A18C6 /* FirebaseAuthManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -811,6 +811,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -843,6 +844,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

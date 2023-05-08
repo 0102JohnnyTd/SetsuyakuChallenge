@@ -47,7 +47,7 @@ final class CreateSaveMoneyReportViewController: UIViewController {
             case .success:
                 self?.navigationController?.popViewController(animated: true)
             case .failure(let error):
-                showSaveDataErrorAlert(error: error)
+                self?.showSaveDataErrorAlert(error: error)
             }
         })
     }

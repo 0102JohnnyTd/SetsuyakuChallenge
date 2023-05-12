@@ -50,35 +50,18 @@ final class CreateChallengeViewController: UIViewController {
             showInputErrorAlert()
             return
         }
-
         startIndicator()
-
         // スコープから抜ける時に呼び出される処理
-        // 後始末で絶対に行いたい処理で使える
-        // defer通過前でreturnが呼ばれた場合などはdeferの中の処理が走ることはない
         defer {
             stopIndicator()
         }
 
         do {
-            try await firebaseFirestoreManager.newSaveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!)
-//            stopIndicator()
+            try await firebaseFirestoreManager.saveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!)
             navigationController?.popViewController(animated: true)
         } catch {
-//            stopIndicator()
             showSaveDataErrorAlert(error: error as NSError)
         }
-
-        // 👇Before
-//        firebaseFirestoreManager.executeSaveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!, completion: { [weak self] result in
-//            self?.stopIndicator()
-//            switch result {
-//            case .success:
-//                self?.navigationController?.popViewController(animated: true)
-//            case .failure(let error):
-//                self?.showSaveDataErrorAlert(error: error)
-//            }
-//        })
     }
 
 
@@ -108,10 +91,11 @@ final class CreateChallengeViewController: UIViewController {
         let errorMessage = firebaseFirestoreManager.getFirestoreErrorMessage(error: error)
         let alertController = UIAlertController(title: AlertTitle.saveDataError, message: errorMessage, preferredStyle: .alert)
 
-        // ボタンをタップすると再度保存を実行する
-//        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
-//            await self?.saveData() }))
-        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: {_ in }))
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+            Task {
+                await self?.saveData()
+            }
+        }))
 
         alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
         present(alertController, animated: true)

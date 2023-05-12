@@ -19,7 +19,9 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
-        saveData()
+        Task { @MainActor in
+            await saveData()
+        }
     }
     // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [nameTextField, goalAmountTextField] }
@@ -39,7 +41,7 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     // チャレンジの作成を実行
-    private func saveData() {
+    private func saveData() async {
         // goalAmountTextFieldの入力値をInt型に変換
         let inputPrice = goalAmountTextField.textToInt
 
@@ -49,15 +51,17 @@ final class CreateChallengeViewController: UIViewController {
             return
         }
         startIndicator()
-        firebaseFirestoreManager.executeSaveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!, completion: { [weak self] result in
-            self?.stopIndicator()
-            switch result {
-            case .success:
-                self?.navigationController?.popViewController(animated: true)
-            case .failure(let error):
-                self?.showSaveDataErrorAlert(error: error)
-            }
-        })
+        // スコープから抜ける時に呼び出される処理
+        defer {
+            stopIndicator()
+        }
+
+        do {
+            try await firebaseFirestoreManager.saveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!)
+            navigationController?.popViewController(animated: true)
+        } catch {
+            showSaveDataErrorAlert(error: error as NSError)
+        }
     }
 
 
@@ -87,9 +91,12 @@ final class CreateChallengeViewController: UIViewController {
         let errorMessage = firebaseFirestoreManager.getFirestoreErrorMessage(error: error)
         let alertController = UIAlertController(title: AlertTitle.saveDataError, message: errorMessage, preferredStyle: .alert)
 
-        // ボタンをタップすると再度保存を実行する
         alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
-            self?.saveData() }))
+            Task {
+                await self?.saveData()
+            }
+        }))
+
         alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
         present(alertController, animated: true)
     }

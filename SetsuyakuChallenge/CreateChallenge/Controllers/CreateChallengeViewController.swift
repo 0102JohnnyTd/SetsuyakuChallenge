@@ -19,7 +19,9 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     @IBAction private func didTapCreateChallengeButton(_ sender: Any) {
-        saveData()
+        Task { @MainActor in
+            await saveData()
+        }
     }
     // 同じ処理を一括で実行する為に複数のtextFieldを一つのプロパティにまとめる
     private var textFields: [UITextField] { [nameTextField, goalAmountTextField] }
@@ -39,7 +41,7 @@ final class CreateChallengeViewController: UIViewController {
     }
 
     // チャレンジの作成を実行
-    private func saveData() {
+    private func saveData() async {
         // goalAmountTextFieldの入力値をInt型に変換
         let inputPrice = goalAmountTextField.textToInt
 
@@ -48,16 +50,35 @@ final class CreateChallengeViewController: UIViewController {
             showInputErrorAlert()
             return
         }
+
         startIndicator()
-        firebaseFirestoreManager.executeSaveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!, completion: { [weak self] result in
-            self?.stopIndicator()
-            switch result {
-            case .success:
-                self?.navigationController?.popViewController(animated: true)
-            case .failure(let error):
-                self?.showSaveDataErrorAlert(error: error)
-            }
-        })
+
+        // スコープから抜ける時に呼び出される処理
+        // 後始末で絶対に行いたい処理で使える
+        // defer通過前でreturnが呼ばれた場合などはdeferの中の処理が走ることはない
+        defer {
+            stopIndicator()
+        }
+
+        do {
+            try await firebaseFirestoreManager.newSaveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!)
+//            stopIndicator()
+            navigationController?.popViewController(animated: true)
+        } catch {
+//            stopIndicator()
+            showSaveDataErrorAlert(error: error as NSError)
+        }
+
+        // 👇Before
+//        firebaseFirestoreManager.executeSaveData(image: imageView.image!, name: nameTextField.text!, goalAmount: inputPrice!, completion: { [weak self] result in
+//            self?.stopIndicator()
+//            switch result {
+//            case .success:
+//                self?.navigationController?.popViewController(animated: true)
+//            case .failure(let error):
+//                self?.showSaveDataErrorAlert(error: error)
+//            }
+//        })
     }
 
 
@@ -88,8 +109,10 @@ final class CreateChallengeViewController: UIViewController {
         let alertController = UIAlertController(title: AlertTitle.saveDataError, message: errorMessage, preferredStyle: .alert)
 
         // ボタンをタップすると再度保存を実行する
-        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
-            self?.saveData() }))
+//        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: { [weak self] _ in
+//            await self?.saveData() }))
+        alertController.addAction(UIAlertAction(title: AlertAction.retry, style: .default, handler: {_ in }))
+
         alertController.addAction(UIAlertAction(title: AlertAction.cancel, style: .cancel))
         present(alertController, animated: true)
     }

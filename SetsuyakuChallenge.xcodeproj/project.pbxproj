@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1C1C3698292F6A5B003C8095 /* FirebaseFirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1C3697292F6A5B003C8095 /* FirebaseFirestoreManager.swift */; };
+		1C1D52112A2F69DB0090BADE /* PiggyBank.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C1D52102A2F69DB0090BADE /* PiggyBank.storyboard */; };
+		1C3049D72A2F6EF300397B29 /* PiggyBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3049D62A2F6EF300397B29 /* PiggyBankViewController.swift */; };
+		1C65E6692A2DF2B100D5115F /* GoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C65E6682A2DF2B100D5115F /* GoalCell.xib */; };
+		1C65E66B2A2E1B0D00D5115F /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C65E66A2A2E1B0D00D5115F /* GoalCell.swift */; };
 		1C6DF4A428BCE54B002F52D0 /* SaveMoneyReportList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */; };
 		1C6DF4A628BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A528BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift */; };
 		1C6DF4A828BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C6DF4A728BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib */; };
@@ -56,6 +60,10 @@
 
 /* Begin PBXFileReference section */
 		1C1C3697292F6A5B003C8095 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
+		1C1D52102A2F69DB0090BADE /* PiggyBank.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PiggyBank.storyboard; sourceTree = "<group>"; };
+		1C3049D62A2F6EF300397B29 /* PiggyBankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiggyBankViewController.swift; sourceTree = "<group>"; };
+		1C65E6682A2DF2B100D5115F /* GoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoalCell.xib; sourceTree = "<group>"; };
+		1C65E66A2A2E1B0D00D5115F /* GoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
 		1C6DF4A328BCE547002F52D0 /* SaveMoneyReportList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaveMoneyReportList.storyboard; sourceTree = "<group>"; };
 		1C6DF4A528BCE5D1002F52D0 /* SaveMoneyReportListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMoneyReportListViewController.swift; sourceTree = "<group>"; };
 		1C6DF4A728BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveMoneyReportListTableViewCell.xib; sourceTree = "<group>"; };
@@ -427,6 +435,41 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		1C1D52122A2F69E90090BADE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1C65E66A2A2E1B0D00D5115F /* GoalCell.swift */,
+				1C65E6682A2DF2B100D5115F /* GoalCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1C1D52132A2F6C450090BADE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1C3049D62A2F6EF300397B29 /* PiggyBankViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1C65E6662A2DF20C00D5115F /* PiggyBank */ = {
+			isa = PBXGroup;
+			children = (
+				1C65E6672A2DF21F00D5115F /* Views */,
+				1C1D52132A2F6C450090BADE /* Controllers */,
+			);
+			path = PiggyBank;
+			sourceTree = "<group>";
+		};
+		1C65E6672A2DF21F00D5115F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1C1D52102A2F69DB0090BADE /* PiggyBank.storyboard */,
+				1C1D52122A2F69E90090BADE /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1CB7A3F228A36021008E1262 = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +505,7 @@
 				1C07C80F28F6AD23003CB630 /* SignIn */,
 				1C07C80E28F6AD1B003CB630 /* SignUp */,
 				1C07C80C28F6ACA8003CB630 /* Home */,
+				1C65E6662A2DF20C00D5115F /* PiggyBank */,
 				1CB7A40728A36026008E1262 /* Assets.xcassets */,
 				1CB7A40928A36026008E1262 /* LaunchScreen.storyboard */,
 				1CB7A40C28A36026008E1262 /* Info.plist */,
@@ -548,6 +592,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C1D52112A2F69DB0090BADE /* PiggyBank.storyboard in Resources */,
 				1CACC76728DC2ADF00A1F052 /* MenuList.storyboard in Resources */,
 				1CD380EA28AC8AD200B2AC80 /* ChallengeCollectionViewCell.xib in Resources */,
 				1CB7A40B28A36026008E1262 /* LaunchScreen.storyboard in Resources */,
@@ -562,6 +607,7 @@
 				1CACC77128DC72BC00A1F052 /* MenuListTableViewCell.xib in Resources */,
 				1CD380B428A62CB000B2AC80 /* UserDetailsTableViewCell.xib in Resources */,
 				1CEB237428BE030000D3FE15 /* CreateSaveMoenyReport.storyboard in Resources */,
+				1C65E6692A2DF2B100D5115F /* GoalCell.xib in Resources */,
 				1C6DF4A428BCE54B002F52D0 /* SaveMoneyReportList.storyboard in Resources */,
 				1CB7A41528A3643B008E1262 /* SignUp.storyboard in Resources */,
 				1CD380AC28A5FB9A00B2AC80 /* UserDetails.storyboard in Resources */,
@@ -643,9 +689,11 @@
 				1CA2DD2428B8A0EA00F401CC /* Challenge.swift in Sources */,
 				1CEB238228C1F11E00D3FE15 /* AlertValueManager.swift in Sources */,
 				1CEB237A28BE5E1100D3FE15 /* UIButton+.swift in Sources */,
+				1C3049D72A2F6EF300397B29 /* PiggyBankViewController.swift in Sources */,
 				1CEB237628BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift in Sources */,
 				1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */,
 				1CEB237E28C0A1E600D3FE15 /* UITextField+.swift in Sources */,
+				1C65E66B2A2E1B0D00D5115F /* GoalCell.swift in Sources */,
 				1CD380F228B3440600B2AC80 /* SignInViewController.swift in Sources */,
 				1CD380EE28B06E2300B2AC80 /* UIColor+.swift in Sources */,
 				1CB7A41A28A3A79E008E1262 /* SignUpViewController.swift in Sources */,

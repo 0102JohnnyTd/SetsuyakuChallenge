@@ -19,6 +19,13 @@ final class GoalCell: UICollectionViewCell {
     /// Cellを表示させる画面に渡すCellのID
     static let identifier = String(describing: GoalCell.self)
 
+    /// Cellのレイアウトを実装
+    func setUpCellLayout() {
+        setUpBackgroundView()
+        setUpContentView()
+        configProgressView()
+    }
+
     /// BackgroundViewを生成
     private func setUpBackgroundView() {
         self.backgroundView = UIView()
@@ -34,5 +41,8 @@ final class GoalCell: UICollectionViewCell {
         self.layer.shadowRadius = 10.0
         self.layer.shadowOpacity = 0.4
     }
-}
 
+    private func configProgressView() {
+        progressView.progressTintColor = .subColor()
+    }
+}

@@ -20,7 +20,9 @@ final class PiggyBankViewController: UIViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(GoalCell.nib, forCellWithReuseIdentifier: GoalCell.identifier)
+        // TODO: 後にセクションを追加して両方のCellを登録する
+//        collectionView.register(GoalCell.nib, forCellWithReuseIdentifier: GoalCell.identifier)
+        collectionView.register(RewardQuestCell.nib, forCellWithReuseIdentifier: RewardQuestCell.identifier)
         setUpCellLayout()
     }
 
@@ -34,7 +36,8 @@ final class PiggyBankViewController: UIViewController {
     /// Cellのサイズを設定
     private func setUpCellSize() -> CGSize {
         let width = UIScreen.main.bounds.width - 32
-        let height = width * 0.5
+//        let height = width * 0.5 Goal
+        let height = width * 0.3
         return CGSize(width: width, height: height)
     }
 }
@@ -45,7 +48,8 @@ extension PiggyBankViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GoalCell.identifier, for: indexPath) as! GoalCell
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GoalCell.identifier, for: indexPath) as! GoalCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RewardQuestCell.identifier, for: indexPath) as! RewardQuestCell
         cell.setUpCellLayout()
         return cell
     }

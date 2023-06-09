@@ -47,6 +47,8 @@
 		1CD380EE28B06E2300B2AC80 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD380ED28B06E2300B2AC80 /* UIColor+.swift */; };
 		1CD380F028B343E500B2AC80 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD380EF28B343E400B2AC80 /* SignIn.storyboard */; };
 		1CD380F228B3440600B2AC80 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD380F128B3440600B2AC80 /* SignInViewController.swift */; };
+		1CE3A2FE2A300FB600443817 /* RewardQuestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CE3A2FD2A300FB600443817 /* RewardQuestCell.xib */; };
+		1CE3A3002A300FD800443817 /* RewardQuestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3A2FF2A300FD800443817 /* RewardQuestCell.swift */; };
 		1CEB237428BE030000D3FE15 /* CreateSaveMoenyReport.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CEB237328BE030000D3FE15 /* CreateSaveMoenyReport.storyboard */; };
 		1CEB237628BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237528BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift */; };
 		1CEB237A28BE5E1100D3FE15 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEB237928BE5E1100D3FE15 /* UIButton+.swift */; };
@@ -101,6 +103,8 @@
 		1CD380ED28B06E2300B2AC80 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		1CD380EF28B343E400B2AC80 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		1CD380F128B3440600B2AC80 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		1CE3A2FD2A300FB600443817 /* RewardQuestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardQuestCell.xib; sourceTree = "<group>"; };
+		1CE3A2FF2A300FD800443817 /* RewardQuestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardQuestCell.swift; sourceTree = "<group>"; };
 		1CEB237328BE030000D3FE15 /* CreateSaveMoenyReport.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateSaveMoenyReport.storyboard; sourceTree = "<group>"; };
 		1CEB237528BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSaveMoneyReportViewController.swift; sourceTree = "<group>"; };
 		1CEB237928BE5E1100D3FE15 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -440,6 +444,8 @@
 			children = (
 				1C65E66A2A2E1B0D00D5115F /* GoalCell.swift */,
 				1C65E6682A2DF2B100D5115F /* GoalCell.xib */,
+				1CE3A2FF2A300FD800443817 /* RewardQuestCell.swift */,
+				1CE3A2FD2A300FB600443817 /* RewardQuestCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -601,6 +607,7 @@
 				1CA2DD2028B5E5B300F401CC /* CreateChallenge.storyboard in Resources */,
 				1CACC76328D9683100A1F052 /* ResetPassword.storyboard in Resources */,
 				1CD380C228A8F51B00B2AC80 /* Home.storyboard in Resources */,
+				1CE3A2FE2A300FB600443817 /* RewardQuestCell.xib in Resources */,
 				1CD380B028A602FF00B2AC80 /* UserDetailsTableViewHeaderView.xib in Resources */,
 				1C6DF4A828BCE961002F52D0 /* SaveMoneyReportListTableViewCell.xib in Resources */,
 				1CD380F028B343E500B2AC80 /* SignIn.storyboard in Resources */,
@@ -693,6 +700,7 @@
 				1CEB237628BE03BF00D3FE15 /* CreateSaveMoneyReportViewController.swift in Sources */,
 				1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */,
 				1CEB237E28C0A1E600D3FE15 /* UITextField+.swift in Sources */,
+				1CE3A3002A300FD800443817 /* RewardQuestCell.swift in Sources */,
 				1C65E66B2A2E1B0D00D5115F /* GoalCell.swift in Sources */,
 				1CD380F228B3440600B2AC80 /* SignInViewController.swift in Sources */,
 				1CD380EE28B06E2300B2AC80 /* UIColor+.swift in Sources */,

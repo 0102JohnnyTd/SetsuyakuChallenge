@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 /// 支出メモ
 struct ExpenseReport {
@@ -13,4 +14,6 @@ struct ExpenseReport {
     var expense: Int
     /// メモ
     var memo:  String
+    /// 作成日時
+    var createdAt: Timestamp
 }

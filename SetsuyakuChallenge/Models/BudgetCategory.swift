@@ -8,11 +8,12 @@
 import Foundation
 
 /// 費目
-struct BudgetCategory {
+struct BudgetCategory: Identifiable {
+    var id = UUID()
     /// 費目名
     var name: String
     /// 費目の予算
     var budget: Int
     /// 費目のサブカテゴリー
-    var ExpenseItem: [BudgetCategory]
+//    var ExpenseItem: [BudgetCategory]
 }

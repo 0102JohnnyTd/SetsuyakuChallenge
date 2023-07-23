@@ -32,6 +32,7 @@
 		1CB7A40B28A36026008E1262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7A40928A36026008E1262 /* LaunchScreen.storyboard */; };
 		1CB7A41528A3643B008E1262 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7A41428A3643B008E1262 /* SignUp.storyboard */; };
 		1CB7A41A28A3A79E008E1262 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7A41928A3A79E008E1262 /* SignUpViewController.swift */; };
+		1CCA8B0C2A6D2DBF005ACC2E /* BudgetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCA8B0B2A6D2DBF005ACC2E /* BudgetListView.swift */; };
 		1CD3807E28A4A60600B2AC80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CD3807D28A4A60600B2AC80 /* GoogleService-Info.plist */; };
 		1CD3808028A4F0C100B2AC80 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3807F28A4F0C100B2AC80 /* User.swift */; };
 		1CD380AC28A5FB9A00B2AC80 /* UserDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD380AB28A5FB9A00B2AC80 /* UserDetails.storyboard */; };
@@ -90,6 +91,7 @@
 		1CB7A40C28A36026008E1262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CB7A41428A3643B008E1262 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		1CB7A41928A3A79E008E1262 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		1CCA8B0B2A6D2DBF005ACC2E /* BudgetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetListView.swift; sourceTree = "<group>"; };
 		1CD3807D28A4A60600B2AC80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../My Mac (todaryoumanoMBP)/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1CD3807F28A4F0C100B2AC80 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1CD380AB28A5FB9A00B2AC80 /* UserDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetails.storyboard; sourceTree = "<group>"; };
@@ -518,12 +520,21 @@
 				1C07C80E28F6AD1B003CB630 /* SignUp */,
 				1C07C80C28F6ACA8003CB630 /* Home */,
 				1C65E6662A2DF20C00D5115F /* PiggyBank */,
+				1CCA8AFE2A6BD434005ACC2E /* BudgetList */,
 				1CB7A40728A36026008E1262 /* Assets.xcassets */,
 				1CB7A40928A36026008E1262 /* LaunchScreen.storyboard */,
 				1CB7A40C28A36026008E1262 /* Info.plist */,
 				1CD3807D28A4A60600B2AC80 /* GoogleService-Info.plist */,
 			);
 			path = SetsuyakuChallenge;
+			sourceTree = "<group>";
+		};
+		1CCA8AFE2A6BD434005ACC2E /* BudgetList */ = {
+			isa = PBXGroup;
+			children = (
+				1CCA8B0B2A6D2DBF005ACC2E /* BudgetListView.swift */,
+			);
+			path = BudgetList;
 			sourceTree = "<group>";
 		};
 		32118A1381797AF599F29A48 /* Frameworks */ = {
@@ -709,6 +720,7 @@
 				1CB7A3FF28A36021008E1262 /* AppDelegate.swift in Sources */,
 				1CEB237E28C0A1E600D3FE15 /* UITextField+.swift in Sources */,
 				1CE3A3002A300FD800443817 /* RewardQuestCell.swift in Sources */,
+				1CCA8B0C2A6D2DBF005ACC2E /* BudgetListView.swift in Sources */,
 				1C65E66B2A2E1B0D00D5115F /* GoalCell.swift in Sources */,
 				1CD380F228B3440600B2AC80 /* SignInViewController.swift in Sources */,
 				1CD380EE28B06E2300B2AC80 /* UIColor+.swift in Sources */,

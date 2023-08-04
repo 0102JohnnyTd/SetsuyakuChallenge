@@ -12,37 +12,43 @@ struct BudgetListView: View {
     let budgetList = [
         BudgetCategory(name: "🍙 食事", budget: 40000),
         BudgetCategory(name: "🚃 交通", budget: 20000),
-        BudgetCategory(name: "🧻 日用品", budget: 30000)
+        BudgetCategory(name: "🧻 日用品aaaaaaa", budget: 30000)
     ]
 
 
     var body: some View {
-        List {
-            Section {
-                HStack {
-                    Text("今月の予算：")
-                        .bold()
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("残 ¥\(27000)")
-                        Text("¥\(90000)")
-                            .foregroundColor(.secondary)
+        GeometryReader { geometry in
+            List {
+                Section {
+                    HStack {
+                        Text("今月の予算：")
+                            .bold()
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text("残 ¥\(27000)")
+                            Text("¥\(90000)")
+                                .foregroundColor(.secondary)
+                        }
+                        ProgressView(value: 0.7)
                     }
-                    ProgressView(value: 0.7)
+                } header: {
+                    Text("合計予算")
                 }
-            } header: {
-                Text("合計予算")
-            }
-            Section {
-                ForEach(budgetList) { budgetCategory in
-                    VStack {
-                        BudgetListRowView(budgetCategory: budgetCategory)
+                Section {
+                    ForEach(budgetList) { budgetCategory in
+                        VStack {
+                            BudgetListRowView(budgetCategory: budgetCategory)
+                                .frame(
+                                    width: geometry.size.width,
+                                    height: geometry.size.height * 0.06
+                                )
+                        }
                     }
+                } header: {
+                    Text("カテゴリ別予算")
                 }
-            } header: {
-                Text("カテゴリ別予算")
             }
+            .listStyle(.grouped)
         }
-        .listStyle(.grouped)
     }
 }
 
@@ -60,20 +66,22 @@ struct BudgetListRowView: View {
     var budgetCategory: BudgetCategory
 
     var body: some View {
-        HStack(alignment: .center, spacing: 10) {
-            Text(budgetCategory.name)
-                .bold()
-                .frame(width: UIScreen.main.bounds.width * 0.25)
-            VStack(alignment: .leading, spacing: 4) {
-                Text("残 ¥\(budgetCategory.budget - 10000)")
-                Text("¥\(budgetCategory.budget)")
-                    .foregroundColor(.secondary)
-            }
-            if #available(iOS 14.0, *) {
-                ProgressView(value: 0.3)
-                    .frame(width: UIScreen.main.bounds.width * 0.4)
-            } else {
-                // Fallback on earlier versions
+        GeometryReader { geometry in
+            HStack(alignment: .center, spacing: 10) {
+                Text(budgetCategory.name)
+                    .bold()
+                    .frame(width: geometry.size.width * 0.25)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("残 ¥\(budgetCategory.budget - 10000)")
+                    Text("¥\(budgetCategory.budget)")
+                        .foregroundColor(.secondary)
+                }
+                if #available(iOS 14.0, *) {
+                    ProgressView(value: 0.3)
+                        .frame(width: geometry.size.width * 0.4)
+                } else {
+                    // Fallback on earlier versions
+                }
             }
         }
     }

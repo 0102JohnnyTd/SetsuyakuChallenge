@@ -23,6 +23,7 @@ struct BudgetListView: View {
                     HStack {
                         Text("今月の予算：")
                             .bold()
+                            .lineLimit(0)
                         VStack(alignment: .leading, spacing: 0) {
                             Text("残 ¥\(27000)")
                             Text("¥\(90000)")
@@ -71,6 +72,7 @@ struct BudgetListRowView: View {
                 Text(budgetCategory.name)
                     .bold()
                     .frame(width: geometry.size.width * 0.25)
+                    .lineLimit(0)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("残 ¥\(budgetCategory.budget - 10000)")
                     Text("¥\(budgetCategory.budget)")

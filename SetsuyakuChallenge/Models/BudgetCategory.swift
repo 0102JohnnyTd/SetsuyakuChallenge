@@ -10,6 +10,8 @@ import Foundation
 /// 費目
 struct BudgetCategory: Identifiable {
     var id = UUID()
+    /// アイコン
+    var icon: String
     /// 費目名
     var name: String
     /// 費目の予算

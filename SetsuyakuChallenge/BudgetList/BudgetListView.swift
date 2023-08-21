@@ -69,10 +69,17 @@ struct BudgetListRowView: View {
     var body: some View {
         GeometryReader { geometry in
             HStack(alignment: .center, spacing: 10) {
-                Text(budgetCategory.name)
-                    .bold()
-                    .frame(width: geometry.size.width * 0.25)
-                    .lineLimit(0)
+                VStack {
+                    Text(budgetCategory.icon)
+                        .bold()
+                        .frame(width: geometry.size.width * 0.25)
+                        .lineLimit(0)
+                    Spacer()
+                    Text(budgetCategory.name)
+                        .bold()
+                        .frame(width: geometry.size.width * 0.25)
+                        .lineLimit(0)
+                }
                 VStack(alignment: .leading, spacing: 4) {
                     Text("残 ¥\(budgetCategory.budget - 10000)")
                     Text("¥\(budgetCategory.budget)")

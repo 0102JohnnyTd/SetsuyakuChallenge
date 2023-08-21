@@ -10,9 +10,9 @@ import SwiftUI
 @available(iOS 14.0, *)
 struct BudgetListView: View {
     let budgetList = [
-        BudgetCategory(name: "🍙 食事", budget: 40000),
-        BudgetCategory(name: "🚃 交通", budget: 20000),
-        BudgetCategory(name: "🧻 日用品aaaaaaa", budget: 30000)
+        BudgetCategory(icon: BudgetItem.food.icon, name: BudgetItem.food.name, budget: 40000),
+        BudgetCategory(icon: BudgetItem.transport.icon, name: BudgetItem.transport.name, budget: 15000),
+        BudgetCategory(icon: BudgetItem.dailyNecessities.icon, name: BudgetItem.dailyNecessities.name, budget: 30000    )
     ]
 
 

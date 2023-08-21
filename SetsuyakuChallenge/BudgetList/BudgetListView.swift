@@ -10,9 +10,9 @@ import SwiftUI
 @available(iOS 14.0, *)
 struct BudgetListView: View {
     let budgetList = [
-        BudgetCategory(name: "🍙 食事", budget: 40000),
-        BudgetCategory(name: "🚃 交通", budget: 20000),
-        BudgetCategory(name: "🧻 日用品aaaaaaa", budget: 30000)
+        BudgetCategory(icon: BudgetItem.food.icon, name: BudgetItem.food.name, budget: 40000),
+        BudgetCategory(icon: BudgetItem.transport.icon, name: BudgetItem.transport.name, budget: 15000),
+        BudgetCategory(icon: BudgetItem.dailyNecessities.icon, name: BudgetItem.dailyNecessities.name, budget: 30000    )
     ]
 
 
@@ -69,10 +69,17 @@ struct BudgetListRowView: View {
     var body: some View {
         GeometryReader { geometry in
             HStack(alignment: .center, spacing: 10) {
-                Text(budgetCategory.name)
-                    .bold()
-                    .frame(width: geometry.size.width * 0.25)
-                    .lineLimit(0)
+                VStack {
+                    Text(budgetCategory.icon)
+                        .bold()
+                        .frame(width: geometry.size.width * 0.25)
+                        .lineLimit(0)
+                    Spacer()
+                    Text(budgetCategory.name)
+                        .bold()
+                        .frame(width: geometry.size.width * 0.25)
+                        .lineLimit(0)
+                }
                 VStack(alignment: .leading, spacing: 4) {
                     Text("残 ¥\(budgetCategory.budget - 10000)")
                     Text("¥\(budgetCategory.budget)")

@@ -15,21 +15,46 @@ struct BudgetListView: View {
         BudgetCategory(icon: BudgetItem.dailyNecessities.icon, name: BudgetItem.dailyNecessities.name, budget: 30000    )
     ]
 
+//    private let 残額と合計額の2行文字列の幅 =
 
-    var body: some View {
+@available(iOS 14.0, *)
+var body: some View {
         GeometryReader { geometry in
             List {
                 Section {
-                    HStack {
-                        Text("今月の予算：")
-                            .bold()
-                            .lineLimit(0)
+                    HStack(alignment: .center) {
+                        VStack {
+                            Text("💰")
+                                .lineLimit(0)
+                            Spacer()
+                            Text("予算")
+                                .bold()
+                                .lineLimit(0)
+                        }.frame(
+                            width: geometry.size.width * ObjectSize.budgetName.width,
+                            height: geometry.size.height * 0.06,
+                            alignment: .leading
+                        )
+
                         VStack(alignment: .leading, spacing: 0) {
                             Text("残 ¥\(27000)")
                             Text("¥\(90000)")
                                 .foregroundColor(.secondary)
-                        }
+                        }.frame(
+                            width: geometry.size.width * ObjectSize.budget.width,
+                            alignment: .leading
+                        )
                         ProgressView(value: 0.7)
+                            .frame(
+                                width: geometry.size.width * ObjectSize.progressView.width)
+                        DisclosureIndicator()
+                            .frame(
+                                width: ObjectSize.disclosureIndicator.width
+                            )
+//                        frame(
+//                            width: geometry.size.width * 0.8,
+//                            alignment: .leading
+//                        )
                     }
                 } header: {
                     Text("合計予算")
@@ -68,17 +93,16 @@ struct BudgetListRowView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            HStack(alignment: .center, spacing: 10) {
+            HStack(alignment: .center) {
                 VStack {
                     Text(budgetCategory.icon)
-                        .bold()
                         .lineLimit(0)
                     Spacer()
                     Text(budgetCategory.name)
                         .bold()
                         .lineLimit(0)
                 }
-                .frame(width: geometry.size.width * 0.2)
+                .frame(width: geometry.size.width * ObjectSize.budgetName.width)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("残 ¥\(budgetCategory.budget - 10000)")
                         .lineLimit(0)
@@ -87,17 +111,17 @@ struct BudgetListRowView: View {
                         .lineLimit(0)
                 }
                 .frame(
-                    width: geometry.size.width * 0.25,
+                    width: geometry.size.width * ObjectSize.budget.width,
                     alignment: .leading
                 )
                 if #available(iOS 14.0, *) {
                     ProgressView(value: 0.3)
-                        .frame(width: geometry.size.width * 0.4)
+                        .frame(width: geometry.size.width * ObjectSize.progressView.width)
                 } else {
                     // Fallback on earlier versions
                 }
                 DisclosureIndicator()
-                    .frame(width: geometry.size.width * 0.05)
+                    .frame(width: geometry.size.width * ObjectSize.disclosureIndicator.width)
             }
         }
     }

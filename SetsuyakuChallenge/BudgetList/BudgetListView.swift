@@ -91,7 +91,16 @@ struct BudgetListRowView: View {
                 } else {
                     // Fallback on earlier versions
                 }
+                DisclosureIndicator()
+                    .frame(width: geometry.size.width * 0.05)
             }
         }
+    }
+}
+
+struct DisclosureIndicator: View {
+    var body: some View {
+        Image(systemName: "chevron.right")
+            .foregroundColor(.gray)
     }
 }

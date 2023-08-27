@@ -10,7 +10,7 @@ import SwiftUI
 // Rowのレイアウトを持つ
 struct ListRowLayoutView<T: View, U: View, V: View, W: View>: View {
     let first: () -> T
-    let second: (CGSize) -> U
+    let second: () -> U
     let third: () -> V
     let fourth: () -> W
 
@@ -22,7 +22,7 @@ struct ListRowLayoutView<T: View, U: View, V: View, W: View>: View {
                         width: geometry.size.width * ObjectSize.budgetName.width,
                         alignment: .center
                     )
-                second(geometry.size)
+                second()
                     .frame(
                         width: geometry.size.width * ObjectSize.budget.width,
                         alignment: .leading
@@ -37,6 +37,9 @@ struct ListRowLayoutView<T: View, U: View, V: View, W: View>: View {
                         width: geometry.size.width * ObjectSize.disclosureIndicator.width,
                         alignment: .trailing
                     )
+                    .onTapGesture {
+                        print("カテゴリ別予算がタップされた")
+                    }
             }
         }
     }
@@ -103,8 +106,8 @@ struct BudgetListRowView: View {
     var budgetCategory: BudgetCategory
 
     var body: some View {
-        GeometryReader { geometry in
-            HStack(alignment: .center) {
+        ListRowLayoutView(
+            first: {
                 VStack {
                     Text(budgetCategory.icon)
                         .lineLimit(0)
@@ -113,35 +116,19 @@ struct BudgetListRowView: View {
                         .bold()
                         .lineLimit(0)
                 }
-                .frame(
-                    width: geometry.size.width * ObjectSize.budgetName.width,
-                    alignment: .center
-                )
+            },
+            second: {
                 VStack(alignment: .leading) {
-                    //                    Text("幅: \(geometry.size.width)")
-                    //                    Text("高さ：\(geometry.size.height)")
                     Text("残 ¥\(budgetCategory.budget - 10000)")
                         .lineLimit(0)
                     Text("¥\(budgetCategory.budget)")
                         .foregroundColor(.secondary)
                         .lineLimit(0)
                 }
-                .frame(
-                    width: geometry.size.width * ObjectSize.budget.width,
-                    alignment: .leading
-                )
-                ProgressView(value: 0.3)
-                    .frame(width: geometry.size.width * ObjectSize.progressView.width)
-                DisclosureIndicator()
-                    .frame(
-                        width: geometry.size.width * ObjectSize.disclosureIndicator.width,
-                        alignment: .trailing
-                    )
-                    .onTapGesture {
-                        print("カテゴリ別予算がタップされた")
-                    }
-            }
-        }
+            },
+            third: { ProgressView(value: 0.3) },
+            fourth: { DisclosureIndicator() }
+        )
     }
 }
 

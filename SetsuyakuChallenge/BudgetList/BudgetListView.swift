@@ -9,53 +9,28 @@ import SwiftUI
 
 @available(iOS 14.0, *)
 struct BudgetListView: View {
+    let budgetCategory = BudgetCategory(
+        icon: BudgetItem.money.icon,
+        name: BudgetItem.money.name,
+        budget: 70000
+    )
+
     let budgetList = [
         BudgetCategory(icon: BudgetItem.food.icon, name: BudgetItem.food.name, budget: 40000),
         BudgetCategory(icon: BudgetItem.transport.icon, name: BudgetItem.transport.name, budget: 15000),
         BudgetCategory(icon: BudgetItem.dailyNecessities.icon, name: BudgetItem.dailyNecessities.name, budget: 30000    )
     ]
 
-//    private let 残額と合計額の2行文字列の幅 =
-
-@available(iOS 14.0, *)
-var body: some View {
+    @available(iOS 14.0, *)
+    var body: some View {
         GeometryReader { geometry in
             List {
                 Section {
-                    HStack(alignment: .center) {
-                        VStack {
-                            Text("💰")
-                                .lineLimit(0)
-                            Spacer()
-                            Text("予算")
-                                .bold()
-                                .lineLimit(0)
-                        }.frame(
-                            width: geometry.size.width * ObjectSize.budgetName.width,
-                            height: geometry.size.height * 0.06,
-                            alignment: .leading
+                    BudgetListRowView(budgetCategory: budgetCategory)
+                        .frame(
+                            width: geometry.size.width,
+                            height: geometry.size.height * 0.06
                         )
-
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("残 ¥\(27000)")
-                            Text("¥\(90000)")
-                                .foregroundColor(.secondary)
-                        }.frame(
-                            width: geometry.size.width * ObjectSize.budget.width,
-                            alignment: .leading
-                        )
-                        ProgressView(value: 0.7)
-                            .frame(
-                                width: geometry.size.width * ObjectSize.progressView.width)
-                        DisclosureIndicator()
-                            .frame(
-                                width: ObjectSize.disclosureIndicator.width
-                            )
-//                        frame(
-//                            width: geometry.size.width * 0.8,
-//                            alignment: .leading
-//                        )
-                    }
                 } header: {
                     Text("合計予算")
                 }
@@ -88,6 +63,7 @@ struct BudgetListView_Previews: PreviewProvider {
     }
 }
 
+@available(iOS 14.0, *)
 struct BudgetListRowView: View {
     var budgetCategory: BudgetCategory
 
@@ -102,8 +78,13 @@ struct BudgetListRowView: View {
                         .bold()
                         .lineLimit(0)
                 }
-                .frame(width: geometry.size.width * ObjectSize.budgetName.width)
-                VStack(alignment: .leading, spacing: 4) {
+                .frame(
+                    width: geometry.size.width * ObjectSize.budgetName.width,
+                    alignment: .center
+                )
+                VStack(alignment: .leading) {
+                    //                    Text("幅: \(geometry.size.width)")
+                    //                    Text("高さ：\(geometry.size.height)")
                     Text("残 ¥\(budgetCategory.budget - 10000)")
                         .lineLimit(0)
                     Text("¥\(budgetCategory.budget)")
@@ -114,14 +95,16 @@ struct BudgetListRowView: View {
                     width: geometry.size.width * ObjectSize.budget.width,
                     alignment: .leading
                 )
-                if #available(iOS 14.0, *) {
-                    ProgressView(value: 0.3)
-                        .frame(width: geometry.size.width * ObjectSize.progressView.width)
-                } else {
-                    // Fallback on earlier versions
-                }
+                ProgressView(value: 0.3)
+                    .frame(width: geometry.size.width * ObjectSize.progressView.width)
                 DisclosureIndicator()
-                    .frame(width: geometry.size.width * ObjectSize.disclosureIndicator.width)
+                    .frame(
+                        width: geometry.size.width * ObjectSize.disclosureIndicator.width,
+                        alignment: .trailing
+                    )
+                    .onTapGesture {
+                        print("カテゴリ別予算がタップされた")
+                    }
             }
         }
     }

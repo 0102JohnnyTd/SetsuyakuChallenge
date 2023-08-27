@@ -9,6 +9,7 @@ import Foundation
 
 /// 費目のアイコンや名前を管理する
 enum BudgetItem {
+    case money
     case transport
     case food
     case dailyNecessities
@@ -16,6 +17,7 @@ enum BudgetItem {
     /// 表示するアイコン
     var icon: String {
         switch self {
+        case .money: return "💰"
         case .transport: return "🚃"
         case .food: return "🍙"
         case .dailyNecessities: return "🧻"
@@ -25,6 +27,7 @@ enum BudgetItem {
     /// 表示する費目名
     var name: String {
         switch self {
+        case .money: return "予算"
         case .transport: return "交通"
         case .food: return "食事"
         case .dailyNecessities: return "日用品"

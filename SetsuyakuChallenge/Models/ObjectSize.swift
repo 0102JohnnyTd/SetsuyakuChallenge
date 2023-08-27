@@ -15,7 +15,7 @@ enum ObjectSize {
 
     var width: CGFloat {
         switch self {
-        case .budgetName: return 0.2
+        case .budgetName: return 0.16
         case .budget: return 0.25
         case .progressView: return 0.4
         case .disclosureIndicator: return 0.05

@@ -9,6 +9,13 @@ import SwiftUI
 
 // Rowのレイアウトを持つ
 struct ListRowLayoutView<T: View, U: View, V: View, W: View>: View {
+    private enum ObjectWidthRatio {
+        static var budgetName: CGFloat { 0.16 }
+        static var budget: CGFloat { 0.25 }
+        static var progressView: CGFloat { 0.4 }
+        static var disclosureIndicator: CGFloat { 0.05 }
+    }
+
     let first: () -> T
     let second: () -> U
     let third: () -> V
@@ -19,22 +26,22 @@ struct ListRowLayoutView<T: View, U: View, V: View, W: View>: View {
             HStack {
                 first()
                     .frame(
-                        width: geometry.size.width * ObjectSize.budgetName.width,
+                        width: geometry.size.width * ObjectWidthRatio.budgetName,
                         alignment: .center
                     )
                 second()
                     .frame(
-                        width: geometry.size.width * ObjectSize.budget.width,
+                        width: geometry.size.width * ObjectWidthRatio.budget,
                         alignment: .leading
                     )
                 third()
                     .frame(
-                        width: geometry.size.width * ObjectSize.progressView.width,
+                        width: geometry.size.width * ObjectWidthRatio.progressView,
                         alignment: .leading
                     )
                 fourth()
                     .frame(
-                        width: geometry.size.width * ObjectSize.disclosureIndicator.width,
+                        width: geometry.size.width * ObjectWidthRatio.disclosureIndicator,
                         alignment: .trailing
                     )
                     .onTapGesture {

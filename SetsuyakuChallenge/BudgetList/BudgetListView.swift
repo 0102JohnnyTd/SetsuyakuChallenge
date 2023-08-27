@@ -7,6 +7,41 @@
 
 import SwiftUI
 
+// Rowのレイアウトを持つ
+struct ListRowLayoutView<T: View, U: View, V: View, W: View>: View {
+    let first: () -> T
+    let second: (CGSize) -> U
+    let third: () -> V
+    let fourth: () -> W
+
+    var body: some View {
+        GeometryReader { geometry in
+            HStack {
+                first()
+                    .frame(
+                        width: geometry.size.width * ObjectSize.budgetName.width,
+                        alignment: .center
+                    )
+                second(geometry.size)
+                    .frame(
+                        width: geometry.size.width * ObjectSize.budget.width,
+                        alignment: .leading
+                    )
+                third()
+                    .frame(
+                        width: geometry.size.width * ObjectSize.progressView.width,
+                        alignment: .leading
+                    )
+                fourth()
+                    .frame(
+                        width: geometry.size.width * ObjectSize.disclosureIndicator.width,
+                        alignment: .trailing
+                    )
+            }
+        }
+    }
+}
+
 @available(iOS 14.0, *)
 struct BudgetListView: View {
     let budgetCategory = BudgetCategory(
